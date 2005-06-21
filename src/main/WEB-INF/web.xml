@@ -14,7 +14,7 @@
     <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
     <init-param>
       <param-name>config</param-name>
-      <param-value>/WEB-INF/struts-config.xml</param-value>
+      <param-value>/WEB-INF/config/struts-config.xml</param-value>
     </init-param>
     <init-param>
       <param-name>debug</param-name>
@@ -27,10 +27,29 @@
     <load-on-startup>2</load-on-startup>
   </servlet>
 
+  <servlet>
+    <servlet-name>velocity</servlet-name>
+    <servlet-class>org.apache.velocity.tools.view.servlet.VelocityViewServlet</servlet-class>
+    <init-param>
+      <param-name>org.apache.velocity.toolbox</param-name>
+      <param-value>/WEB-INF/config/toolbox.xml</param-value>
+    </init-param>
+    <init-param>
+      <param-name>org.apache.velocity.properties</param-name>
+      <param-value>/WEB-INF/config/velocity.properties</param-value>
+    </init-param>
+    <load-on-startup>5</load-on-startup>
+  </servlet>
+
 
   <servlet-mapping>
     <servlet-name>action</servlet-name>
     <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>velocity</servlet-name>
+    <url-pattern>*.vm</url-pattern>
   </servlet-mapping>
 
 
@@ -38,6 +57,17 @@
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
+
+
+  <error-page>
+		<error-code>400</error-code>
+		<location>/PathNotFound.vm</location>
+  </error-page>
+
+  <error-page>
+		<error-code>404</error-code>
+		<location>/PageNotFound.vm</location>
+  </error-page>
 
 
 </web-app>
