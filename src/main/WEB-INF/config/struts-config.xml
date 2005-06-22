@@ -23,6 +23,7 @@
     <action-mappings>
 
         <action path="/login" type="org.pgist.actions.LoginAction" name="loginForm" scope="request">
+            <forward name="login"    path="/index.html"/>
             <forward name="success"  path="/WEB-INF/main.vm"/>
             <forward name="failure"  path="/WEB-INF/loginFailure.vm"/>
         </action>

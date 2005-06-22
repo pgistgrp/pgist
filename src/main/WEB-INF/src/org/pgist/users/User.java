@@ -2,6 +2,8 @@ package org.pgist.users;
 
 import java.util.Set;
 
+import org.pgist.util.MD5;
+
 
 /**
  * PGIST User class.
@@ -61,6 +63,11 @@ public class User {
     }
 
 
+    public void setOriginPassword(String password) {
+        this.password = MD5.getDigest(password);
+    }
+
+    
     /**
      * @return
      * @hibernate.property
@@ -106,7 +113,7 @@ public class User {
     
     
     public boolean checkPassword(String providedPWD) {
-        return true;
+        return this.password.equals(MD5.getDigest(providedPWD));
     }
     
     

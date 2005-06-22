@@ -35,6 +35,10 @@ public class LoginAction extends Action {
             HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         
+        if ("GET".equals(request.getMethod())) {
+            return mapping.findForward("login");
+        }
+        
         LoginActionForm aForm = (LoginActionForm) form;
         String loginname = aForm.getLoginname();
         

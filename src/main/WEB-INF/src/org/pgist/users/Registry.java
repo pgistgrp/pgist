@@ -11,6 +11,7 @@ public class Registry {
     
     private Long id;
     private String loginname;
+    private String status;
     
     
     /**
@@ -38,6 +39,20 @@ public class Registry {
     
     public void setLoginname(String loginname) {
         this.loginname = loginname;
+    }
+
+
+    /**
+     * @return
+     * @hibernate.property
+     */
+    public String getStatus() {
+        return status;
+    }
+
+
+    public void setStatus(String status) {
+        this.status = status;
     }
     
     
