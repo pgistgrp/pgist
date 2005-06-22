@@ -31,6 +31,7 @@
 
 
         <mapping resource="org/pgist/users/User.hbm.xml"/>
+        <mapping resource="org/pgist/users/Role.hbm.xml"/>
 
 
         <!--class-cache class="org.hibernate.test.Simple" region="Simple" usage="read-write"/-->
