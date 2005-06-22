@@ -8,6 +8,7 @@
 
 
     <form-beans>
+        <form-bean name="loginForm" type="org.pgist.actions.LoginActionForm"></form-bean>
     </form-beans>
 
 
@@ -21,9 +22,9 @@
 
     <action-mappings>
 
-        <action path="/login" type="org.pgist.actions.LoginAction" scope="request">
-            <forward name="success"  path="/common/login_ok_index.htm"/>
-            <forward name="failure"  path="/loginFail.jsp"/>
+        <action path="/login" type="org.pgist.actions.LoginAction" name="loginForm" scope="request">
+            <forward name="success"  path="/WEB-INF/main.vm"/>
+            <forward name="failure"  path="/WEB-INF/loginFailure.vm"/>
         </action>
 
     </action-mappings>

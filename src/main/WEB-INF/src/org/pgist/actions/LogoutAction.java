@@ -27,7 +27,7 @@ public class LogoutAction extends Action {
             ActionMapping mapping,
             ActionForm form,
             HttpServletRequest request,
-            HttpServletResponse response) {
+            HttpServletResponse response) throws Exception {
         
         return null;
         

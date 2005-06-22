@@ -8,6 +8,8 @@
     <property name="deplib" value="../lib" />
     <property name="lib" value="main/WEB-INF/lib" />
     <property name="build" value="main/WEB-INF/classes" />
+    <property name="tomcat" value="/opt/jakarta-tomcat-5.5.9"/>
+    <property name="webapp" value="${tomcat}/webapps/pgist"/>
     <property name="javadoc" value="docs/api"/>
     <property name="doctime" value="2005"/>
     
@@ -28,6 +30,11 @@
         <javac classpathref="classpath" srcdir="${src}" destdir="${build}">
             <include name="**/*.java" />
         </javac>
+        <copy todir="${build}" >
+            <fileset dir="${src}" >
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
     </target>
     
     
@@ -62,6 +69,16 @@
               <include name="**" />
             </packageset>
         </javadoc>
+    </target>
+    
+    
+    <target name="war" depends="compile, mapping">
+        <mkdir dir="${webapp}"/>
+        <copy todir="${webapp}">
+          <fileset dir="main">
+            <exclude name="WEB-INF/src/**"/>
+          </fileset>
+        </copy>
     </target>
     
     

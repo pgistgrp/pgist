@@ -13,6 +13,7 @@ public class User {
     
     private Long id;
     private String loginname;
+    private String password;
     private boolean enabled;
     private boolean deleted;
     private Set roles;
@@ -43,6 +44,20 @@ public class User {
     
     public void setLoginname(String loginname) {
         this.loginname = loginname;
+    }
+
+
+    /**
+     * @return
+     * @hibernate.property
+     */
+    public String getPassword() {
+        return password;
+    }
+
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 
@@ -87,6 +102,11 @@ public class User {
 
     public void setRoles(Set roles) {
         this.roles = roles;
+    }
+    
+    
+    public boolean checkPassword(String providedPWD) {
+        return true;
     }
     
     
