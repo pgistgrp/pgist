@@ -30,7 +30,7 @@ public class Role {
     
     /**
      * @return
-     * @hibernate.property
+     * @hibernate.property unique="true" not-null="true"
      */
     public String getName() {
         return name;

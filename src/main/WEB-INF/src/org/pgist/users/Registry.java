@@ -11,7 +11,7 @@ public class Registry {
     
     private Long id;
     private String loginname;
-    private String status;
+    private int status;
     
     
     /**
@@ -30,7 +30,7 @@ public class Registry {
     
     /**
      * @return
-     * @hibernate.property
+     * @hibernate.property unique="true" not-null="true"
      */
     public String getLoginname() {
         return loginname;
@@ -44,14 +44,14 @@ public class Registry {
 
     /**
      * @return
-     * @hibernate.property
+     * @hibernate.property not-null="true"
      */
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
     

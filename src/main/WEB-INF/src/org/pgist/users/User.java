@@ -37,7 +37,7 @@ public class User {
     
     /**
      * @return
-     * @hibernate.property
+     * @hibernate.property unique="true" not-null="true"
      */
     public String getLoginname() {
         return loginname;
@@ -51,7 +51,7 @@ public class User {
 
     /**
      * @return
-     * @hibernate.property
+     * @hibernate.property not-null="true"
      */
     public String getPassword() {
         return password;
@@ -70,7 +70,7 @@ public class User {
     
     /**
      * @return
-     * @hibernate.property
+     * @hibernate.property not-null="true"
      */
     public boolean isEnabled() {
         return enabled;
@@ -84,7 +84,7 @@ public class User {
 
     /**
      * @return
-     * @hibernate.property
+     * @hibernate.property not-null="true"
      */
     public boolean isDeleted() {
         return deleted;

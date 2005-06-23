@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <project default="compile" basedir=".">
-    
-    
+
+
     <property name="base" value="." />
     <property name="src" value="main/WEB-INF/src" />
     <property name="deplib" value="../lib" />
@@ -12,8 +12,8 @@
     <property name="webapp" value="${tomcat}/webapps/pgist"/>
     <property name="javadoc" value="docs/api"/>
     <property name="doctime" value="2005"/>
-    
-    
+
+
     <path id="classpath">
         <fileset dir="${deplib}">
             <include name="**/*.jar"/>
@@ -23,8 +23,8 @@
         </fileset>
         <pathelement location="${build}"/>
     </path>
-    
-    
+
+
     <target name="compile">
         <mkdir dir="${build}" />
         <javac classpathref="classpath" srcdir="${src}" destdir="${build}">
@@ -36,8 +36,8 @@
             </fileset>
         </copy>
     </target>
-    
-    
+
+
     <target name="mapping" depends="compile" description="Hibernate Mapping Files with XDoclet">
         <taskdef name="hibernatemapping" classname="xdoclet.modules.hibernate.HibernateDocletTask">
             <classpath refid="classpath"/>
@@ -49,8 +49,8 @@
             <hibernate version="3.0" />
         </hibernatemapping>
     </target>
-    
-    
+
+
     <target name="schema" depends="compile, mapping">
         <taskdef name="schema" classname="org.hibernate.tool.hbm2ddl.SchemaExportTask">
             <classpath refid="classpath"/>
@@ -58,8 +58,16 @@
         <schema config="main/WEB-INF/src/hibernate.cfg.xml" quiet="no" text="no" drop="no" delimiter=";" output="databaseschema.sql">
         </schema>
     </target>
-    
-    
+
+
+    <target name="init">
+        <taskdef name="SystemInit" classname="org.pgist.tests.SystemInit">
+            <classpath refid="classpath"/>
+        </taskdef>
+        <SystemInit config="main/WEB-INF/src/hibernate.cfg.xml"/>
+    </target>
+
+
     <target name="javadoc">
         <delete dir="${javadoc}"/>
         <mkdir dir="${javadoc}"/>
@@ -70,17 +78,18 @@
             </packageset>
         </javadoc>
     </target>
-    
-    
+
+
     <target name="war" depends="compile, mapping">
         <mkdir dir="${webapp}"/>
         <copy todir="${webapp}">
           <fileset dir="main">
+            <exclude name="WEB-INF/classes/org/pgist/tests/**"/>
             <exclude name="WEB-INF/src/**"/>
           </fileset>
         </copy>
     </target>
-    
-    
+
+
 </project>
 
