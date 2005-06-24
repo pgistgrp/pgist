@@ -1,6 +1,7 @@
 package org.pgist.filters;
 
 import java.io.IOException;
+import java.util.HashSet;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -18,20 +19,49 @@ import org.pgist.util.HibernateUtil;
 /**
  * Filter for PGIST
  * @author kenny
+ * 
+ * Function 1: check if the user already logged in for most requests.
+ *          2: automacticly close any database connection involved in one request
  *
  */
 public class PgistFilter implements Filter {
 
     
-    protected boolean forceCloseConnection = true;
     protected FilterConfig filterConfig = null;
-    protected String ignoreURL = null;
+    
+    /*
+     * If forceCloseConnection is true, each request will cause the system to try to close
+     * any database connection involved in this request.
+     */
+    protected boolean forceCloseConnection = true;
+    
+    /*
+     * The login URL.
+     */
+    protected String loginURL = null;
+    
+    /*
+     * All request urls in the ignoreURLs will not be checked if the user has logged in.
+     */
+    protected HashSet ignoreURLs = new HashSet();
 
     
     public void init(FilterConfig filterConfig) throws ServletException {
         this.filterConfig = filterConfig;
+        
         forceCloseConnection = "true".equals(filterConfig.getInitParameter("force-close-connection"));
-        ignoreURL = filterConfig.getInitParameter("ignore-url");
+        
+        /*
+         * loginURL should be in the ignoreURLs.
+         */
+        loginURL = filterConfig.getInitParameter("login-url");
+        ignoreURLs.add(loginURL);
+        
+        String ignoreURL = filterConfig.getInitParameter("ignore-url");
+        String[] array = ignoreURL.split(",");
+        for (int i=0; i<array.length; i++) {
+            ignoreURLs.add(array[i]);
+        }
     }
 
     
@@ -39,12 +69,12 @@ public class PgistFilter implements Filter {
         //check if the user logged in
         HttpServletRequest req = (HttpServletRequest) request;
         String path = req.getServletPath();
-        if (!path.equals(ignoreURL)) {
+        if (!ignoreURLs.contains(path)) {
             HttpSession session = req.getSession();
             if (session.getAttribute("user")==null) {
                 //user has not logged on
                 HttpServletResponse res = (HttpServletResponse) response;
-                res.sendRedirect( req.getContextPath() + ignoreURL );
+                res.sendRedirect( req.getContextPath() + loginURL );
                 return;
             }
         }

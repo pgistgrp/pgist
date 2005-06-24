@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.pgist.users.Registry;
 import org.pgist.users.User;
 import org.pgist.util.HibernateUtil;
 
@@ -13,7 +14,7 @@ import org.pgist.util.HibernateUtil;
  * @author kenny
  *
  */
-public class UserDAO {
+public class UserDAO extends BaseDAO {
 
     
     /**

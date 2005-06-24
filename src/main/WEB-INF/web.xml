@@ -17,8 +17,12 @@
       <param-value>true</param-value>
     </init-param>
     <init-param>
-      <param-name>ignore-url</param-name>
+      <param-name>login-url</param-name>
       <param-value>/login.do</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignore-url</param-name>
+      <param-value>/register.do</param-value>
     </init-param>
   </filter>
   

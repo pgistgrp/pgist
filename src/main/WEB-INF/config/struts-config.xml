@@ -9,6 +9,7 @@
 
     <form-beans>
         <form-bean name="loginForm" type="org.pgist.actions.LoginActionForm"></form-bean>
+        <form-bean name="userForm" type="org.pgist.actions.UserForm"></form-bean>
     </form-beans>
 
 
@@ -26,6 +27,12 @@
             <forward name="login"    path="/index.html"/>
             <forward name="success"  path="/WEB-INF/main.vm"/>
             <forward name="failure"  path="/WEB-INF/loginFailure.vm"/>
+        </action>
+
+        <action path="/register" type="org.pgist.actions.RegisterAction" name="userForm" scope="request">
+            <forward name="register" path="/WEB-INF/register.vm"/>
+            <forward name="success"  path="/index.html"/>
+            <forward name="failure"  path="/WEB-INF/register.vm"/>
         </action>
 
     </action-mappings>
