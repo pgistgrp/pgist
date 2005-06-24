@@ -1,0 +1,29 @@
+<html>
+<head>
+<title>PGIST register Page</title>
+</head>
+
+<body>
+  <form name="mainForm" method="POST" action="register.do">
+  <table>
+    <tr>
+      <td>User Name:</td>
+      <td><input type="input" name="loginname" value=""></td>
+    </tr>
+    <tr>
+      <td>Password:</td>
+      <td><input type="password" name="password" value=""></td>
+    </tr>
+    <tr>
+      <td>Password Confirm:</td>
+      <td><input type="password" name="password1" value=""></td>
+    </tr>
+    <tr>
+      <td colspan="2"><input type="submit" value="Submit"></td>
+    </tr>
+  </table>
+  </form>
+</body>
+
+</html>
+
