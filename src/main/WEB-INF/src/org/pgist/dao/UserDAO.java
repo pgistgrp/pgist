@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.pgist.users.Registry;
 import org.pgist.users.User;
 import org.pgist.util.HibernateUtil;
 

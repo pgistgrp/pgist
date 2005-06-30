@@ -1,10 +1,39 @@
 package org.pgist.dao;
 
+import java.io.Serializable;
+
 import org.hibernate.Session;
 import org.pgist.util.HibernateUtil;
 
 public class BaseDAO {
 
+    
+    /**
+     * a generic method to load a POJO by its id
+     * @param theClass
+     * @param id
+     * @return
+     */
+    public static Object load(Class theClass, Serializable id) {
+        try {
+            Session session = HibernateUtil.getSession();
+            HibernateUtil.begin();
+            
+            Object obj = session.load(theClass, id);
+            
+            HibernateUtil.commit();
+            
+            return obj;
+        } catch (Exception e) {
+            try {
+                HibernateUtil.rollback();
+            } catch(Exception ex) {
+            }
+        }
+        
+        return null;
+    }
+    
     
     /**
      * a generic method to insert new POJO into hibernate
