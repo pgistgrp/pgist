@@ -8,7 +8,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.pgist.dao.UserDAO;
-import org.pgist.users.Registry;
+import org.pgist.users.User;
 
 
 /**
@@ -54,11 +54,19 @@ public class RegisterAction extends Action {
             return mapping.findForward("failure");
         }
         
+        /*
         Registry registry = new Registry();
         registry.setLoginname(loginname);
         registry.setOriginPassword(password);
+        */
         
-        if (UserDAO.insert(registry)) {
+        User user = new User();
+        user.setLoginname(loginname);
+        user.setOriginPassword(password);
+        user.setDeleted(false);
+        user.setEnabled(true);
+
+        if (UserDAO.insert(user)) {
             return mapping.findForward("success");
         } else {
             return mapping.findForward("failure");

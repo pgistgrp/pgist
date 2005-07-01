@@ -5,6 +5,8 @@
 
 <body>
   <h2>Login Ok!</h2>
+  <br>
+  <a href="logout.do">Logout here.</a>
 </body>
 
 </html>

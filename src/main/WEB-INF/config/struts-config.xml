@@ -18,19 +18,24 @@
 
 
     <global-forwards>
+        <forward name="login"    path="/index.html"/>
+        <forward name="register" path="/WEB-INF/register.vm"/>
     </global-forwards>
 
 
     <action-mappings>
 
         <action path="/login" type="org.pgist.actions.LoginAction" name="loginForm" scope="request">
-            <forward name="login"    path="/index.html"/>
+            <forward name="success"  path="/WEB-INF/main.vm"/>
+            <forward name="failure"  path="/WEB-INF/loginFailure.vm"/>
+        </action>
+
+        <action path="/logout" type="org.pgist.actions.LogoutAction" scope="request">
             <forward name="success"  path="/WEB-INF/main.vm"/>
             <forward name="failure"  path="/WEB-INF/loginFailure.vm"/>
         </action>
 
         <action path="/register" type="org.pgist.actions.RegisterAction" name="userForm" scope="request">
-            <forward name="register" path="/WEB-INF/register.vm"/>
             <forward name="success"  path="/index.html"/>
             <forward name="failure"  path="/WEB-INF/register.vm"/>
         </action>

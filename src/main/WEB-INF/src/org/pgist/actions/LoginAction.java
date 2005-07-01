@@ -37,13 +37,15 @@ public class LoginAction extends Action {
         
         LoginActionForm aForm = (LoginActionForm) form;
         
-        User user = UserDAO.getUserByName(aForm.getLoginname(), true, false);
-        if (user==null) { //user not found or database error
-            return mapping.findForward("failure");
-        } else if ( user.checkPassword(aForm.getPassword()) ) { //user is valid
-            request.getSession().setAttribute("user", user);
-            return mapping.findForward("success");
-        } else { //user is invalid
+        try {
+            User user = UserDAO.getUserByName(aForm.getLoginname(), true, false);
+            if ( user.checkPassword(aForm.getPassword()) ) { //user is valid
+                request.getSession().setAttribute("user", user);
+                return mapping.findForward("success");
+            } else { //user is invalid
+                return mapping.findForward("failure");
+            }
+        } catch(Exception e) {
             return mapping.findForward("failure");
         }
     }

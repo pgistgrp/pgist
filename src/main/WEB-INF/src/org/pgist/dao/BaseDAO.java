@@ -14,7 +14,7 @@ public class BaseDAO {
      * @param id
      * @return
      */
-    public static Object load(Class theClass, Serializable id) {
+    public static Object load(Class theClass, Serializable id) throws Exception {
         try {
             Session session = HibernateUtil.getSession();
             HibernateUtil.begin();
@@ -29,9 +29,10 @@ public class BaseDAO {
                 HibernateUtil.rollback();
             } catch(Exception ex) {
             }
+            throw e;
+        } finally {
+            HibernateUtil.closeSession();
         }
-        
-        return null;
     }
     
     
@@ -40,7 +41,7 @@ public class BaseDAO {
      * @param object
      * @return
      */
-    public static boolean insert(Object object) {
+    public static boolean insert(Object object) throws Exception {
         try {
             Session session = HibernateUtil.getSession();
             HibernateUtil.begin();
@@ -55,9 +56,8 @@ public class BaseDAO {
                 HibernateUtil.rollback();
             } catch(Exception ex) {
             }
+            throw e;
         }
-        
-        return false;
     }
     
     
@@ -67,7 +67,7 @@ public class BaseDAO {
      * @param object
      * @return
      */
-    public static boolean insert(String className, Object object) {
+    public static boolean insert(String className, Object object) throws Exception {
         try {
             Session session = HibernateUtil.getSession();
             HibernateUtil.begin();
@@ -82,9 +82,8 @@ public class BaseDAO {
                 HibernateUtil.rollback();
             } catch(Exception ex) {
             }
+            throw e;
         }
-        
-        return false;
     }
     
     
@@ -93,7 +92,7 @@ public class BaseDAO {
      * @param object
      * @return
      */
-    public static boolean update(Object object) {
+    public static boolean update(Object object) throws Exception {
         try {
             Session session = HibernateUtil.getSession();
             HibernateUtil.begin();
@@ -108,9 +107,8 @@ public class BaseDAO {
                 HibernateUtil.rollback();
             } catch(Exception ex) {
             }
+            throw e;
         }
-        
-        return false;
     }
     
     
@@ -119,7 +117,7 @@ public class BaseDAO {
      * @param object
      * @return
      */
-    public static boolean update(String className, Object object) {
+    public static boolean update(String className, Object object) throws Exception {
         try {
             Session session = HibernateUtil.getSession();
             HibernateUtil.begin();
@@ -134,9 +132,8 @@ public class BaseDAO {
                 HibernateUtil.rollback();
             } catch(Exception ex) {
             }
+            throw e;
         }
-        
-        return false;
     }
     
     
@@ -145,7 +142,7 @@ public class BaseDAO {
      * @param object
      * @return
      */
-    public static boolean insertOrUpdate(Object object) {
+    public static boolean insertOrUpdate(Object object) throws Exception {
         try {
             Session session = HibernateUtil.getSession();
             HibernateUtil.begin();
@@ -160,9 +157,8 @@ public class BaseDAO {
                 HibernateUtil.rollback();
             } catch(Exception ex) {
             }
+            throw e;
         }
-        
-        return false;
     }
 
 
@@ -171,7 +167,7 @@ public class BaseDAO {
      * @param object
      * @return
      */
-    public static boolean insertOrUpdate(String className, Object object) {
+    public static boolean insertOrUpdate(String className, Object object) throws Exception {
         try {
             Session session = HibernateUtil.getSession();
             HibernateUtil.begin();
@@ -186,9 +182,8 @@ public class BaseDAO {
                 HibernateUtil.rollback();
             } catch(Exception ex) {
             }
+            throw e;
         }
-        
-        return false;
     }
 
 

@@ -23,7 +23,7 @@ public class UserDAO extends BaseDAO {
      * @param deleted
      * @return
      */
-    public static User getUserByName(String loginname, boolean enabled, boolean deleted) {
+    public static User getUserByName(String loginname, boolean enabled, boolean deleted) throws Exception {
         User user = null;
         
         try {
@@ -45,6 +45,7 @@ public class UserDAO extends BaseDAO {
                 HibernateUtil.rollback();
             } catch(Exception ex) {
             }
+            throw e;
         }
         
         return user;
