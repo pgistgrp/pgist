@@ -2,6 +2,8 @@ package org.pgist.users;
 
 import java.util.Set;
 
+import org.pgist.util.MD5;
+
 
 /**
  * PGIST User class.
@@ -42,6 +44,11 @@ public class User extends BaseUser {
 
     public void setRoles(Set roles) {
         this.roles = roles;
+    }
+    
+    
+    public boolean checkPassword(String providedPWD) {
+        return this.password.equals(MD5.getDigest(providedPWD));
     }
     
     

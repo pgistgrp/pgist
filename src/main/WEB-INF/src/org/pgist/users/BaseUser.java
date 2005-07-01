@@ -13,7 +13,7 @@ public class BaseUser {
     
     private Long id;
     private String loginname;
-    private String password;
+    protected String password;
     private boolean enabled;
     private boolean deleted;
     
@@ -93,9 +93,4 @@ public class BaseUser {
     }
 
 
-    public boolean checkPassword(String providedPWD) {
-        return this.password.equals(MD5.getDigest(providedPWD));
-    }
-    
-    
 }
