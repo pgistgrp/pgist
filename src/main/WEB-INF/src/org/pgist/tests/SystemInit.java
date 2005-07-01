@@ -1,9 +1,11 @@
 package org.pgist.tests;
 
 import java.io.File;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.DirectoryScanner;
@@ -15,6 +17,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.util.ArrayHelper;
+import org.pgist.users.Role;
 import org.pgist.users.User;
 
 
@@ -69,19 +72,34 @@ public class SystemInit extends MatchingTask {
             //initialization begins here
             
             /* create administrator user */
+            Session session = null;
             try {
-                Session session = sessionFactory.openSession();
+                session = sessionFactory.openSession();
                 Transaction transaction = session.beginTransaction();
+                Role role = new Role();
+                role.setName("admin");
+                role.setDescription("Administrator");
+                role.setInternal(true);
                 User admin = new User();
                 admin.setLoginname("admin");
                 admin.setOriginPassword("admin");
                 admin.setEnabled(true);
                 admin.setDeleted(false);
+                Set roles = admin.getRoles();
+                if (roles==null) {
+                    roles =  new HashSet();
+                    admin.setRoles(roles);
+                }
+                roles.add(role);
+                
                 session.save(admin);
                 transaction.commit();
                 System.out.println("---- successfully inserte a user: admin");
             } catch(Exception ex) {
                 System.out.println("---- failed to inserte a user: admin");
+                ex.printStackTrace();
+            } finally {
+                session.close();
             }
             
             //initialization ends here

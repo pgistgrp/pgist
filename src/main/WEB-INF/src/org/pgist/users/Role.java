@@ -12,6 +12,7 @@ public class Role {
     private Long id;
     private String name;
     private String description;
+    private boolean internal = false;
     
     
     /**
@@ -53,6 +54,20 @@ public class Role {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+
+    /**
+     * @return
+     * @hibernate.property
+     */
+    public boolean isInternal() {
+        return internal;
+    }
+
+
+    public void setInternal(boolean internal) {
+        this.internal = internal;
     }
     
     

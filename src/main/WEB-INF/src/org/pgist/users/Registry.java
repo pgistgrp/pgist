@@ -6,7 +6,7 @@ package org.pgist.users;
  * @author kenny
  * @hibernate.class table="pgist_registry"
  */
-public class Registry extends User {
+public class Registry extends BaseUser {
 
     
     private int status;
