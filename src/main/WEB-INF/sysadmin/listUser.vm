@@ -1,0 +1,15 @@
+<html>
+<head>
+<title>User Management</title>
+</head>
+
+<body>
+  <h2>User Management</h2>
+  <br>
+  #foreach ($one in $sysAdminForm.users)
+    $one.loginname
+  #end
+</body>
+
+</html>
+
