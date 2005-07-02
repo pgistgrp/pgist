@@ -185,6 +185,27 @@ public class BaseDAO {
             throw e;
         }
     }
+    
+    
+    /**
+     * refresh an object
+     * @param object
+     */
+    public static void refresh(Object object) {
+        try {
+            Session session = HibernateUtil.getSession();
+            HibernateUtil.begin();
+            
+            session.refresh(object);
+            
+            HibernateUtil.commit();
+        } catch (Exception e) {
+            try {
+                HibernateUtil.rollback();
+            } catch(Exception ex) {
+            }
+        }
+    }
 
 
 }

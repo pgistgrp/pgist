@@ -10,6 +10,7 @@
     <form-beans>
         <form-bean name="loginForm" type="org.pgist.actions.LoginActionForm"></form-bean>
         <form-bean name="userForm" type="org.pgist.actions.UserForm"></form-bean>
+        <form-bean name="sysAdminForm" type="org.pgist.actions.SysAdminForm"></form-bean>
     </form-beans>
 
 
@@ -40,6 +41,15 @@
             <forward name="failure"  path="/WEB-INF/register.vm"/>
         </action>
 
+        <action path="/sysAdmin" type="org.pgist.actions.SysAdminAction" name="sysAdminForm" scope="request" parameter="action">
+            <forward name="main"     path="/WEB-INF/sysadmin/main.vm"/>
+            <forward name="notAdmin" path="/WEB-INF/sysadmin/notAdmin.vm"/>
+            <forward name="failure"  path="/WEB-INF/sysadmin/failure.vm"/>
+            <forward name="listUser" path="/WEB-INF/sysadmin/listUser.vm"/>
+            <forward name="addUser"  path="/WEB-INF/sysadmin/addUser.vm"/>
+            <forward name="listRole" path="/WEB-INF/sysadmin/listRole.vm"/>
+        </action>
+        
     </action-mappings>
 
 

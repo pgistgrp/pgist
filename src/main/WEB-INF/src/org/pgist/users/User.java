@@ -33,7 +33,7 @@ public class User extends BaseUser {
 
     /**
      * @return
-     * @hibernate.set lazy="true" table="pgist_user_role_link" cascade="all" order-by="id"
+     * @hibernate.set lazy="false" table="pgist_user_role_link" cascade="all" order-by="role_id"
      * @hibernate.collection-key  column="user_id"
      * @hibernate.collection-many-to-many column="role_id" class="org.pgist.users.Role"
      */

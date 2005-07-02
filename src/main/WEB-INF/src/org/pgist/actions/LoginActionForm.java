@@ -11,6 +11,7 @@ import org.apache.struts.action.ActionForm;
 public class LoginActionForm extends ActionForm {
 
     
+    private static final long serialVersionUID = 1L;
     private String loginname;
     private String password;
     
