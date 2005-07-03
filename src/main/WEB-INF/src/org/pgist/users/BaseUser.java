@@ -14,6 +14,7 @@ public class BaseUser {
     private Long id;
     private String loginname;
     protected String password;
+    protected String email;
     private boolean enabled;
     private boolean deleted;
     
@@ -90,6 +91,20 @@ public class BaseUser {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+
+    /**
+     * @return
+     * @hibernate.property not-null="true"
+     */
+    public String getEmail() {
+        return email;
+    }
+
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 

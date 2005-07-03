@@ -86,7 +86,7 @@ public class SysAdminAction extends DispatchAction  {
         aForm.setUsers(list);
         
         return mapping.findForward("listUser");
-    }
+    }//listUser()
     
     
     /**
@@ -110,10 +110,72 @@ public class SysAdminAction extends DispatchAction  {
             return mapping.findForward("userAdd");
         }
         
-        SysAdminForm aForm = (SysAdminForm) form;
+        UserForm aForm = (UserForm) form;
         
-        return mapping.findForward("failure");
-    }
+        String loginname = aForm.getLoginname();
+        String password  = aForm.getPassword();
+        String password1 = aForm.getPassword1();
+        String email = aForm.getEmail();
+        
+        //check if password is valid
+        if (password==null || "".equals(password)) {
+            System.out.println("password invlid");
+            return mapping.findForward("failure");
+        }
+        
+        //check if password is matched
+        if (!password.equals(password1)) {
+            System.out.println("password not match");
+            return mapping.findForward("failure");
+        }
+        
+        //check if password is valid
+        if (email==null || "".equals(email)) {
+            System.out.println("email invlid");
+            return mapping.findForward("failure");
+        }
+
+        /*
+        Registry registry = new Registry();
+        registry.setLoginname(loginname);
+        registry.setOriginPassword(password);
+        */
+        
+        User user = new User();
+        user.setLoginname(loginname);
+        user.setEmail(email);
+        user.setOriginPassword(password);
+        user.setDeleted(false);
+        user.setEnabled(true);
+
+        if (UserDAO.insert(user)) {
+            return mapping.findForward("success");
+        } else {
+            return mapping.findForward("failure");
+        }
+    }//addUser()
+    
+    
+    /**
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     */
+    public ActionForward delUser(
+            ActionMapping mapping,
+            ActionForm form,
+            HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        
+        if (!checkRole((User) request.getSession().getAttribute("user"))) {
+            return mapping.findForward("notAdmin");
+        }
+        
+        return null;
+        
+    }//delUser()
     
     
 }

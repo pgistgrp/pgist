@@ -41,6 +41,7 @@ public class RegisterAction extends Action {
         String loginname = aForm.getLoginname();
         String password  = aForm.getPassword();
         String password1 = aForm.getPassword1();
+        String email = aForm.getEmail();
         
         //check if password is valid
         if (password==null || "".equals(password)) {
@@ -54,6 +55,12 @@ public class RegisterAction extends Action {
             return mapping.findForward("failure");
         }
         
+        //check if password is valid
+        if (email==null || "".equals(email)) {
+            System.out.println("email invlid");
+            return mapping.findForward("failure");
+        }
+
         /*
         Registry registry = new Registry();
         registry.setLoginname(loginname);
@@ -62,6 +69,7 @@ public class RegisterAction extends Action {
         
         User user = new User();
         user.setLoginname(loginname);
+        user.setEmail(email);
         user.setOriginPassword(password);
         user.setDeleted(false);
         user.setEnabled(true);

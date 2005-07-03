@@ -11,6 +11,7 @@ public class UserForm extends ActionForm {
     private String loginname;
     private String password;
     private String password1;
+    private String email;
     
     
     public Long getId() {
@@ -50,6 +51,16 @@ public class UserForm extends ActionForm {
 
     public void setPassword1(String password1) {
         this.password1 = password1;
+    }
+
+
+    public String getEmail() {
+        return email;
+    }
+
+
+    public void setEmail(String email) {
+        this.email = email;
     }
     
     

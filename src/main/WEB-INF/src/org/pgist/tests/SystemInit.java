@@ -76,6 +76,8 @@ public class SystemInit extends MatchingTask {
             try {
                 session = sessionFactory.openSession();
                 Transaction transaction = session.beginTransaction();
+                
+                //admin
                 Role role = new Role();
                 role.setName("admin");
                 role.setDescription("Administrator");
@@ -83,6 +85,7 @@ public class SystemInit extends MatchingTask {
                 User admin = new User();
                 admin.setLoginname("admin");
                 admin.setOriginPassword("admin");
+                admin.setEmail("admin@pgist.org");
                 admin.setEnabled(true);
                 admin.setDeleted(false);
                 Set roles = admin.getRoles();
@@ -91,8 +94,27 @@ public class SystemInit extends MatchingTask {
                     admin.setRoles(roles);
                 }
                 roles.add(role);
-                
                 session.save(admin);
+                
+                //guest
+                role = new Role();
+                role.setName("guest");
+                role.setDescription("Guest");
+                role.setInternal(true);
+                User guest = new User();
+                guest.setLoginname("guest");
+                guest.setOriginPassword("guest");
+                guest.setEmail("guest@pgist.org");
+                guest.setEnabled(true);
+                guest.setDeleted(false);
+                roles = guest.getRoles();
+                if (roles==null) {
+                    roles =  new HashSet();
+                    guest.setRoles(roles);
+                }
+                roles.add(role);
+                session.save(guest);
+                
                 transaction.commit();
                 System.out.println("---- successfully inserte a user: admin");
             } catch(Exception ex) {
