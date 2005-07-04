@@ -14,7 +14,7 @@ public class BaseUser {
     private Long id;
     private String loginname;
     protected String password;
-    protected String email;
+    protected String email = "";
     private boolean enabled;
     private boolean deleted;
     

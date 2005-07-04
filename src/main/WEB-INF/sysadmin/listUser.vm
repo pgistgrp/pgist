@@ -4,11 +4,26 @@
 </head>
 
 <body>
+
   <h2>User Management</h2>
   <br>
-  #foreach ($one in $sysAdminForm.users)
-    $one.loginname
-  #end
+  <table>
+    <tr>
+      <td align="center"><b>Login Name</b></td>
+      <td align="center"><b>Status</b></td>
+      <td align="center"><b>Selection</b></td>
+    </tr>
+    #foreach ($user in $sysAdminForm.users)
+    <tr>
+      <td nowrap>$user.loginname</td>
+      <td nowrap>#if($user.enabled)Enabled#else <span style="color:red;">Disabled</span> #end</td>
+      <td nowrap align="center">
+        #if($user.internal)&nbsp;#else<input type="checkbox" name="userId" value="$!{user.id}">#end
+      </td>
+    </tr>
+    #end
+  </table>
+    
 </body>
 
 </html>

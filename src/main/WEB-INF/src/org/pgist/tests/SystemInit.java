@@ -1,11 +1,9 @@
 package org.pgist.tests;
 
 import java.io.File;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.DirectoryScanner;
@@ -77,46 +75,56 @@ public class SystemInit extends MatchingTask {
                 session = sessionFactory.openSession();
                 Transaction transaction = session.beginTransaction();
                 
-                //admin
-                Role role = new Role();
-                role.setName("admin");
-                role.setDescription("Administrator");
-                role.setInternal(true);
+                //role - member
+                Role roleMember = new Role();
+                roleMember.setName("admin");
+                roleMember.setDescription("Administrator");
+                roleMember.setInternal(true);
+                session.save(roleMember);
+                System.out.println("---- successfully inserte a role: admin");
+                
+                //role - admin
+                Role roleAdmin = new Role();
+                roleAdmin.setName("member");
+                roleAdmin.setDescription("Member");
+                roleAdmin.setInternal(true);
+                session.save(roleAdmin);
+                System.out.println("---- successfully inserte a role: member");
+                
+                //role - guest
+                Role roleGuest = new Role();
+                roleGuest.setName("guest");
+                roleGuest.setDescription("Guest");
+                roleGuest.setInternal(true);
+                session.save(roleGuest);
+                System.out.println("---- successfully inserte a role: guest");
+                
+                //user - admin
                 User admin = new User();
                 admin.setLoginname("admin");
                 admin.setOriginPassword("admin");
                 admin.setEmail("admin@pgist.org");
                 admin.setEnabled(true);
                 admin.setDeleted(false);
-                Set roles = admin.getRoles();
-                if (roles==null) {
-                    roles =  new HashSet();
-                    admin.setRoles(roles);
-                }
-                roles.add(role);
+                admin.setInternal(true);
+                admin.getRoles().add(roleMember);
+                admin.getRoles().add(roleAdmin);
                 session.save(admin);
+                System.out.println("---- successfully inserte a user: admin");
                 
-                //guest
-                role = new Role();
-                role.setName("guest");
-                role.setDescription("Guest");
-                role.setInternal(true);
+                //user - guest
                 User guest = new User();
                 guest.setLoginname("guest");
                 guest.setOriginPassword("guest");
                 guest.setEmail("guest@pgist.org");
                 guest.setEnabled(true);
                 guest.setDeleted(false);
-                roles = guest.getRoles();
-                if (roles==null) {
-                    roles =  new HashSet();
-                    guest.setRoles(roles);
-                }
-                roles.add(role);
+                guest.setInternal(true);
+                guest.getRoles().add(roleGuest);
                 session.save(guest);
+                System.out.println("---- successfully inserte a user: guest");
                 
                 transaction.commit();
-                System.out.println("---- successfully inserte a user: admin");
             } catch(Exception ex) {
                 System.out.println("---- failed to inserte a user: admin");
                 ex.printStackTrace();

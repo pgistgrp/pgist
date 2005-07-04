@@ -1,5 +1,6 @@
 package org.pgist.users;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.pgist.util.MD5;
@@ -13,8 +14,8 @@ import org.pgist.util.MD5;
 public class User extends BaseUser {
     
     
-    private boolean internal;
-    protected Set roles;
+    private boolean internal = false;
+    protected Set roles = new HashSet();
     
     
     /**
@@ -33,7 +34,7 @@ public class User extends BaseUser {
 
     /**
      * @return
-     * @hibernate.set lazy="false" table="pgist_user_role_link" cascade="all" order-by="role_id"
+     * @hibernate.set lazy="false" table="pgist_user_role_link" cascade="none" order-by="role_id"
      * @hibernate.collection-key  column="user_id"
      * @hibernate.collection-many-to-many column="role_id" class="org.pgist.users.Role"
      */

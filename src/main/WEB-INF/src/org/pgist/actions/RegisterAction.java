@@ -8,6 +8,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.pgist.dao.UserDAO;
+import org.pgist.users.Role;
 import org.pgist.users.User;
 
 
@@ -73,7 +74,10 @@ public class RegisterAction extends Action {
         user.setOriginPassword(password);
         user.setDeleted(false);
         user.setEnabled(true);
-
+        
+        Role role = UserDAO.getRoleByName("member");
+        user.getRoles().add(role);
+        
         if (UserDAO.insert(user)) {
             return mapping.findForward("success");
         } else {

@@ -188,6 +188,31 @@ public class BaseDAO {
     
     
     /**
+     * a generic method to delete a POJO from hibernate.
+     * @param object
+     * @return
+     */
+    public static boolean delete(Object object) {
+        try {
+            Session session = HibernateUtil.getSession();
+            HibernateUtil.begin();
+            
+            session.delete(object);
+            
+            HibernateUtil.commit();
+            
+            return true;
+        } catch (Exception e) {
+            try {
+                HibernateUtil.rollback();
+            } catch(Exception ex) {
+            }
+        }
+        return false;
+    }
+    
+    
+    /**
      * refresh an object
      * @param object
      */

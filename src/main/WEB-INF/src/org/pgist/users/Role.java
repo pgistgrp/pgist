@@ -13,6 +13,7 @@ public class Role {
     private String name;
     private String description;
     private boolean internal = false;
+    private boolean deleted = false;
     
     
     /**
@@ -68,6 +69,20 @@ public class Role {
 
     public void setInternal(boolean internal) {
         this.internal = internal;
+    }
+
+
+    /**
+     * @return
+     * @hibernate.property
+     */
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
     
     

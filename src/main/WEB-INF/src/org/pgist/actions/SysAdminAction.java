@@ -173,6 +173,12 @@ public class SysAdminAction extends DispatchAction  {
             return mapping.findForward("notAdmin");
         }
         
+        SysAdminForm aForm = (SysAdminForm) form;
+
+        if (UserDAO.delUsers(aForm.getUserId())) {
+            return mapping.findForward("listUser");
+        }
+        
         return null;
         
     }//delUser()

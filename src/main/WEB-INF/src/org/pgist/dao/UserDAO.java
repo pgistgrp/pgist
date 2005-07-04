@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.pgist.users.Role;
 import org.pgist.users.User;
 import org.pgist.util.HibernateUtil;
 import org.pgist.util.PageSetting;
@@ -16,6 +17,33 @@ import org.pgist.util.PageSetting;
  */
 public class UserDAO extends BaseDAO {
 
+    
+    public static Role getRoleByName(String roleName) throws Exception {
+        Role role = null;
+        
+        try {
+            Session session = HibernateUtil.getSession();
+            HibernateUtil.begin();
+            
+            Query query = session.createQuery("from Role where name=:name and deleted=:deleted");
+            query.setString("name", roleName);
+            query.setBoolean("deleted", false);
+            List list = query.list();
+            if (list.size()>0) {
+                role = (Role) list.get(0);
+            }
+            HibernateUtil.commit();
+        } catch (Exception e) {
+            try {
+                HibernateUtil.rollback();
+            } catch(Exception ex) {
+            }
+            throw e;
+        }
+        
+        return role;
+    }//getRoleByName()
+    
     
     /**
      * Get User object by the given name and query conditions
@@ -36,10 +64,9 @@ public class UserDAO extends BaseDAO {
             query.setBoolean("enabled", true);
             query.setBoolean("deleted", false);
             List list = query.list();
-            if (list.size()==0) return user;
-            
-            user = (User) list.get(0);
-            
+            if (list.size()>0) {
+                user = (User) list.get(0);
+            }
             HibernateUtil.commit();
         } catch (Exception e) {
             try {
@@ -98,6 +125,36 @@ public class UserDAO extends BaseDAO {
         }
 
         return list;
+    }
+    
+    
+    /**
+     * Delete users according to the idList. The deletion is a transaction
+     * so that either all users are deleted or none of them is deleted.
+     * @param idList
+     * @return
+     */
+    public static boolean delUsers(Long[] idList) {
+        
+        try {
+            Session session = HibernateUtil.getSession();
+            HibernateUtil.begin();
+            
+            for (int i=0; i<idList.length; i++) {
+                User user = (User) session.load(User.class, idList[i]);
+                user.setDeleted(true);
+                user.setEnabled(false);
+                session.update(user);
+            }//for i
+            
+            HibernateUtil.commit();
+        } catch (Exception e) {
+            try {
+                HibernateUtil.rollback();
+            } catch(Exception ex) {
+            }
+        }
+        return false;
     }
     
     
