@@ -1,6 +1,13 @@
 <html>
 <head>
 <title>PGIST register Page</title>
+<script language="JavaScript">
+<!--
+  #if("$!{PGISTMessage}"!="")
+    alert('$!{PGISTMessage}');
+  #end
+//-->
+</script>
 </head>
 
 <body>
@@ -8,19 +15,19 @@
   <table>
     <tr>
       <td>User Name:</td>
-      <td><input type="input" name="loginname" value=""></td>
+      <td><input type="input" name="loginname" value="$!{userForm.loginname}"></td>
     </tr>
     <tr>
       <td>Password:</td>
-      <td><input type="password" name="password" value=""></td>
+      <td><input type="password" name="password" value="$!{userForm.password}"></td>
     </tr>
     <tr>
       <td>Password Confirm:</td>
-      <td><input type="password" name="password1" value=""></td>
+      <td><input type="password" name="password1" value="$!{userForm.password1}"></td>
     </tr>
     <tr>
       <td>Email:</td>
-      <td><input type="input" name="email" value=""></td>
+      <td><input type="input" name="email" value="$!{userForm.email}"></td>
     </tr>
     <tr>
       <td colspan="2"><input type="submit" value="Submit"></td>

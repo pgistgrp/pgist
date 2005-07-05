@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.pgist.exceptions.UserExistException;
 import org.pgist.users.Role;
 import org.pgist.users.User;
 import org.pgist.util.HibernateUtil;
@@ -125,6 +126,36 @@ public class UserDAO extends BaseDAO {
         }
 
         return list;
+    }
+    
+    
+    /**
+     * Add a new user to system
+     * @param user
+     * @throws Exception
+     */
+    public static void addUser(User user) throws UserExistException, Exception {
+        try {
+            Session session = HibernateUtil.getSession();
+            HibernateUtil.begin();
+            
+            Query query = session.createQuery("from User where loginname=:loginname and enabled=:enabled and deleted=:deleted");
+            query.setString("loginname", user.getLoginname());
+            query.setBoolean("enabled", true);
+            query.setBoolean("deleted", false);
+            List list = query.list();
+            if (list.size()>0) {
+                throw new UserExistException("User already exists!");
+            }
+
+            HibernateUtil.commit();
+        } catch (Exception e) {
+            try {
+                HibernateUtil.rollback();
+            } catch(Exception ex) {
+            }
+            throw e;
+        }
     }
     
     

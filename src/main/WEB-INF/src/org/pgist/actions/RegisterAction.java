@@ -8,6 +8,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.pgist.dao.UserDAO;
+import org.pgist.exceptions.UserExistException;
 import org.pgist.users.Role;
 import org.pgist.users.User;
 
@@ -44,21 +45,27 @@ public class RegisterAction extends Action {
         String password1 = aForm.getPassword1();
         String email = aForm.getEmail();
         
+        //check if loginname is valid
+        if (loginname==null || "".equals(loginname)) {
+            request.setAttribute("PGISTMessage", "please input login name");
+            return mapping.findForward("failure");
+        }
+
         //check if password is valid
         if (password==null || "".equals(password)) {
-            System.out.println("password invlid");
+            request.setAttribute("PGISTMessage", "please input password");
             return mapping.findForward("failure");
         }
         
         //check if password is matched
         if (!password.equals(password1)) {
-            System.out.println("password not match");
+            request.setAttribute("PGISTMessage", "please confirm password");
             return mapping.findForward("failure");
         }
         
-        //check if password is valid
+        //check if email is valid
         if (email==null || "".equals(email)) {
-            System.out.println("email invlid");
+            request.setAttribute("PGISTMessage", "please input email");
             return mapping.findForward("failure");
         }
 
@@ -78,11 +85,14 @@ public class RegisterAction extends Action {
         Role role = UserDAO.getRoleByName("member");
         user.getRoles().add(role);
         
-        if (UserDAO.insert(user)) {
+        try {
+            UserDAO.addUser(user);
             return mapping.findForward("success");
-        } else {
-            return mapping.findForward("failure");
+        } catch(UserExistException e) {
+            request.setAttribute("PGISTMessage", e.getMessage());
         }
+        
+        return mapping.findForward("failure");
     }
     
     

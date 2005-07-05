@@ -11,6 +11,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 import org.pgist.dao.UserDAO;
+import org.pgist.exceptions.UserExistException;
 import org.pgist.users.Role;
 import org.pgist.users.User;
 import org.pgist.util.PageSetting;
@@ -148,11 +149,14 @@ public class SysAdminAction extends DispatchAction  {
         user.setDeleted(false);
         user.setEnabled(true);
 
-        if (UserDAO.insert(user)) {
+        try {
+            UserDAO.addUser(user);
             return mapping.findForward("success");
-        } else {
-            return mapping.findForward("failure");
+        } catch(UserExistException e) {
+            request.setAttribute("PGISTMessage", e.getMessage());
         }
+        
+        return mapping.findForward("failure");
     }//addUser()
     
     
