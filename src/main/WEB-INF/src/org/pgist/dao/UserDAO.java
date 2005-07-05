@@ -189,4 +189,25 @@ public class UserDAO extends BaseDAO {
     }
     
     
+    /**
+     * Add a new user to system
+     * @param user
+     * @throws Exception
+     */
+    public static void editUser(User user) throws Exception {
+        try {
+            Session session = HibernateUtil.getSession();
+            HibernateUtil.begin();
+            
+            HibernateUtil.commit();
+        } catch (Exception e) {
+            try {
+                HibernateUtil.rollback();
+            } catch(Exception ex) {
+            }
+            throw e;
+        }
+    }
+    
+    
 }

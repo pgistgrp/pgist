@@ -44,7 +44,11 @@
     </tr>
     #foreach ($user in $sysAdminForm.users)
     <tr>
+      #if($user.internal)
       <td nowrap>$user.loginname</td>
+      #else
+      <td nowrap><a href="?action=editUser&userId=$user.id">$user.loginname</a></td>
+      #end
       <td nowrap>#if($user.enabled)Enabled#else <span style="color:red;">Disabled</span> #end</td>
       <td nowrap align="center">
         #if($user.internal)&nbsp;#else<input type="checkbox" name="userId" value="$!{user.id}">#end

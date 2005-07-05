@@ -188,4 +188,46 @@ public class SysAdminAction extends DispatchAction  {
     }//delUser()
     
     
+    /**
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     */
+    public ActionForward editUser(
+            ActionMapping mapping,
+            ActionForm form,
+            HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        
+        if (!checkRole((User) request.getSession().getAttribute("user"))) {
+            return mapping.findForward("notAdmin");
+        }
+        
+        if ("GET".equals(request.getMethod())) {
+            
+            return mapping.findForward("userEdit");
+        }
+        
+        SysAdminForm aForm = (SysAdminForm) form;
+        if (aForm.getUserId().length<1) {
+            request.setAttribute("PGISTMessage", "Please select a user to be edited.");
+            return mapping.findForward("listUser");
+        }
+        
+        User user = (User) UserDAO.load(User.class, aForm.getUserId()[0]);
+        
+
+        try {
+            UserDAO.editUser(user);
+        } catch(Exception e) {
+            return mapping.findForward("listUser");
+        }
+        
+        return null;
+        
+    }//editUser()
+    
+    
 }
