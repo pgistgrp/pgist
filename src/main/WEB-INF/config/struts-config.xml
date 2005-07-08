@@ -48,6 +48,7 @@
             <forward name="listUser" path="/WEB-INF/sysadmin/listUser.vm"/>
             <forward name="addUser"  path="/WEB-INF/sysadmin/addUser.vm"/>
             <forward name="listRole" path="/WEB-INF/sysadmin/listRole.vm"/>
+            <forward name="addRole"  path="/WEB-INF/sysadmin/addRole.vm"/>
         </action>
         
     </action-mappings>

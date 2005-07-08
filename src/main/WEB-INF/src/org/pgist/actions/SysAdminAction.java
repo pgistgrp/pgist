@@ -11,6 +11,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 import org.pgist.dao.UserDAO;
+import org.pgist.exceptions.RoleExistException;
 import org.pgist.exceptions.UserExistException;
 import org.pgist.users.Role;
 import org.pgist.users.User;
@@ -206,7 +207,6 @@ public class SysAdminAction extends DispatchAction  {
         }
         
         if ("GET".equals(request.getMethod())) {
-            
             return mapping.findForward("userEdit");
         }
         
@@ -217,7 +217,6 @@ public class SysAdminAction extends DispatchAction  {
         }
         
         User user = (User) UserDAO.load(User.class, aForm.getUserId()[0]);
-        
 
         try {
             UserDAO.editUser(user);
@@ -228,6 +227,143 @@ public class SysAdminAction extends DispatchAction  {
         return null;
         
     }//editUser()
+    
+    
+    /**
+     * List All Roles.
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     */
+    public ActionForward listRole(
+            ActionMapping mapping,
+            ActionForm form,
+            HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        
+        
+        if (!checkRole((User) request.getSession().getAttribute("user"))) {
+            return mapping.findForward("notAdmin");
+        }
+        
+        SysAdminForm aForm = (SysAdminForm) form;
+        PageSetting setting = new PageSetting(aForm.getPage());
+        setting.set("nameFilter", aForm.getNameFilter());
+        List list = UserDAO.getRoleList(setting);
+        aForm.setRoles(list);
+        
+        return mapping.findForward("listRole");
+    }//listUser()
+    
+    
+    /**
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     */
+    public ActionForward addRole(
+            ActionMapping mapping,
+            ActionForm form,
+            HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        
+        if (!checkRole((User) request.getSession().getAttribute("user"))) {
+            return mapping.findForward("notAdmin");
+        }
+        
+        if ("GET".equals(request.getMethod())) {
+            return mapping.findForward("roleAdd");
+        }
+        
+        SysAdminForm aForm = (SysAdminForm) form;
+        
+        String name = aForm.getRoleName();
+        
+        Role role = new Role();
+        role.setName(name);
+        role.setDeleted(false);
+        
+        try {
+            UserDAO.addRole(role);
+            return mapping.findForward("success");
+        } catch(RoleExistException e) {
+            request.setAttribute("PGISTMessage", e.getMessage());
+        }
+        
+        return mapping.findForward("failure");
+    }//addRole()
+    
+    
+    /**
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     */
+    public ActionForward delRole(
+            ActionMapping mapping,
+            ActionForm form,
+            HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        
+        if (!checkRole((User) request.getSession().getAttribute("user"))) {
+            return mapping.findForward("notAdmin");
+        }
+        
+        SysAdminForm aForm = (SysAdminForm) form;
+
+        if (UserDAO.delRoles(aForm.getRoleId())) {
+            return mapping.findForward("listRole");
+        }
+        
+        return null;
+        
+    }//delRole()
+    
+    
+    /**
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     */
+    public ActionForward editRole(
+            ActionMapping mapping,
+            ActionForm form,
+            HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        
+        if (!checkRole((User) request.getSession().getAttribute("user"))) {
+            return mapping.findForward("notAdmin");
+        }
+        
+        if ("GET".equals(request.getMethod())) {
+            return mapping.findForward("roleEdit");
+        }
+        
+        SysAdminForm aForm = (SysAdminForm) form;
+        if (aForm.getRoleId().length<1) {
+            request.setAttribute("PGISTMessage", "Please select a role to be edited.");
+            return mapping.findForward("listRole");
+        }
+        
+        Role role = (Role) UserDAO.load(Role.class, aForm.getRoleId()[0]);
+        
+        try {
+            UserDAO.editRole(role);
+        } catch(Exception e) {
+            return mapping.findForward("listRole");
+        }
+        
+        return null;
+        
+    }//editRole()
     
     
 }

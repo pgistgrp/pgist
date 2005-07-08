@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.pgist.exceptions.RoleExistException;
 import org.pgist.exceptions.UserExistException;
 import org.pgist.users.Role;
 import org.pgist.users.User;
@@ -82,7 +83,7 @@ public class UserDAO extends BaseDAO {
     
     
     /**
-     * Get all user, enabled or disabled
+     * Get all users, enabled or disabled
      * @param enabled
      * @return
      * @throws Exception
@@ -147,6 +148,8 @@ public class UserDAO extends BaseDAO {
             if (list.size()>0) {
                 throw new UserExistException("User already exists!");
             }
+            
+            session.save(user);
 
             HibernateUtil.commit();
         } catch (Exception e) {
@@ -190,7 +193,7 @@ public class UserDAO extends BaseDAO {
     
     
     /**
-     * Add a new user to system
+     * Edit the infomation of a user
      * @param user
      * @throws Exception
      */
@@ -198,6 +201,137 @@ public class UserDAO extends BaseDAO {
         try {
             Session session = HibernateUtil.getSession();
             HibernateUtil.begin();
+            
+            session.update(user);
+            
+            HibernateUtil.commit();
+        } catch (Exception e) {
+            try {
+                HibernateUtil.rollback();
+            } catch(Exception ex) {
+            }
+            throw e;
+        }
+    }
+    
+    
+    /**
+     * Get all roles
+     * @param setting
+     * @return
+     * @throws Exception
+     */
+    public static List getRoleList(PageSetting setting) throws Exception {
+        List list = null;
+        
+        try {
+            Session session = HibernateUtil.getSession();
+            HibernateUtil.begin();
+            
+            StringBuffer hql = new StringBuffer("from Role where deleted=:deleted");
+            String nameFilter = (String) setting.get("nameFilter");
+            if (nameFilter!=null && !"".equals(nameFilter)) hql.append(" and name like :nameFilter");
+            
+            Query query = session.createQuery("select count(id) "+hql.toString());
+            query.setBoolean("deleted", false);
+            if (nameFilter!=null && !"".equals(nameFilter)) query.setString("nameFilter", "%"+nameFilter+"%");
+            list = query.list();
+            
+            if (list.size()>0) {
+                setting.setRowSize(((Integer)list.get(0)).intValue());
+                
+                query = session.createQuery(hql.toString());
+                query.setBoolean("deleted", false);
+                if (nameFilter!=null && !"".equals(nameFilter)) query.setString("nameFilter", "%"+nameFilter+"%");
+                query.setFirstResult(setting.getFirstRow());
+                query.setFetchSize(setting.getRowOfPage());
+                list = query.list();
+            }
+
+            HibernateUtil.commit();
+        } catch (Exception e) {
+            try {
+                HibernateUtil.rollback();
+            } catch(Exception ex) {
+            }
+            throw e;
+        }
+
+        return list;
+    }
+    
+    
+    /**
+     * Add a new role to system
+     * @param role
+     * @throws Exception
+     */
+    public static void addRole(Role role) throws RoleExistException, Exception {
+        try {
+            Session session = HibernateUtil.getSession();
+            HibernateUtil.begin();
+            
+            Query query = session.createQuery("from Role where name=:name and deleted=:deleted");
+            query.setString("name", role.getName());
+            query.setBoolean("deleted", false);
+            List list = query.list();
+            if (list.size()>0) {
+                throw new RoleExistException("Role already exists!");
+            }
+            
+            session.save(role);
+
+            HibernateUtil.commit();
+        } catch (Exception e) {
+            try {
+                HibernateUtil.rollback();
+            } catch(Exception ex) {
+            }
+            throw e;
+        }
+    }
+    
+    
+    /**
+     * Delete roles according to the idList. The deletion is a transaction
+     * so that either all roles are deleted or none of them is deleted.
+     * @param idList
+     * @return
+     */
+    public static boolean delRoles(Long[] idList) {
+        
+        try {
+            Session session = HibernateUtil.getSession();
+            HibernateUtil.begin();
+            
+            for (int i=0; i<idList.length; i++) {
+                Role role = (Role) session.load(User.class, idList[i]);
+                role.setDeleted(true);
+                session.update(role);
+            }//for i
+            
+            HibernateUtil.commit();
+        } catch (Exception e) {
+            try {
+                HibernateUtil.rollback();
+            } catch(Exception ex) {
+            }
+        }
+        return false;
+    }
+    
+    
+    /**
+     * Edit the infomation of a role
+     * @param user
+     * @throws Exception
+     */
+    public static void editRole(Role role) throws Exception {
+        try {
+            Session session = HibernateUtil.getSession();
+            HibernateUtil.begin();
+            
+            session.update(role);
             
             HibernateUtil.commit();
         } catch (Exception e) {
