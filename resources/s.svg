@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:export-ydpi="11.510000"
+   inkscape:export-xdpi="11.510000"
+   inkscape:export-filename="t.png"
+   sodipodi:docname="s.svg"
+   sodipodi:docbase="/home/kenny/workdir/pgist/resources"
+   inkscape:version="0.41"
+   sodipodi:version="0.32"
+   id="svg1308"
+   height="160.00000pt"
+   width="110.00000pt">
+  <defs
+     id="defs3" />
+  <sodipodi:namedview
+     inkscape:window-y="22"
+     inkscape:window-x="0"
+     inkscape:window-height="544"
+     inkscape:window-width="640"
+     inkscape:current-layer="layer1"
+     inkscape:document-units="px"
+     inkscape:cy="62.857143"
+     inkscape:cx="375.00000"
+     inkscape:zoom="0.35000000"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base" />
+  <metadata
+     id="metadata4">
+    <rdf:RDF
+       id="RDF5">
+      <cc:Work
+         id="Work6"
+         rdf:about="">
+        <dc:format
+           id="format7">image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage"
+           id="type9" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <path
+       style="font-size:209.94371;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#008400;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Serif;text-anchor:start;writing-mode:lr-tb"
+       d="M 15.866276,147.89869 L 15.866276,113.04475 L 27.655106,113.14726 C 27.996776,124.76527 31.345486,133.37624 37.701236,138.98018 C 44.125246,144.51582 53.863836,147.28363 66.917036,147.28362 C 79.081666,147.28363 88.341866,144.89169 94.697676,140.10781 C 101.12163,135.25561 104.33366,128.21649 104.33377,118.99042 C 104.33366,111.60963 102.38594,105.93733 98.490610,101.97350 C 94.663406,98.009780 86.530826,94.148514 74.092846,90.389694 L 53.898066,84.341514 C 39.273036,79.899424 28.953546,74.363804 22.939566,67.734634 C 16.993876,61.105654 14.021046,52.016294 14.021066,40.466554 C 14.021046,27.481884 18.634066,17.401584 27.860126,10.225644 C 37.086126,3.0499843 50.036746,-0.53791570 66.712016,-0.53807570 C 73.819406,-0.53791570 81.610276,0.24800430 90.084656,1.8196943 C 98.558850,3.3233443 107.57986,5.5444243 117.14771,8.4829440 L 117.14771,41.081624 L 105.56391,41.081624 C 104.40200,30.283864 100.77993,22.492994 94.697676,17.708984 C 88.683566,12.856914 79.491706,10.430804 67.122056,10.430664 C 56.324116,10.430804 48.089026,12.651894 42.416766,17.093914 C 36.812766,21.467874 34.010786,27.857754 34.010816,36.263584 C 34.010786,43.576184 36.129356,49.316824 40.366536,53.485524 C 44.603636,57.654434 53.590476,61.789064 67.327086,65.889424 L 86.291726,71.527564 C 100.16486,75.696454 110.04013,81.027044 115.91757,87.519374 C 121.86312,93.943494 124.83595,102.58862 124.83608,113.45480 C 124.83595,128.28483 120.08626,139.45858 110.58697,146.97608 C 101.08746,154.49360 86.940876,158.25235 68.147176,158.25236 C 59.741166,158.25235 51.164366,157.39809 42.416766,155.68957 C 33.737416,153.98104 24.887266,151.38408 15.866276,147.89869"
+       id="text2115" />
+  </g>
+</svg>

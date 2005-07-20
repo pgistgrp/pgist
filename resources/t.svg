@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:export-ydpi="11.510000"
+   inkscape:export-xdpi="11.510000"
+   inkscape:export-filename="t1.png"
+   sodipodi:docname="t.svg"
+   sodipodi:docbase="/home/kenny/workdir/pgist/resources"
+   inkscape:version="0.41"
+   sodipodi:version="0.32"
+   id="svg1308"
+   height="160.00000pt"
+   width="500.28000pt">
+  <defs
+     id="defs3" />
+  <sodipodi:namedview
+     inkscape:window-y="22"
+     inkscape:window-x="0"
+     inkscape:window-height="544"
+     inkscape:window-width="640"
+     inkscape:current-layer="layer1"
+     inkscape:document-units="px"
+     inkscape:cy="-165.71429"
+     inkscape:cx="375.00000"
+     inkscape:zoom="0.35000000"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base" />
+  <metadata
+     id="metadata4">
+    <rdf:RDF
+       id="RDF5">
+      <cc:Work
+         id="Work6"
+         rdf:about="">
+        <dc:format
+           id="format7">image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage"
+           id="type9" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <path
+       style="font-size:209.94371;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#00008e;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Serif;text-anchor:start;writing-mode:lr-tb"
+       d="M 40.112237,156.52489 L 40.112237,145.65866 L 59.691947,145.65866 L 59.691947,15.673984 L 14.689367,15.673984 L 14.689367,39.559184 L 2.0804371,39.559184 L 2.0804371,3.4751043 L 138.01079,3.4751043 L 138.01079,39.559184 L 125.40187,39.559184 L 125.40187,15.673984 L 80.399287,15.673984 L 80.399287,145.65866 L 99.979000,145.65866 L 99.979000,156.52489 L 40.112237,156.52489"
+       id="text2111" />
+  </g>
+</svg>
