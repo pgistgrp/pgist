@@ -262,6 +262,12 @@ public class UserDAO extends BaseDAO {
     }
     
     
+    /**
+     * Enable or disable selected users
+     * @param idList
+     * @param enable
+     * @throws Exception
+     */
     public static void enableUsers(List idList, boolean enable) throws Exception {
         try {
             Session session = HibernateUtil.getSession();
@@ -440,4 +446,4 @@ public class UserDAO extends BaseDAO {
     }
     
     
-}
+}//class UserDAO

@@ -2,22 +2,20 @@ package org.pgist.backing;
 
 import java.util.List;
 
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIData;
-import javax.faces.component.UIInput;
-import javax.faces.component.UISelectBoolean;
 import javax.faces.event.ActionEvent;
 
 import org.pgist.dao.UserDAO;
 import org.pgist.exceptions.RoleExistException;
-import org.pgist.exceptions.UserExistException;
 import org.pgist.users.Role;
-import org.pgist.users.User;
 import org.pgist.util.JSFUtil;
 import org.pgist.util.ListTableBean;
-import org.pgist.util.PageSetting;
 
 
+/**
+ * Backing bean for managing the roles
+ * @author kenny
+ *
+ */
 public class RoleBean extends ListTableBean {
     
     

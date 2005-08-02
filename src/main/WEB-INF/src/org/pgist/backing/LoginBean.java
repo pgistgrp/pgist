@@ -2,16 +2,19 @@ package org.pgist.backing;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.faces.validator.ValidatorException;
+import javax.servlet.http.HttpSession;
 
 import org.pgist.dao.UserDAO;
 import org.pgist.users.User;
 import org.pgist.util.JSFUtil;
 
-import javax.servlet.http.HttpSession;
 
-
+/**
+ * Backing bean for processing user login
+ * @author kenny
+ *
+ */
 public class LoginBean {
 
     
@@ -45,8 +48,11 @@ public class LoginBean {
     }
     
     
+    /**
+     * authentic current user login
+     * @return
+     */
     public String login() {
-        System.out.println("---> @ LoginBean.login");
         try {
             User user = UserDAO.getUserByName(loginname, true, false);
             if ( user.checkPassword(password) ) { //user is valid
@@ -65,6 +71,10 @@ public class LoginBean {
     }//login()
     
     
+    /**
+     * remove current user from http session
+     * @return
+     */
     public String logout() {
         System.out.println("---> @ LoginBean.logout");
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);

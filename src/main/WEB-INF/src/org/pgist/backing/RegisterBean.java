@@ -1,13 +1,11 @@
 package org.pgist.backing;
 
 
-import org.pgist.dao.UserDAO;
-import org.pgist.users.User;
-import org.pgist.util.JSFUtil;
-
-import javax.servlet.http.HttpSession;
-
-
+/**
+ * Backing bean for register new user
+ * @author kenny
+ *
+ */
 public class RegisterBean {
 
     
@@ -42,4 +40,3 @@ public class RegisterBean {
     
     
 }//class RegisterBean
-

@@ -9,9 +9,13 @@ import org.pgist.exceptions.UserExistException;
 import org.pgist.users.User;
 import org.pgist.util.JSFUtil;
 import org.pgist.util.ListTableBean;
-import org.pgist.util.PageSetting;
 
 
+/**
+ * Backing bean for managing the users
+ * @author kenny
+ *
+ */
 public class UserBean extends ListTableBean {
     
     
@@ -134,4 +138,3 @@ public class UserBean extends ListTableBean {
     
     
 }//class UserBean
-

@@ -72,13 +72,6 @@ public class PgistFilter implements Filter {
         String ctxPath = req.getContextPath();
         path = path.substring(ctxPath.length());
         
-        System.out.println("---> @ PgistFilter.doFilter "+req.getRequestURI());
-        System.out.println("---> "+ignoreURLs+"       "+ignoreURLs.contains(path));
-        System.out.println("getContextPath() ---> "+req.getContextPath());
-        System.out.println("getPathInfo()    ---> "+req.getPathInfo());
-        System.out.println("getRequestURI()  ---> "+req.getRequestURI());
-        System.out.println("getRequestURL()  ---> "+req.getRequestURL());
-        System.out.println("getServletPath()  ---> "+req.getServletPath());
         if (!ignoreURLs.contains(path)) {
             HttpSession session = req.getSession();
             if (session.getAttribute("user")==null) {
@@ -90,7 +83,6 @@ public class PgistFilter implements Filter {
         }
         
         try {
-            System.out.println("---> ok, we now go to service");
             chain.doFilter(request, response);
         } finally {
             if (forceCloseConnection) {

@@ -9,6 +9,12 @@ import org.pgist.dao.UserDAO;
 import org.pgist.users.Role;
 import org.pgist.users.User;
 
+
+/**
+ * Util class
+ * @author kenny
+ *
+ */
 public class JSFUtil {
 
     
@@ -17,6 +23,10 @@ public class JSFUtil {
     }
     
     
+    /**
+     * Check if the current user is an system administrator
+     * @return
+     */
     public static boolean checkAdmin() {
         HttpSession session = getSession(false);
         
@@ -36,7 +46,7 @@ public class JSFUtil {
         }
         
         return hasAdminRole;
-    }
+    }//checkAdmin()
     
     
-}
+}//class JSFUtil
