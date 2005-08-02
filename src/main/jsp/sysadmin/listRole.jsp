@@ -21,8 +21,8 @@
     
     <f:facet name="toolbar">
       <pg:toolbar styleClass="toolbar">
-        <h:commandLink id="addRole" action="addRole" value="Add Role" />
-        <h:commandLink id="delRoles"  actionListener="#{RoleBean.delRoles}" value="Delete Roles" />
+        <pg:toolButton id="addRole" action="addRole" value="Add Role" />
+        <pg:toolButton id="delRoles"  actionListener="#{RoleBean.delRoles}" confirm="Are you sure to delete role?" value="Delete Roles" />
       </pg:toolbar>
     </f:facet>
 

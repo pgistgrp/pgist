@@ -21,10 +21,10 @@
     
     <f:facet name="toolbar">
       <pg:toolbar styleClass="toolbar">
-        <h:commandLink id="addUser" action="addUser" value="Add" />
-        <h:commandLink id="delUsers"  actionListener="#{UserBean.delUsers}" value="Delete" />
-        <h:commandLink id="enableUsers"  actionListener="#{UserBean.enableUsers}" value="Enable" />
-        <h:commandLink id="disableUsers"  actionListener="#{UserBean.disableUsers}" value="Disable" />
+        <pg:toolButton id="addUser" action="addUser" value="Add" />
+        <pg:toolButton id="delUsers" actionListener="#{UserBean.delUsers}" confirm="Are you sure to delete user?" value="Delete" />
+        <pg:toolButton id="enableUsers" actionListener="#{UserBean.enableUsers}" confirm="Are you sure to enable user?" value="Enable" />
+        <pg:toolButton id="disableUsers" actionListener="#{UserBean.disableUsers}" confirm="Are you sure to disable user?" value="Disable" />
       </pg:toolbar>
     </f:facet>
 
