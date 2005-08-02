@@ -19,8 +19,8 @@ import org.pgist.util.ListTableBean;
 public class UserBean extends ListTableBean {
     
     
-    private static final long serialVersionUID = 1L;
     private List users = null;
+    private User user = new User();
 
 
     public List getUsers() {
@@ -30,6 +30,16 @@ public class UserBean extends ListTableBean {
     
     public void setUsers(List users) {
         this.users = users;
+    }
+    
+    
+    public User getUser() {
+        return user;
+    }
+    
+    
+    public void setUser(User user) {
+        this.user = user;
     }
 
 
@@ -58,18 +68,14 @@ public class UserBean extends ListTableBean {
      */
     public String addUser() {
         
+        System.out.println("---> @ UserBean.addUser()");
+
         if (!JSFUtil.checkAdmin()) return "notAdmin";
         
-        /*
-        Registry registry = new Registry();
-        registry.setLoginname(loginname);
-        registry.setOriginPassword(password);
-        */
-        
-        User user = new User();
+        user = new User();
         user.setLoginname("");
         user.setEmail("");
-        user.setOriginPassword("");
+        user.setPassword("");
         user.setDeleted(false);
         user.setEnabled(true);
 
@@ -138,3 +144,4 @@ public class UserBean extends ListTableBean {
     
     
 }//class UserBean
+

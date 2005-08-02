@@ -66,6 +66,11 @@
       <from-outcome>listUser</from-outcome>
       <to-view-id>/jsp/sysadmin/listUser.jsp</to-view-id>
     </navigation-case>
+    <navigation-case>
+      <description>add user</description>
+      <from-outcome>addUser</from-outcome>
+      <to-view-id>/jsp/sysadmin/editUser.jsp</to-view-id>
+    </navigation-case>
   </navigation-rule>
 
   
