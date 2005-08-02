@@ -1,0 +1,36 @@
+.myclass {
+  display: inline;
+  margin: 0;
+  font-size: 10px;
+}
+.myclass a:link {
+  text-decoration:none;
+  color: green;
+}
+.myclass a:active {
+  text-decoration:none;
+  color: green;
+}
+.myclass a:visited {
+  text-decoration:none;
+  color: green;
+}
+
+.toolbar {
+  display: inline;
+  margin: 0;
+  font-size: 10px;
+}
+.toolbar a:link {
+  text-decoration:none;
+  color: blue;
+}
+.toolbar a:active {
+  text-decoration:none;
+  color: blue;
+}
+.toolbar a:visited {
+  text-decoration:none;
+  color: blue;
+}
+

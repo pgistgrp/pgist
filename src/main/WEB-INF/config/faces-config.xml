@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE faces-config PUBLIC
+  "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN"
+  "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
+
+<faces-config>
+
+
+  <application>
+    <locale-config>
+      <default-locale>en</default-locale>
+    </locale-config>
+  </application>
+
+  <navigation-rule>
+    <description></description>
+    <from-view-id>/greeting.jsp</from-view-id>
+    <navigation-case>
+      <description>
+          Indicates to the NavigationHandler that the response.jsp
+          view must be displayed if the Action referenced by a
+          UICommand component on the greeting.jsp view returns
+          the outcome "success".
+      </description>
+      <from-outcome>success</from-outcome>
+      <to-view-id>/jsp/sysadmin/main.jsp</to-view-id>
+    </navigation-case>
+    <navigation-case>
+        <description>
+            Indicates to the NavigationHandler that the response.jsp
+            view must be displayed if the Action referenced by a
+            UICommand component on the greeting.jsp view returns
+            the outcome "failure".
+        </description>
+      <from-outcome>failure</from-outcome>
+      <to-view-id>/greeting.jsp</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+
+  <navigation-rule>
+    <description>
+        The decision rule used by the NavigationHandler to
+        determine which view must be displayed after the
+        current view, greeting.jsp is processed.
+    </description>
+    <from-view-id>/jsp/sysadmin/main.jsp</from-view-id>
+    <navigation-case>
+      <description>list user</description>
+      <from-outcome>listUser</from-outcome>
+      <to-view-id>/jsp/sysadmin/listUser.jsp</to-view-id>
+    </navigation-case>
+    <navigation-case>
+        <description>list role</description>
+      <from-outcome>listRole</from-outcome>
+      <to-view-id>/jsp/sysadmin/listRole.jsp</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+
+
+  <navigation-rule>
+    <description>
+    </description>
+    <from-view-id>/jsp/sysadmin/listUser.jsp</from-view-id>
+    <navigation-case>
+      <description>list user</description>
+      <from-outcome>listUser</from-outcome>
+      <to-view-id>/jsp/sysadmin/listUser.jsp</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+
+  
+  <managed-bean>
+    <description>
+      Backing Bean : login bean
+    </description>
+    <managed-bean-name>LoginBean</managed-bean-name>
+    <managed-bean-class>org.pgist.backing.LoginBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+
+  <managed-bean>
+    <description>
+      Backing Bean : user admin bean
+    </description>
+    <managed-bean-name>UserBean</managed-bean-name>
+    <managed-bean-class>org.pgist.backing.UserBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+
+  <managed-bean>
+    <description>
+      Backing Bean : role admin bean
+    </description>
+    <managed-bean-name>RoleBean</managed-bean-name>
+    <managed-bean-class>org.pgist.backing.RoleBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+
+
+</faces-config>
+
