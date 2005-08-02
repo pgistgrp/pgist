@@ -1,6 +1,7 @@
 package org.pgist.users;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import org.pgist.util.MD5;
@@ -52,5 +53,23 @@ public class User extends BaseUser {
         return this.password.equals(MD5.getDigest(providedPWD));
     }
     
+    
+    public String getRoleString() {
+        StringBuffer sb = new StringBuffer();
+        
+        boolean first = true;
+        for (Iterator iter=roles.iterator(); iter.hasNext(); ) {
+            Role role = (Role) iter.next();
+            if (first) {
+                first = false;
+            } else {
+                sb.append(",");
+            }
+            sb.append(role.getName());
+        }//for iter
+        
+        return sb.toString();
+    }
+
     
 }

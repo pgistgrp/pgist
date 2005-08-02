@@ -25,9 +25,19 @@
     </path>
 
 
-    <target name="compile">
+    <target name="init">
+        <tstamp/>
         <mkdir dir="${build}" />
-        <javac classpathref="classpath" srcdir="${src}" destdir="${build}">
+    </target>
+
+
+    <target name="clean" >
+        <delete dir="${build}" />
+    </target>
+
+
+    <target name="compile" depends="init">
+        <javac classpathref="classpath" srcdir="${src}" destdir="${build}" debug="on">
             <include name="**/*.java" />
         </javac>
         <copy todir="${build}" >
@@ -60,7 +70,7 @@
     </target>
 
 
-    <target name="init">
+    <target name="initdb">
         <taskdef name="SystemInit" classname="org.pgist.tests.SystemInit">
             <classpath refid="classpath"/>
         </taskdef>

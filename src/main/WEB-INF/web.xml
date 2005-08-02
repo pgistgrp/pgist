@@ -9,6 +9,45 @@
   <display-name>PIGST Application</display-name>
 
 
+  <context-param>
+      <param-name>org.pgist.THEME_MANAGER_PATH</param-name>
+      <param-value></param-value>
+  </context-param>
+
+  <context-param>
+      <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+      <param-value>client</param-value>
+  </context-param>
+
+  <context-param>
+      <param-name>com.sun.faces.validateXml</param-name>
+      <param-value>true</param-value>
+      <description>
+          Set this flag to true if you want the JavaServer Faces
+          Reference Implementation to validate the XML in your
+          faces-config.xml resources against the DTD.  Default
+          value is false.
+      </description>
+  </context-param>
+
+  <context-param>
+      <param-name>com.sun.faces.verifyObjects</param-name>
+      <param-value>true</param-value>
+      <description>
+          Set this flag to true if you want the JavaServer Faces
+          Reference Implementation to verify that all of the application
+          objects you have configured (components, converters,
+          renderers, and validators) can be successfully created.
+          Default value is false.
+      </description>
+  </context-param>
+
+  <context-param>
+      <param-name>javax.faces.CONFIG_FILES</param-name>
+      <param-value>/WEB-INF/config/faces-config.xml</param-value>
+  </context-param>
+  
+  
   <filter>
     <filter-name>pgist filter</filter-name>
     <filter-class>org.pgist.filters.PgistFilter</filter-class>
@@ -18,63 +57,59 @@
     </init-param>
     <init-param>
       <param-name>login-url</param-name>
-      <param-value>/login.do</param-value>
+      <param-value>/index.jsp</param-value>
     </init-param>
     <init-param>
       <param-name>ignore-url</param-name>
-      <param-value>/register.do</param-value>
+      <param-value>/greeting.faces, /register.faces</param-value>
     </init-param>
   </filter>
-  
-  
+
+
   <filter-mapping>
     <filter-name>pgist filter</filter-name>
-    <url-pattern>*.do</url-pattern>
+    <url-pattern>/*</url-pattern>
   </filter-mapping>
 
-  
-  <servlet>
-    <servlet-name>action</servlet-name>
-    <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
-    <init-param>
-      <param-name>config</param-name>
-      <param-value>/WEB-INF/config/struts-config.xml</param-value>
-    </init-param>
-    <init-param>
-      <param-name>debug</param-name>
-      <param-value>2</param-value>
-    </init-param>
-    <init-param>
-      <param-name>detail</param-name>
-      <param-value>2</param-value>
-    </init-param>
-    <load-on-startup>2</load-on-startup>
-  </servlet>
 
   <servlet>
-    <servlet-name>velocity</servlet-name>
-    <servlet-class>org.apache.velocity.tools.view.servlet.VelocityViewServlet</servlet-class>
+    <servlet-name>Faces Servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
     <init-param>
-      <param-name>org.apache.velocity.toolbox</param-name>
-      <param-value>/WEB-INF/config/toolbox.xml</param-value>
+       <param-name>debug</param-name>
+       <param-value>3</param-value>
     </init-param>
     <init-param>
-      <param-name>org.apache.velocity.properties</param-name>
-      <param-value>/WEB-INF/config/velocity.properties</param-value>
+       <param-name>detail</param-name>
+       <param-value>3</param-value>
     </init-param>
-    <load-on-startup>5</load-on-startup>
+    <load-on-startup>1</load-on-startup>
   </servlet>
 
 
   <servlet-mapping>
-    <servlet-name>action</servlet-name>
-    <url-pattern>*.do</url-pattern>
+      <servlet-name>Faces Servlet</servlet-name>
+      <url-pattern>*.faces</url-pattern>
   </servlet-mapping>
 
-  <servlet-mapping>
-    <servlet-name>velocity</servlet-name>
-    <url-pattern>*.vm</url-pattern>
-  </servlet-mapping>
+
+  <security-constraint>
+    <!--
+        This security constraint illustrates how JSP pages
+        with JavaServer Faces components can be protected from
+        being accessed without going through the Faces Servlet.
+        The security constraint ensures that the Faces Servlet will
+        be used or the pages will not be processed.
+    -->
+    <display-name>Restrict access to JSF pages</display-name>
+    <web-resource-collection>
+      <web-resource-name>Restrict access to JSF pages</web-resource-name>
+      <url-pattern>/jspa/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <description>With no roles defined, no access granted</description>
+    </auth-constraint>
+  </security-constraint>
 
 
   <welcome-file-list>
@@ -85,12 +120,12 @@
 
   <error-page>
 		<error-code>400</error-code>
-		<location>/PathNotFound.vm</location>
+		<location>/PathNotFound.jsf</location>
   </error-page>
 
   <error-page>
 		<error-code>404</error-code>
-		<location>/PageNotFound.vm</location>
+		<location>/PageNotFound.jsf</location>
   </error-page>
 
 

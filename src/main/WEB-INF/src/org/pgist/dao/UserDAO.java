@@ -88,6 +88,53 @@ public class UserDAO extends BaseDAO {
      * @return
      * @throws Exception
      */
+    public static List getUserList(PageSetting setting) throws Exception {
+        List list = null;
+        
+        try {
+            Session session = HibernateUtil.getSession();
+            HibernateUtil.begin();
+            
+            StringBuffer hql = new StringBuffer("from User as user where user.deleted=:deleted");
+            String nameFilter = (String) setting.get("nameFilter");
+            if (nameFilter!=null && !"".equals(nameFilter)) hql.append(" and loginname like :nameFilter");
+            
+            Query query = session.createQuery("select count(id) "+hql.toString());
+            query.setBoolean("deleted", false);
+            if (nameFilter!=null && !"".equals(nameFilter)) query.setString("nameFilter", "%"+nameFilter+"%");
+            list = query.list();
+            
+            if (list.size()>0) {
+                setting.setRowSize(((Integer)list.get(0)).intValue());
+                
+                hql.append(" order by user.id");
+                query = session.createQuery(hql.toString());
+                query.setBoolean("deleted", false);
+                if (nameFilter!=null && !"".equals(nameFilter)) query.setString("nameFilter", "%"+nameFilter+"%");
+                query.setFirstResult(setting.getFirstRow());
+                query.setMaxResults(setting.getRowOfPage());
+                list = query.list();
+            }
+            
+            HibernateUtil.commit();
+        } catch (Exception e) {
+            try {
+                HibernateUtil.rollback();
+            } catch(Exception ex) {
+            }
+            throw e;
+        }
+
+        return list;
+    }
+    
+    
+    /**
+     * Get all users, enabled or disabled
+     * @param enabled
+     * @return
+     * @throws Exception
+     */
     public static List getUserList(boolean enabled, PageSetting setting) throws Exception {
         List list = null;
         
@@ -113,7 +160,7 @@ public class UserDAO extends BaseDAO {
                 query.setBoolean("deleted", false);
                 if (nameFilter!=null && !"".equals(nameFilter)) query.setString("nameFilter", "%"+nameFilter+"%");
                 query.setFirstResult(setting.getFirstRow());
-                query.setFetchSize(setting.getRowOfPage());
+                query.setMaxResults(setting.getRowOfPage());
                 list = query.list();
             }
 
@@ -168,14 +215,14 @@ public class UserDAO extends BaseDAO {
      * @param idList
      * @return
      */
-    public static boolean delUsers(Long[] idList) {
+    public static boolean delUsers(List idList) {
         
         try {
             Session session = HibernateUtil.getSession();
             HibernateUtil.begin();
             
-            for (int i=0; i<idList.length; i++) {
-                User user = (User) session.load(User.class, idList[i]);
+            for (int i=0, size=idList.size(); i<size; i++) {
+                User user = (User) session.load(User.class, (Long)idList.get(i));
                 user.setDeleted(true);
                 user.setEnabled(false);
                 session.update(user);
@@ -215,6 +262,28 @@ public class UserDAO extends BaseDAO {
     }
     
     
+    public static void enableUsers(List idList, boolean enable) throws Exception {
+        try {
+            Session session = HibernateUtil.getSession();
+            HibernateUtil.begin();
+            
+            for (int i=0, size=idList.size(); i<size; i++) {
+                User user = (User) session.load(User.class, (Long)idList.get(i));
+                user.setEnabled(enable);
+                session.update(user);
+            }//for i
+            
+            HibernateUtil.commit();
+        } catch (Exception e) {
+            try {
+                HibernateUtil.rollback();
+            } catch(Exception ex) {
+            }
+            throw e;
+        }
+    }//enableUsers()
+    
+    
     /**
      * Get all roles
      * @param setting
@@ -244,7 +313,7 @@ public class UserDAO extends BaseDAO {
                 query.setBoolean("deleted", false);
                 if (nameFilter!=null && !"".equals(nameFilter)) query.setString("nameFilter", "%"+nameFilter+"%");
                 query.setFirstResult(setting.getFirstRow());
-                query.setFetchSize(setting.getRowOfPage());
+                query.setMaxResults(setting.getRowOfPage());
                 list = query.list();
             }
 
@@ -298,17 +367,44 @@ public class UserDAO extends BaseDAO {
      * @param idList
      * @return
      */
-    public static boolean delRoles(Long[] idList) {
+    public static boolean delRoles(List idList) {
         
         try {
             Session session = HibernateUtil.getSession();
             HibernateUtil.begin();
             
-            for (int i=0; i<idList.length; i++) {
-                Role role = (Role) session.load(User.class, idList[i]);
+            for (int i=0, size=idList.size(); i<size; i++) {
+                Role role = (Role) session.load(Role.class, (Long)idList.get(i));
                 role.setDeleted(true);
                 session.update(role);
             }//for i
+            
+            HibernateUtil.commit();
+        } catch (Exception e) {
+            try {
+                HibernateUtil.rollback();
+            } catch(Exception ex) {
+            }
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    
+    /**
+     * Delete role according to the id.
+     * @param id
+     * @return
+     */
+    public static boolean delRole(Long id) {
+        
+        try {
+            Session session = HibernateUtil.getSession();
+            HibernateUtil.begin();
+            
+            Role role = (Role) session.load(Role.class, id);
+            role.setDeleted(true);
+            session.update(role);
             
             HibernateUtil.commit();
         } catch (Exception e) {

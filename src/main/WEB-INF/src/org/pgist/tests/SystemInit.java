@@ -99,6 +99,18 @@ public class SystemInit extends MatchingTask {
                 session.save(roleGuest);
                 System.out.println("---- successfully inserte a role: guest");
                 
+                //role - test
+                for (int i=1; i<500; i++) {
+                    String s = "role-"+i;
+                    Role role = new Role();
+                    role.setDeleted(false);
+                    role.setInternal(false);
+                    role.setName(s);
+                    role.setDescription("role "+i);
+                    session.save(role);
+                    System.out.println("---- successfully inserte a role: "+s);
+                }//for i
+
                 //user - admin
                 User admin = new User();
                 admin.setLoginname("admin");
@@ -123,6 +135,21 @@ public class SystemInit extends MatchingTask {
                 guest.getRoles().add(roleGuest);
                 session.save(guest);
                 System.out.println("---- successfully inserte a user: guest");
+                
+                //user - test
+                for (int i=1; i<10000; i++) {
+                    String s = "test-"+i;
+                    User test = new User();
+                    test.setEnabled(true);
+                    test.setDeleted(false);
+                    test.setInternal(false);
+                    test.getRoles().add(roleGuest);
+                    test.setLoginname(s);
+                    test.setOriginPassword(s);
+                    test.setEmail(s+"@pgist.org");
+                    session.save(test);
+                    System.out.println("---- successfully inserte a user: "+s);
+                }//for i
                 
                 transaction.commit();
             } catch(Exception ex) {
