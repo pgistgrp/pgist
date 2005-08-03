@@ -100,7 +100,7 @@ public class SystemInit extends MatchingTask {
                 System.out.println("---- successfully inserte a role: guest");
                 
                 //role - test
-                for (int i=1; i<500; i++) {
+                for (int i=1; i<20; i++) {
                     String s = "role-"+i;
                     Role role = new Role();
                     role.setDeleted(false);

@@ -16,7 +16,18 @@
   <h:inputHidden id="id" value="#{UserBean.user.id}"/>
   <h:panelGrid columns="2">
     <h:outputText value="Login Name: " />
-    <h:inputText id="loginname" value="#{UserBean.user.loginname}"/>
+    <h:inputText value="#{UserBean.user.loginname}"/>
+    <h:outputText value="Password: " />
+    <h:inputSecret value="#{UserBean.user.password}"/>
+    <h:outputText value="Email: " />
+    <h:inputText value="#{UserBean.user.email}"/>
+    <h:outputText value="Roles: " />
+    <h:dataTable id="userRoles" binding="#{UserBean.data}" value="#{UserBean.roles}" var="role">
+      <h:column>
+        <h:selectBooleanCheckbox id="checked" rendered="true" binding="#{UserBean.checked}"/>
+        <h:outputText id="name" value="#{role.name}"/>
+      </h:column>
+    </h:dataTable>
   </h:panelGrid>
 
   <h:commandButton value="Commit" action="#{UserBean.addUser}" type="submit"/>

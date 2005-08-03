@@ -30,8 +30,6 @@ public class BaseDAO {
             } catch(Exception ex) {
             }
             throw e;
-        } finally {
-            HibernateUtil.closeSession();
         }
     }
     

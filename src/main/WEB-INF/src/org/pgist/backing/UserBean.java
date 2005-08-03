@@ -6,6 +6,7 @@ import javax.faces.event.ActionEvent;
 
 import org.pgist.dao.UserDAO;
 import org.pgist.exceptions.UserExistException;
+import org.pgist.users.Role;
 import org.pgist.users.User;
 import org.pgist.util.JSFUtil;
 import org.pgist.util.ListTableBean;
@@ -49,16 +50,11 @@ public class UserBean extends ListTableBean {
      */
     public void listUser(ActionEvent event) {
         
-        //if (!JSFUtil.checkAdmin()) return "notAdmin";
-        
-        //pageSetting.set("nameFilter", nameFilter);
         try {
             users = UserDAO.getUserList(pageSetting);
         } catch(Exception e) {
-            //return "dberror";
         }
         
-        //return "listUser";
     }//listUser()
     
     
@@ -68,19 +64,14 @@ public class UserBean extends ListTableBean {
      */
     public String addUser() {
         
-        System.out.println("---> @ UserBean.addUser()");
-
         if (!JSFUtil.checkAdmin()) return "notAdmin";
         
-        user = new User();
-        user.setLoginname("");
-        user.setEmail("");
-        user.setPassword("");
-        user.setDeleted(false);
         user.setEnabled(true);
-
+        user.setInternal(false);
+        user.setDeleted(false);
+        
         try {
-            UserDAO.addUser(user);
+            UserDAO.addUser(user, selectedIds(Role.class, "id"));
             return "success";
         } catch(UserExistException uee) {
         } catch(Exception e) {
@@ -95,7 +86,6 @@ public class UserBean extends ListTableBean {
      * @return
      */
     public void delUsers(ActionEvent event) {
-        
         UserDAO.delUsers(selectedIds(User.class, "id"));
         
     }//delUsers()
@@ -130,17 +120,25 @@ public class UserBean extends ListTableBean {
     public String editUser() {
         
         if (!JSFUtil.checkAdmin()) return "notAdmin";
-        
         try {
-            //User user = (User) UserDAO.load(User.class, userId);
-            //UserDAO.editUser(user);
+            user = (User) UserDAO.load(User.class, selectedId());
+            System.out.println("--> "+user.getLoginname());
         } catch(Exception e) {
-            return "listUser";
         }
         
-        return null;
+        return "editUser";
         
     }//editUser()
+    
+    
+    public List getRoles() {
+        List list = UserDAO.getRoleList();
+        for (int i=0; i<list.size(); i++) {
+            Role role = (Role) list.get(i);
+        }
+        return list;
+    }//getRoles()
+    
     
     
 }//class UserBean

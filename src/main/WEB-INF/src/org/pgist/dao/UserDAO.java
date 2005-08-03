@@ -182,21 +182,37 @@ public class UserDAO extends BaseDAO {
      * @param user
      * @throws Exception
      */
-    public static void addUser(User user) throws UserExistException, Exception {
+    public static void addUser(User user, List idList) throws UserExistException, Exception {
         try {
             Session session = HibernateUtil.getSession();
             HibernateUtil.begin();
             
-            Query query = session.createQuery("from User where loginname=:loginname and enabled=:enabled and deleted=:deleted");
+            StringBuffer hql = new StringBuffer("from User where loginname=:loginname and enabled=:enabled and deleted=:deleted");
+            if (user.getId()!=null) {
+                hql.append(" and id!=:id");
+            }
+            
+            Query query = session.createQuery(hql.toString());
             query.setString("loginname", user.getLoginname());
             query.setBoolean("enabled", true);
             query.setBoolean("deleted", false);
+            if (user.getId()!=null) query.setLong("id", user.getId());
+            
             List list = query.list();
             if (list.size()>0) {
                 throw new UserExistException("User already exists!");
             }
             
-            session.save(user);
+            user.getRoles().clear();
+            
+            if (idList!=null) {
+                for (int i=0; i<idList.size(); i++) {
+                    Role role = (Role) session.load(Role.class, (Long)idList.get(i));
+                    user.addRole(role);
+                }//for i
+            }
+            
+            session.saveOrUpdate(user);
 
             HibernateUtil.commit();
         } catch (Exception e) {
@@ -206,6 +222,16 @@ public class UserDAO extends BaseDAO {
             }
             throw e;
         }
+    }//addUser()
+    
+
+    /**
+     * Add a new user to system
+     * @param user
+     * @throws Exception
+     */
+    public static void addUser(User user) throws UserExistException, Exception {
+        addUser(user, null);
     }
     
     
@@ -269,6 +295,7 @@ public class UserDAO extends BaseDAO {
      * @throws Exception
      */
     public static void enableUsers(List idList, boolean enable) throws Exception {
+        if (idList==null || idList.size()==0) return;
         try {
             Session session = HibernateUtil.getSession();
             HibernateUtil.begin();
@@ -330,6 +357,36 @@ public class UserDAO extends BaseDAO {
             } catch(Exception ex) {
             }
             throw e;
+        }
+
+        return list;
+    }
+    
+    
+    /**
+     * Get all roles
+     * @param setting
+     * @return
+     * @throws Exception
+     */
+    public static List getRoleList() {
+        List list = null;
+        
+        try {
+            Session session = HibernateUtil.getSession();
+            HibernateUtil.begin();
+            
+            String hql = "from Role where deleted=:deleted order by id";
+            Query query = session.createQuery(hql);
+            query.setBoolean("deleted", false);
+            list = query.list();
+            
+            HibernateUtil.commit();
+        } catch (Exception e) {
+            try {
+                HibernateUtil.rollback();
+            } catch(Exception ex) {
+            }
         }
 
         return list;

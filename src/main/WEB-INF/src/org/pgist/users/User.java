@@ -49,6 +49,11 @@ public class User extends BaseUser {
     }
     
     
+    public void addRole(Role role) {
+        roles.add(role);
+    }
+    
+    
     public boolean checkPassword(String providedPWD) {
         return this.password.equals(MD5.getDigest(providedPWD));
     }
@@ -63,7 +68,7 @@ public class User extends BaseUser {
             if (first) {
                 first = false;
             } else {
-                sb.append(",");
+                sb.append(", ");
             }
             sb.append(role.getName());
         }//for iter

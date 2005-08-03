@@ -44,7 +44,8 @@
       <f:facet name="header">
         <h:outputText value="Login Name"/>
       </f:facet>
-      <h:outputText value="#{user.loginname}"/>
+      <h:inputHidden id="objectId" binding="#{UserBean.objectId}" value="#{user.id}"/>
+      <h:commandLink id="editUser" action="#{UserBean.editUser}" value="#{user.loginname}" />
     </h:column>
     
     <h:column>
