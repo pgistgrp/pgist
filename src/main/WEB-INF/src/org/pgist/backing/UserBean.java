@@ -146,7 +146,6 @@ public class UserBean extends ListTableBean {
         if (!JSFUtil.checkAdmin()) return "notAdmin";
         try {
             user = (User) UserDAO.load(User.class, selectedId());
-            System.out.println("--> "+user.getLoginname());
         } catch(Exception e) {
         }
         

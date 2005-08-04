@@ -22,12 +22,12 @@
     <h:outputText value="Email: " />
     <h:inputText value="#{UserBean.user.email}"/>
     <h:outputText value="Roles: " />
-    <h:dataTable id="userRoles" binding="#{UserBean.roleData}" value="#{UserBean.roles}" var="role">
+    <pg:multiCheckbox id="userRoles" columns="4" binding="#{UserBean.roleData}" value="#{UserBean.roles}" var="role">
       <h:column>
         <h:selectBooleanCheckbox id="checked" binding="#{UserBean.roleChecked}"/>
         <h:outputText value="#{role.name}"/>
       </h:column>
-    </h:dataTable>
+    </pg:multiCheckbox>
   </h:panelGrid>
 
   <h:commandButton value="Commit" action="#{UserBean.addUser}" type="submit"/>
