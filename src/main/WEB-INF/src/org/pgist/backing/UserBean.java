@@ -2,6 +2,8 @@ package org.pgist.backing;
 
 import java.util.List;
 
+import javax.faces.component.UIData;
+import javax.faces.component.UISelectBoolean;
 import javax.faces.event.ActionEvent;
 
 import org.pgist.dao.UserDAO;
@@ -22,6 +24,8 @@ public class UserBean extends ListTableBean {
     
     private List users = null;
     private User user = new User();
+    private UIData roleData = null;
+    protected UISelectBoolean roleChecked = null;
 
 
     public List getUsers() {
@@ -44,6 +48,26 @@ public class UserBean extends ListTableBean {
     }
 
 
+    public UIData getRoleData() {
+        return roleData;
+    }
+    
+    
+    public void setRoleData(UIData roleData) {
+        this.roleData = roleData;
+    }
+    
+    
+    public UISelectBoolean getRoleChecked() {
+        return roleChecked;
+    }
+    
+    
+    public void setRoleChecked(UISelectBoolean roleChecked) {
+        this.roleChecked = roleChecked;
+    }
+    
+    
     /**
      * List All Users.
      * @return
@@ -138,7 +162,6 @@ public class UserBean extends ListTableBean {
         }
         return list;
     }//getRoles()
-    
     
     
 }//class UserBean

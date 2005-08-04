@@ -22,10 +22,10 @@
     <h:outputText value="Email: " />
     <h:inputText value="#{UserBean.user.email}"/>
     <h:outputText value="Roles: " />
-    <h:dataTable id="userRoles" binding="#{UserBean.data}" value="#{UserBean.roles}" var="role">
+    <h:dataTable id="userRoles" binding="#{UserBean.roleData}" value="#{UserBean.roles}" var="role">
       <h:column>
-        <h:selectBooleanCheckbox id="checked" rendered="true" binding="#{UserBean.checked}"/>
-        <h:outputText id="name" value="#{role.name}"/>
+        <h:selectBooleanCheckbox id="checked" binding="#{UserBean.roleChecked}"/>
+        <h:outputText value="#{role.name}"/>
       </h:column>
     </h:dataTable>
   </h:panelGrid>

@@ -75,6 +75,7 @@ public class User extends BaseUser {
         
         return sb.toString();
     }
-
     
-}
+    
+}//class User
+

@@ -20,7 +20,7 @@
     <f:facet name="title"><h:outputText value="User List"/></f:facet>
     
     <f:facet name="toolbar">
-      <pg:toolbar styleClass="toolbar">
+      <pg:toolbar id="toolbar" styleClass="toolbar">
         <pg:toolButton id="addUser" action="addUser" value="Add" />
         <pg:toolButton id="delUsers" actionListener="#{UserBean.delUsers}" confirm="Are you sure to delete user?" value="Delete" />
         <pg:toolButton id="enableUsers" actionListener="#{UserBean.enableUsers}" confirm="Are you sure to enable user?" value="Enable" />
