@@ -85,7 +85,7 @@ public class Post {
     
     /**
      * @return
-     * @hibernate.set lazy="false" table="nlp_thread_post_link" cascade="all" order-by="role_id"
+     * @hibernate.set lazy="false" table="nlp_thread_post_link" cascade="all" order-by="id"
      * @hibernate.collection-key column="parent_id"
      * @hibernate.collection-one-to-many class="org.pgist.nlp.Post"
      */

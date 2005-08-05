@@ -38,9 +38,11 @@ public class ConversationBean extends ListTableBean {
         try {
             conversations = ConversationDAO.getConversationList(pageSetting);
         } catch(Exception e) {
+            e.printStackTrace();
         }
         
     }//listConversation()
     
     
 }//class ConversationBean
+

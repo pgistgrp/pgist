@@ -21,7 +21,7 @@
     
     <f:facet name="toolbar">
       <pg:toolbar id="toolbar" styleClass="toolbar">
-        <pg:toolButton id="newConversation" action="#{UserBean.newConversation}" value="New Thread" />
+        <pg:toolButton id="newConversation" action="#{ConversationBean.newConversation}" value="New Thread" />
       </pg:toolbar>
     </f:facet>
 
@@ -39,10 +39,10 @@
 
     <h:column>
       <f:facet name="header">
-        <h:outputText value="Login Name"/>
+        <h:outputText value="Thread"/>
       </f:facet>
-      <h:inputHidden id="objectId" binding="#{UserBean.objectId}" value="#{user.id}"/>
-      <h:commandLink id="readConversation" action="#{UserBean.readConversation}" value="#{conversation.root.title}" />
+      <h:inputHidden id="objectId" binding="#{ConversationBean.objectId}" value="#{user.id}"/>
+      <h:commandLink id="readConversation" action="#{ConversationBean.readConversation}" value="#{conversation.root.title}" />
     </h:column>
     
     <h:column>
