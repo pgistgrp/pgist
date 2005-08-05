@@ -35,6 +35,8 @@
         <mapping resource="org/pgist/users/Role.hbm.xml"/>
         <mapping resource="org/pgist/users/Registry.hbm.xml"/>
 
+        <mapping resource="org/pgist/nlp/ConversationThread.hbm.xml"/>
+        <mapping resource="org/pgist/nlp/Post.hbm.xml"/>
 
         <!--class-cache class="org.hibernate.test.Simple" region="Simple" usage="read-write"/-->
 

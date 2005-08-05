@@ -1,6 +1,7 @@
 package org.pgist.tests;
 
 import java.io.File;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,6 +16,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.util.ArrayHelper;
+import org.pgist.nlp.ConversationThread;
+import org.pgist.nlp.Post;
 import org.pgist.users.Role;
 import org.pgist.users.User;
 
@@ -137,7 +140,7 @@ public class SystemInit extends MatchingTask {
                 System.out.println("---- successfully inserte a user: guest");
                 
                 //user - test
-                for (int i=1; i<10000; i++) {
+                for (int i=1; i<20; i++) {
                     String s = "test-"+i;
                     User test = new User();
                     test.setEnabled(true);
@@ -150,6 +153,30 @@ public class SystemInit extends MatchingTask {
                     session.save(test);
                     System.out.println("---- successfully inserte a user: "+s);
                 }//for i
+                
+                //test nlp
+                ConversationThread thread = new ConversationThread();
+                thread.setEnabled(true);
+                thread.setDeleted(false);
+                Post post = new Post();
+                post.setTitle("This is A");
+                post.setOwner(admin);
+                post.setParent(null);
+                post.setContent("content of A");
+                post.setTime(new Date());
+                post.setTone(1);
+                thread.setRoot(post);
+                Post post1 = new Post();
+                post1.setTitle("This is B");
+                post1.setOwner(admin);
+                post1.setParent(post);
+                post.addPost(post1);
+                post1.setContent("content of B");
+                post1.setTime(new Date());
+                post1.setTone(2);
+                session.saveOrUpdate(post);
+                session.saveOrUpdate(post1);
+                session.saveOrUpdate(thread);
                 
                 transaction.commit();
             } catch(Exception ex) {

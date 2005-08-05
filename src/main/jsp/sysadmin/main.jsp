@@ -15,6 +15,8 @@
   <h:commandLink action="listUser" value="User Management" />
   <br>
   <h:commandLink action="listRole" value="Role Management" />
+  <br>
+  <h:commandLink action="listConversation" value="Conversation List" />
 
 </h:form>
 </f:view>

@@ -54,6 +54,11 @@
       <from-outcome>listRole</from-outcome>
       <to-view-id>/jsp/sysadmin/listRole.jsp</to-view-id>
     </navigation-case>
+    <navigation-case>
+        <description>list conversation</description>
+      <from-outcome>listConversation</from-outcome>
+      <to-view-id>/jsp/nlp/index.jsp</to-view-id>
+    </navigation-case>
   </navigation-rule>
 
 
@@ -123,6 +128,14 @@
     <managed-bean-scope>session</managed-bean-scope>
   </managed-bean>
 
+  <managed-bean>
+    <description>
+      Backing Bean : conversation admin bean
+    </description>
+    <managed-bean-name>ConversationBean</managed-bean-name>
+    <managed-bean-class>org.pgist.nlp.ConversationBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
 
 </faces-config>
 
