@@ -69,7 +69,7 @@
     <navigation-case>
       <description>add user</description>
       <from-outcome>addUser</from-outcome>
-      <to-view-id>/jsp/sysadmin/editUser.jsp</to-view-id>
+      <to-view-id>/jsp/sysadmin/addUser.jsp</to-view-id>
     </navigation-case>
     <navigation-case>
       <description>edit user</description>

@@ -21,7 +21,7 @@
     
     <f:facet name="toolbar">
       <pg:toolbar id="toolbar" styleClass="toolbar">
-        <pg:toolButton id="addUser" action="addUser" value="Add" />
+        <pg:toolButton id="addUser" action="#{UserBean.addUser}" value="Add" />
         <pg:toolButton id="delUsers" actionListener="#{UserBean.delUsers}" confirm="Are you sure to delete user?" value="Delete" />
         <pg:toolButton id="enableUsers" actionListener="#{UserBean.enableUsers}" confirm="Are you sure to enable user?" value="Enable" />
         <pg:toolButton id="disableUsers" actionListener="#{UserBean.disableUsers}" confirm="Are you sure to disable user?" value="Disable" />

@@ -83,26 +83,56 @@ public class UserBean extends ListTableBean {
     
     
     /**
-     * Add a new User
+     * GoTo the "Add User" page
      * @return
      */
     public String addUser() {
         
         if (!JSFUtil.checkAdmin()) return "notAdmin";
         
+        user = new User();
         user.setEnabled(true);
         user.setInternal(false);
         user.setDeleted(false);
         
+        return "addUser";
+    }//addUser()
+    
+    
+    /**
+     * GoTo the "Edit User" page
+     * @return
+     */
+    public String editUser() {
+        
+        if (!JSFUtil.checkAdmin()) return "notAdmin";
         try {
-            UserDAO.addUser(user, selectedIds(Role.class, "id"));
+            user = (User) UserDAO.load(User.class, selectedId());
+        } catch(Exception e) {
+        }
+        
+        return "editUser";
+        
+    }//editUser()
+    
+    
+    /**
+     * Save a new/modified User
+     * @return
+     */
+    public String saveUser() {
+        
+        if (!JSFUtil.checkAdmin()) return "notAdmin";
+        
+        try {
+            UserDAO.addUser(user, selectedIds(roleData, roleChecked, Role.class, "id"));
             return "success";
         } catch(UserExistException uee) {
         } catch(Exception e) {
         }
         
         return "failure";
-    }//addUser()
+    }//saveUser()
     
     
     /**
@@ -135,23 +165,6 @@ public class UserBean extends ListTableBean {
         UserDAO.enableUsers(selectedIds(User.class, "id"), false);
         
     }//disableUsers()
-    
-    
-    /**
-     * edit a user info
-     * @return
-     */
-    public String editUser() {
-        
-        if (!JSFUtil.checkAdmin()) return "notAdmin";
-        try {
-            user = (User) UserDAO.load(User.class, selectedId());
-        } catch(Exception e) {
-        }
-        
-        return "editUser";
-        
-    }//editUser()
     
     
     public List getRoles() {

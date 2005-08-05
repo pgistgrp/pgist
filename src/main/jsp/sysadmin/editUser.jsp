@@ -12,7 +12,8 @@
 
 <f:view>
 <h:form id="userEditForm">
-
+  <h:outputText value="Edit User"/>
+  
   <h:inputHidden id="id" value="#{UserBean.user.id}"/>
   <h:panelGrid columns="2">
     <h:outputText value="Login Name: " />
@@ -30,7 +31,7 @@
     </pg:multiCheckbox>
   </h:panelGrid>
 
-  <h:commandButton value="Commit" action="#{UserBean.addUser}" type="submit"/>
+  <h:commandButton value="Commit" action="#{UserBean.saveUser}" type="submit"/>
   
 </h:form>
 </f:view>
