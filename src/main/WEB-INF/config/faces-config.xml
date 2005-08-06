@@ -101,6 +101,18 @@
   </navigation-rule>
 
 
+  <navigation-rule>
+    <description>
+    </description>
+    <from-view-id>/jsp/nlp/index.jsp</from-view-id>
+    <navigation-case>
+      <description>success</description>
+      <from-outcome>success</from-outcome>
+      <to-view-id>/jsp/nlp/main.jsp</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+
+
   <managed-bean>
     <description>
       Backing Bean : login bean

@@ -44,5 +44,11 @@ public class ConversationBean extends ListTableBean {
     }//listConversation()
     
     
+    public String readConversation() {
+        System.out.println("--->      "+selectedId());
+        return "success";
+    }
+    
+    
 }//class ConversationBean
 
