@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.pgist.dao.BaseDAO;
 import org.pgist.util.HibernateUtil;
 import org.pgist.util.PageSetting;
 
@@ -13,7 +14,7 @@ import org.pgist.util.PageSetting;
  * @author kenny
  *
  */
-public class ConversationDAO {
+public class ConversationDAO extends BaseDAO {
 
     
     /**

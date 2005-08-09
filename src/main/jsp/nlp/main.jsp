@@ -1,3 +1,4 @@
+<jsp:useBean id="thread" scope="request" class="org.pgist.nlp.ConversationThread" />
 <!doctype html public "-//w3c//dtd html 4.0 transitional//en">
 <html>
 <head>
@@ -5,10 +6,10 @@
 </head>
 
 <frameset cols="80%,20%">
-  <frame name="slate" src="slate.jsp">
+  <frame name="slate" src="slate.jsp?threadId=<%= thread.getId() %>">
   <frameset rows="70%,30%">
-      <frame name="conbar" src="conbar.jsp">
-      <frame name="focus" src="focus.jsp">
+    <frame name="conbar" src="conbar.jsp?threadId=<%= thread.getId() %>">
+    <frame name="focus" src="focus.jsp?threadId=<%= thread.getId() %>">
   </frameset>
 </frameset>
 <noframes>

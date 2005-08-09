@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.pgist.model.Node;
 import org.pgist.users.User;
 
 
@@ -14,7 +15,7 @@ import org.pgist.users.User;
  * @hibernate.class table="nlp_post"
  *
  */
-public class Post {
+public class Post implements Node {
     
     
     private Long id;
@@ -45,13 +46,13 @@ public class Post {
      * @return
      * @hibernate.many-to-one column="parent_id" class="org.pgist.nlp.Post" casecad="all"
      */
-    public Post getParent() {
+    public Node getParent() {
         return parent;
     }
     
     
-    public void setParent(Post parent) {
-        this.parent = parent;
+    public void setParent(Node parent) {
+        this.parent = (Post) parent;
     }
     
     
@@ -144,5 +145,6 @@ public class Post {
     public void addPost(Post post) {
         children.add(post);
     }
-    
+
+
 }//class Post

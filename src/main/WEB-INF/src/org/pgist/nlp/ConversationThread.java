@@ -1,12 +1,15 @@
 package org.pgist.nlp;
 
+import org.pgist.model.Tree;
+import org.pgist.model.Node;
+
 
 /**
  * PGIST User class.
  * @author kenny
  * @hibernate.class table="nlp_conversation_thread"
  */
-public class ConversationThread {
+public class ConversationThread implements Tree {
     
     
     private Long id;
@@ -33,13 +36,13 @@ public class ConversationThread {
      * @return
      * @hibernate.many-to-one column="root_id" class="org.pgist.nlp.Post" casecad="all"
      */
-    public Post getRoot() {
+    public Node getRoot() {
         return root;
     }
 
 
-    public void setRoot(Post root) {
-        this.root = root;
+    public void setRoot(Node root) {
+        this.root = (Post) root;
     }
 
 

@@ -13,8 +13,6 @@
 <f:view>
 <h:form id="focusForm">
 
-
-
 </h:form>
 </f:view>
 

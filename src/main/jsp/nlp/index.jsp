@@ -41,7 +41,7 @@
       <f:facet name="header">
         <h:outputText value="Thread"/>
       </f:facet>
-      <h:inputHidden id="objectId" binding="#{ConversationBean.objectId}" value="#{user.id}"/>
+      <h:inputHidden id="objectId" binding="#{ConversationBean.objectId}" value="#{conversation.id}"/>
       <h:commandLink id="readConversation" action="#{ConversationBean.readConversation}" value="#{conversation.root.title}" />
     </h:column>
     

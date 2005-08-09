@@ -2,9 +2,11 @@ package org.pgist.nlp;
 
 import java.util.List;
 
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpServletRequest;
 
-import org.pgist.dao.UserDAO;
+import org.pgist.model.Tree;
 import org.pgist.util.ListTableBean;
 
 
@@ -17,6 +19,7 @@ public class ConversationBean extends ListTableBean {
 
     
     private List conversations;
+    private ConversationThread thread;
     
 
     public List getConversations() {
@@ -29,6 +32,16 @@ public class ConversationBean extends ListTableBean {
     }
     
     
+    public ConversationThread getThread() {
+        return thread;
+    }
+
+
+    public void setThread(ConversationThread thread) {
+        this.thread = thread;
+    }
+
+
     /**
      * List All Users.
      * @return
@@ -44,11 +57,23 @@ public class ConversationBean extends ListTableBean {
     }//listConversation()
     
     
-    public String readConversation() {
-        System.out.println("--->      "+selectedId());
+    public String readConversation() throws Exception {
+        ConversationThread thread = (ConversationThread) ConversationDAO.load(ConversationThread.class, selectedId());
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        request.setAttribute("thread", thread);
         return "success";
     }
     
     
-}//class ConversationBean
+    public static Tree getThread(ActionEvent event, Long id) {
+        Tree tree = null;
+        try {
+            tree = (Tree) ConversationDAO.load(ConversationThread.class, id);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return tree;
+    }//getThread()
+    
 
+}//class ConversationBean
