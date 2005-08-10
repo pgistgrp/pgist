@@ -1,5 +1,9 @@
 package org.pgist.nlp;
 
+import java.util.Iterator;
+import java.util.Set;
+import java.util.Stack;
+
 import org.pgist.model.Tree;
 import org.pgist.model.Node;
 
@@ -16,6 +20,7 @@ public class ConversationThread implements Tree {
     private Post root;
     private boolean enabled;
     private boolean deleted;
+    private String title;
     
     
     /**
@@ -74,5 +79,65 @@ public class ConversationThread implements Tree {
     }
 
 
-}//class ConversationThread
+    /**
+     * @return
+     * @hibernate.property not-null="true"
+     */
+    public String getTitle() {
+        return title;
+    }
 
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+
+    public int getNodesCount() {
+        int count = 0;
+        
+        if (root==null) return count;
+        
+        Stack stack = new Stack();
+        stack.push(root);
+        
+        while (!stack.empty()) {
+            Node node = (Node) stack.pop();
+            count++;
+            
+            Set kids = node.getChildren();
+            if (kids!=null) {
+                for (Iterator iter=kids.iterator(); iter.hasNext(); ) {
+                    stack.push(iter.next());
+                }//for iter
+            }
+        }//while stack
+        
+        return count;
+    }//getNodesCount()
+    
+    
+    public Node findNode(Long nodeId) {
+        if (root.getId().longValue()==nodeId.longValue()) return root;
+        
+        Stack stack = new Stack();
+        stack.push(root);
+        
+        while (!stack.empty()) {
+            Node one = (Node) stack.pop();
+            
+            Set kids = one.getChildren();
+            if (kids!=null) {
+                for (Iterator iter=kids.iterator(); iter.hasNext(); ) {
+                    Node kid = (Node) iter.next();
+                    if (kid.getId().longValue()==nodeId.longValue()) return kid;
+                    stack.push(kid);
+                }//for iter
+            }
+        }//while stack
+        
+        return null;
+    }//findNode()
+    
+    
+}//class ConversationThread

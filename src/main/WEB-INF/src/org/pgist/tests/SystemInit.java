@@ -158,6 +158,7 @@ public class SystemInit extends MatchingTask {
                 ConversationThread thread = new ConversationThread();
                 thread.setEnabled(true);
                 thread.setDeleted(false);
+                thread.setTitle("This is the first thread");
                 Post post = new Post();
                 post.setTitle("This is A");
                 post.setOwner(admin);
@@ -180,7 +181,6 @@ public class SystemInit extends MatchingTask {
                 
                 transaction.commit();
             } catch(Exception ex) {
-                System.out.println("---- failed to inserte a user: admin");
                 ex.printStackTrace();
             } finally {
                 session.close();

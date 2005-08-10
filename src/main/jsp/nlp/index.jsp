@@ -42,7 +42,7 @@
         <h:outputText value="Thread"/>
       </f:facet>
       <h:inputHidden id="objectId" binding="#{ConversationBean.objectId}" value="#{conversation.id}"/>
-      <h:commandLink id="readConversation" action="#{ConversationBean.readConversation}" value="#{conversation.root.title}" />
+      <h:commandLink id="readConversation" action="#{ConversationBean.readConversation}" value="#{conversation.title}" />
     </h:column>
     
     <h:column>

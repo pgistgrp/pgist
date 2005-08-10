@@ -13,7 +13,8 @@
 <f:view>
 <h:form id="slateForm">
 
-  <pg:treemap id="treemap" depth="3" actionBinding="#{ConversationBean.getThread}"/>
+  <pg:treemap id="treemap" depth="3" actionBinding="#{ConversationBean.getThread}"
+      title="title" content="content" username="owner.loginname" conbar="" focus=""/>
 
 </h:form>
 </f:view>

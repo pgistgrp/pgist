@@ -145,6 +145,17 @@ public class Post implements Node {
     public void addPost(Post post) {
         children.add(post);
     }
+    
+    
+    public int getDepth() {
+        int depth = 0;
+        Node one = this;
+        while (one.getParent()!=null) {
+            depth++;
+            one = one.getParent();
+        }
+        return depth;
+    }
 
 
 }//class Post

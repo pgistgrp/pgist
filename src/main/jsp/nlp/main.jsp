@@ -6,10 +6,10 @@
 </head>
 
 <frameset cols="80%,20%">
-  <frame name="slate" src="slate.jsp?threadId=<%= thread.getId() %>">
+  <frame name="slate" src="slate.jsp?treeId=<%= thread.getId() %>">
   <frameset rows="70%,30%">
-    <frame name="conbar" src="conbar.jsp?threadId=<%= thread.getId() %>">
-    <frame name="focus" src="focus.jsp?threadId=<%= thread.getId() %>">
+    <frame name="conbar" src="conbar.jsp?treeId=<%= thread.getId() %>">
+    <frame name="focus" src="focus.jsp?treeId=<%= thread.getId() %>">
   </frameset>
 </frameset>
 <noframes>
