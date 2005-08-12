@@ -6,6 +6,7 @@
 <head>
 <title>Conversation Slate</title>
 <link rel=stylesheet href='<%= request.getContextPath() +"/styles/default.css"%>' type="text/css" media=all>
+<link rel=stylesheet href='<%= request.getContextPath() +"/styles/treemap.css"%>' type="text/css" media=all>
 </head>
 
 <body>

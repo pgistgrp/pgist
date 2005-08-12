@@ -72,7 +72,7 @@ public class Post implements Node {
     
     /**
      * @return
-     * @hibernate.property not-null="true"
+     * @hibernate.property type="text" not-null="true"
      */
     public String getContent() {
         return content;

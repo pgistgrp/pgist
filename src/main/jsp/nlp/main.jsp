@@ -7,7 +7,7 @@
 
 <frameset cols="80%,20%">
   <frame name="slate" src="slate.jsp?treeId=<%= thread.getId() %>">
-  <frameset rows="70%,30%">
+  <frameset rows="60%,40%">
     <frame name="conbar" src="conbar.jsp?treeId=<%= thread.getId() %>">
     <frame name="focus" src="focus.jsp?treeId=<%= thread.getId() %>">
   </frameset>
