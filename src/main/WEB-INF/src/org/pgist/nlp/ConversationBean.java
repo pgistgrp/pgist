@@ -1,5 +1,6 @@
 package org.pgist.nlp;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.context.FacesContext;
@@ -7,6 +8,7 @@ import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpServletRequest;
 
 import org.pgist.model.Tree;
+import org.pgist.util.JSFUtil;
 import org.pgist.util.ListTableBean;
 
 
@@ -74,6 +76,22 @@ public class ConversationBean extends ListTableBean {
         }
         return tree;
     }//getThread()
+    
+    
+    public static Post savePost(ActionEvent event, Long id, Integer tone, String s) throws Exception {
+        Post post = new Post();
+        
+        Post parent = (Post) ConversationDAO.load(Post.class, id);
+        post.setParent(parent);
+        post.setOwner(JSFUtil.getCurrentUser());
+        post.setContent(s);
+        post.setTime(new Date());
+        post.setTitle("");
+        post.setTone(tone.intValue());
+        ConversationDAO.insert(post);
+        
+        return post;
+    }//savePost()
     
 
 }//class ConversationBean

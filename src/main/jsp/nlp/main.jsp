@@ -1,26 +1,25 @@
-<jsp:useBean id="thread" scope="request" class="org.pgist.nlp.ConversationThread" />
+<%@ taglib uri="http://java.sun.com/jsf/html" prefix="h" %>
+<%@ taglib uri="http://java.sun.com/jsf/core" prefix="f" %>
+<%@ taglib uri="http://www.pgist.org/jsf/components" prefix="pg" %>
 <!doctype html public "-//w3c//dtd html 4.0 transitional//en">
 <html>
 <head>
-<title>Conversation Thread</title>
+<title>Conversation Slate</title>
+<link rel=stylesheet href='<%= request.getContextPath() +"/styles/default.css"%>' type="text/css" media=all>
+<link rel=stylesheet href='<%= request.getContextPath() +"/styles/treemap.css"%>' type="text/css" media=all>
 </head>
 
-<frameset cols="80%,20%">
-  <frame name="slate" src="slate.jsp?treeId=<%= thread.getId() %>">
-  <frameset rows="60%,40%">
-    <frame name="conbar" src="conbar.jsp?treeId=<%= thread.getId() %>">
-    <frame name="focus" src="focus.jsp?treeId=<%= thread.getId() %>">
-  </frameset>
-</frameset>
-<noframes>
-  <h2>Frame Alert</h2>
-  <p>
-    This document is designed to be viewed using the frames feature.  
-    If you see this message, you are using a non-frame-capable web 
-    client.
-    <br>
-    Link to <a href="overview-summary.html">Non-frame version.</a>
-</noframes>
+<body>
 
+<f:view>
+<h:form id="slateForm">
+
+  <pg:treemap id="treemap" depth="3" readBinding="#{ConversationBean.getThread}" writeBinding="#{ConversationBean.savePost}"
+      title="title" content="content" username="owner.loginname" tone="tone"/>
+
+</h:form>
+</f:view>
+
+</body>
 </html>
 

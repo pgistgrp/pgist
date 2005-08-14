@@ -44,6 +44,33 @@ code.line { display: block; font-size: 0.8em; font-family: lucida console, monac
 .index a { font-family: sans-serif; font-size: 14px; font-weight: bold; }
 .threadinfo { font-family: sans-serif; font-size: 11px; color: #666; }
 
+td.conbar { color: blue; background: #d0d0d0; }
+td.conbar a{
+  color: blue;
+  font-size: 10px;
+  text-decoration: none;
+  cursor: pointer; cursor: hand;
+}
+td.conbar1 { color: red; background: #d0d0d0; }
+td.conbar1 a{
+  color: red;
+  font-size: 10px;
+  text-decoration: none;
+  cursor: pointer; cursor: hand;
+}
+
+td.focus { color: #666; background: #d0d0d0; }
+td.focus div{
+  color: red;
+  width:100%;
+  height:150px;
+  overflow:auto;
+}
+td.focus textarea{
+  width:100%;
+  height:200px;
+}
+
 #popup { visibility: hidden; position: absolute; width: 200px;
     border: 1px solid #000; background: #fff; padding: 2px;
     font-family: sans-serif; font-size: 10px; }

@@ -49,4 +49,19 @@ public class JSFUtil {
     }//checkAdmin()
     
     
+    public static User getCurrentUser() {
+        User user = null;
+        
+        HttpSession session = getSession(false);
+        if (session!=null) {
+            user = (User) session.getAttribute("user");
+            if (user!=null) {
+                UserDAO.refresh(user);
+            }
+        }
+        
+        return user;
+    }//getCurrentUser()
+    
+    
 }//class JSFUtil
