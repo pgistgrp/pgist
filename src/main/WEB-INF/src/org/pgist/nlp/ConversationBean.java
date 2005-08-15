@@ -60,11 +60,46 @@ public class ConversationBean extends ListTableBean {
     
     
     public String readConversation() throws Exception {
-        ConversationThread thread = (ConversationThread) ConversationDAO.load(ConversationThread.class, selectedId());
+        thread = (ConversationThread) ConversationDAO.load(ConversationThread.class, selectedId());
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         request.setAttribute("thread", thread);
         return "success";
     }
+    
+    
+    public String newConversation() throws Exception {
+        thread = new ConversationThread();
+        thread.setDeleted(false);
+        thread.setEnabled(true);
+        thread.setTitle("");
+        
+        Post post = new Post();
+        post.setOwner(JSFUtil.getCurrentUser());
+        post.setParent(null);
+        post.setTime(new Date());
+        post.setTitle("");
+        post.setContent("");
+        post.setOwner(JSFUtil.getCurrentUser());
+        post.setTone(1);
+        
+        thread.setRoot(post);
+        
+        return "newConversation";
+    }
+    
+    
+    public String saveNewConversation() throws Exception {
+        try {
+            ConversationDAO.insert(thread.getRoot());
+            ConversationDAO.insert(thread);
+            objectId.setValue(thread.getId());
+            HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            request.setAttribute("thread", thread);
+            return "success";
+        } catch(Exception e) {
+            return "failure";
+        }
+    }//saveNewConversation()
     
     
     public static Tree getThread(ActionEvent event, Long id) {
