@@ -90,7 +90,7 @@
     </target>
 
 
-    <target name="war" depends="compile, mapping">
+    <target name="deploy" depends="compile, mapping">
         <mkdir dir="${webapp}"/>
         <copy todir="${webapp}">
           <fileset dir="main">
@@ -98,6 +98,16 @@
             <exclude name="WEB-INF/src/**"/>
           </fileset>
         </copy>
+    </target>
+    
+
+    <target name="war" depends="compile, mapping">
+        <war destfile="${base}/pgist.war" webxml="main/WEB-INF/web.xml">
+            <fileset dir="main">
+                <exclude name="main/WEB-INF/classes/org/pgist/tests/**"/>
+                <exclude name="main/WEB-INF/src/**"/>
+            </fileset>
+        </war>
     </target>
 
 
