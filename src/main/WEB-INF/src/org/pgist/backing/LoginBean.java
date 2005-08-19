@@ -66,6 +66,7 @@ public class LoginBean {
                 return "failure";
             }
         } catch(Exception e) {
+            e.printStackTrace();
             return "failure";
         }
     }//login()

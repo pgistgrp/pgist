@@ -25,6 +25,7 @@ public class Glossary {
     private String link1;
     private String link2;
     private String link3;
+    private boolean internal = false;
     
     
     /**
@@ -234,6 +235,20 @@ public class Glossary {
 
     public void setTerm5(String term5) {
         this.term5 = term5;
+    }
+
+
+    /**
+     * @return
+     * @hibernate.property not-null="true"
+     */
+    public boolean isInternal() {
+        return internal;
+    }
+
+
+    public void setInternal(boolean internal) {
+        this.internal = internal;
     }
     
     

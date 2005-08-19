@@ -1,5 +1,7 @@
 package org.pgist.backing;
 
+import org.pgist.util.ListTableBean;
+
 
 /**
  * Backing bean for processing glossary management
@@ -7,6 +9,6 @@ package org.pgist.backing;
  * @author kenny
  *
  */
-public class GlossaryBean {
+public class GlossaryBean extends ListTableBean {
 
 }//class GlossaryBean
