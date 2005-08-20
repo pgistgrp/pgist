@@ -1,10 +1,12 @@
 package org.pgist.backing;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.component.UIData;
 import javax.faces.component.UISelectBoolean;
 import javax.faces.event.ActionEvent;
+import javax.faces.model.SelectItem;
 
 import org.pgist.dao.UserDAO;
 import org.pgist.exceptions.UserExistException;
@@ -24,8 +26,7 @@ public class UserBean extends ListTableBean {
     
     private List users = null;
     private User user = new User();
-    private UIData roleData = null;
-    protected UISelectBoolean roleChecked = null;
+    private String[] selectedRoles;
 
 
     public List getUsers() {
@@ -48,26 +49,6 @@ public class UserBean extends ListTableBean {
     }
 
 
-    public UIData getRoleData() {
-        return roleData;
-    }
-    
-    
-    public void setRoleData(UIData roleData) {
-        this.roleData = roleData;
-    }
-    
-    
-    public UISelectBoolean getRoleChecked() {
-        return roleChecked;
-    }
-    
-    
-    public void setRoleChecked(UISelectBoolean roleChecked) {
-        this.roleChecked = roleChecked;
-    }
-    
-    
     /**
      * List All Users.
      * @return
@@ -125,7 +106,14 @@ public class UserBean extends ListTableBean {
         if (!JSFUtil.checkAdmin()) return "notAdmin";
         
         try {
-            UserDAO.addUser(user, selectedIds(roleData, roleChecked, Role.class, "id"));
+            UserDAO.refresh(user);
+            user.getRoles().clear();
+            for (int i=0; i<selectedRoles.length; i++) {
+                Long id = new Long(selectedRoles[i]);
+                Role role = (Role) UserDAO.load(Role.class, id);
+                user.addRole(role);
+            }//for i
+            UserDAO.insertOrUpdate(user);
             return "success";
         } catch(UserExistException uee) {
         } catch(Exception e) {
@@ -168,12 +156,18 @@ public class UserBean extends ListTableBean {
     
     
     public List getRoles() {
-        List list = UserDAO.getRoleList();
-        for (int i=0; i<list.size(); i++) {
-            Role role = (Role) list.get(i);
-        }
-        return list;
+        return UserDAO.getRoleList();
     }//getRoles()
+
+
+    public String[] getSelectedRoles() {
+        return selectedRoles;
+    }
+
+
+    public void setSelectedRoles(String[] selectedRoles) {
+        this.selectedRoles = selectedRoles;
+    }
     
     
 }//class UserBean

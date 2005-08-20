@@ -23,12 +23,9 @@
     <h:outputText value="Email: " />
     <h:inputText value="#{UserBean.user.email}"/>
     <h:outputText value="Roles: " />
-    <pg:multiCheckbox id="userRoles" columns="4" binding="#{UserBean.roleData}" value="#{UserBean.roles}" var="role">
-      <h:column>
-        <h:selectBooleanCheckbox id="checked" binding="#{UserBean.roleChecked}"/>
-        <h:outputText value="#{role.name}"/>
-      </h:column>
-    </pg:multiCheckbox>
+    <pg:multiSelect id="roles" columns="4" styleClass="selectManyCheckbox"
+        key="id" label="name" value="#{UserBean.selectedRoles}"
+        universalSet="#{UserBean.roles}" subSet="#{UserBean.user.roles}"/>
   </h:panelGrid>
 
   <h:commandButton value="Commit" action="#{UserBean.saveUser}" type="submit"/>

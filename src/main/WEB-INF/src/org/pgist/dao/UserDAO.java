@@ -196,7 +196,7 @@ public class UserDAO extends BaseDAO {
             query.setString("loginname", user.getLoginname());
             query.setBoolean("enabled", true);
             query.setBoolean("deleted", false);
-            if (user.getId()!=null) query.setLong("id", user.getId());
+            if (user.getId()!=null) query.setLong("id", user.getId().longValue());
             
             List list = query.list();
             if (list.size()>0) {
