@@ -16,6 +16,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.util.ArrayHelper;
+import org.pgist.glossary.Glossary;
 import org.pgist.nlp.ConversationThread;
 import org.pgist.nlp.Post;
 import org.pgist.users.Role;
@@ -178,6 +179,24 @@ public class SystemInit extends MatchingTask {
                 session.saveOrUpdate(post);
                 session.saveOrUpdate(post1);
                 session.saveOrUpdate(thread);
+                
+                Glossary glossary = new Glossary();
+                glossary.setName("transport");
+                glossary.setShortDefinition("to move from one place to another");
+                glossary.setExtDefinition("The percific method to move from one place to another, especially with the help of some kind of vehcles.");
+                glossary.setInternal(true);
+                glossary.setLink1("link1");
+                glossary.setLink2("link2");
+                glossary.setLink3("link3");
+                glossary.setSource1("source1");
+                glossary.setSource2("source2");
+                glossary.setSource3("source3");
+                glossary.setTerm1("term1");
+                glossary.setTerm2("term2");
+                glossary.setTerm3("term3");
+                glossary.setTerm4("term4");
+                glossary.setTerm5("term5");
+                session.save(glossary);
                 
                 transaction.commit();
             } catch(Exception ex) {

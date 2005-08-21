@@ -84,7 +84,7 @@ public class UserDAO extends BaseDAO {
     
     /**
      * Get all users, enabled or disabled
-     * @param enabled
+     * @param setting
      * @return
      * @throws Exception
      */

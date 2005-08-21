@@ -26,6 +26,7 @@ public class Glossary {
     private String link2;
     private String link3;
     private boolean internal = false;
+    private boolean deleted = false;
     
     
     /**
@@ -249,6 +250,20 @@ public class Glossary {
 
     public void setInternal(boolean internal) {
         this.internal = internal;
+    }
+
+
+    /**
+     * @return
+     * @hibernate.property not-null="true"
+     */
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
     
     

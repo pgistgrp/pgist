@@ -4,7 +4,7 @@
 <!doctype html public "-//w3c//dtd html 4.0 transitional//en">
 <html>
 <head>
-<title>User Management</title>
+<title>Glossary Management</title>
 <link rel=stylesheet href='<%= request.getContextPath() +"/styles/default.css"%>' type="text/css" media=all>
 </head>
 
@@ -44,6 +44,13 @@
       </f:facet>
       <h:inputHidden id="objectId" binding="#{GlossaryBean.objectId}" value="#{glossary.id}"/>
       <h:commandLink id="editGlossary" action="#{GlossaryBean.editGlossary}" value="#{glossary.name}" />
+    </h:column>
+    
+    <h:column>
+      <f:facet name="header">
+        <h:outputText value="Short Definition"/>
+      </f:facet>
+      <h:outputText value="#{glossary.shortDefinition}"/>
     </h:column>
     
     <h:column>

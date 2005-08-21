@@ -55,6 +55,11 @@
       <to-view-id>/jsp/sysadmin/listRole.jsp</to-view-id>
     </navigation-case>
     <navigation-case>
+        <description>list glossary</description>
+      <from-outcome>listGlossary</from-outcome>
+      <to-view-id>/jsp/glossary/listGlossary.jsp</to-view-id>
+    </navigation-case>
+    <navigation-case>
         <description>list conversation</description>
       <from-outcome>listConversation</from-outcome>
       <to-view-id>/jsp/nlp/index.jsp</to-view-id>
@@ -159,6 +164,15 @@
     </description>
     <managed-bean-name>RoleBean</managed-bean-name>
     <managed-bean-class>org.pgist.backing.RoleBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+
+  <managed-bean>
+    <description>
+      Backing Bean : glossary admin bean
+    </description>
+    <managed-bean-name>GlossaryBean</managed-bean-name>
+    <managed-bean-class>org.pgist.backing.GlossaryBean</managed-bean-class>
     <managed-bean-scope>session</managed-bean-scope>
   </managed-bean>
 
