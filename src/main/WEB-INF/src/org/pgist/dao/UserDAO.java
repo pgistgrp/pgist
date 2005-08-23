@@ -182,21 +182,27 @@ public class UserDAO extends BaseDAO {
      * @param user
      * @throws Exception
      */
-    public static void addUser(User user, List idList) throws UserExistException, Exception {
+    public static void addUser(User user) throws UserExistException, Exception {
+        addUser(user, null);
+    }
+    
+    
+    /**
+     * Add a new user to system
+     * @param user
+     * @throws Exception
+     */
+    public static void addUser(User user, String[] idList) throws UserExistException, Exception {
         try {
             Session session = HibernateUtil.getSession();
             HibernateUtil.begin();
             
             StringBuffer hql = new StringBuffer("from User where loginname=:loginname and enabled=:enabled and deleted=:deleted");
-            if (user.getId()!=null) {
-                hql.append(" and id!=:id");
-            }
             
             Query query = session.createQuery(hql.toString());
             query.setString("loginname", user.getLoginname());
             query.setBoolean("enabled", true);
             query.setBoolean("deleted", false);
-            if (user.getId()!=null) query.setLong("id", user.getId().longValue());
             
             List list = query.list();
             if (list.size()>0) {
@@ -206,13 +212,15 @@ public class UserDAO extends BaseDAO {
             user.getRoles().clear();
             
             if (idList!=null) {
-                for (int i=0; i<idList.size(); i++) {
-                    Role role = (Role) session.load(Role.class, (Long)idList.get(i));
+                for (int i=0; i<idList.length; i++) {
+                    Role role = (Role) session.load(Role.class, new Long(idList[i]));
                     user.addRole(role);
                 }//for i
             }
             
-            session.saveOrUpdate(user);
+            if (user.getPassword().length()<=31) user.encodePassword();
+            
+            session.save(user);
 
             HibernateUtil.commit();
         } catch (Exception e) {
@@ -230,11 +238,50 @@ public class UserDAO extends BaseDAO {
      * @param user
      * @throws Exception
      */
-    public static void addUser(User user) throws UserExistException, Exception {
-        addUser(user, null);
-    }
+    public static void updateUser(User user, String[] idList) throws UserExistException, Exception {
+        try {
+            Session session = HibernateUtil.getSession();
+            HibernateUtil.begin();
+            
+            UserDAO.refresh(user);
+
+            StringBuffer hql = new StringBuffer("from User where loginname=:loginname and enabled=:enabled and deleted=:deleted and id!=:id");
+            
+            Query query = session.createQuery(hql.toString());
+            query.setString("loginname", user.getLoginname());
+            query.setBoolean("enabled", true);
+            query.setBoolean("deleted", false);
+            query.setLong("id", user.getId().longValue());
+            
+            List list = query.list();
+            if (list.size()>0) {
+                throw new UserExistException("User already exists!");
+            }
+            
+            user.getRoles().clear();
+            
+            if (idList!=null) {
+                for (int i=0; i<idList.length; i++) {
+                    Role role = (Role) session.load(Role.class, new Long(idList[i]));
+                    user.addRole(role);
+                }//for i
+            }
+            
+            if (user.getPassword().length()<=31) user.encodePassword();
+            
+            session.save(user);
+            
+            HibernateUtil.commit();
+        } catch (Exception e) {
+            try {
+                HibernateUtil.rollback();
+            } catch(Exception ex) {
+            }
+            throw e;
+        }
+    }//updateUser()
     
-    
+
     /**
      * Delete users according to the idList. The deletion is a transaction
      * so that either all users are deleted or none of them is deleted.
@@ -275,6 +322,7 @@ public class UserDAO extends BaseDAO {
             Session session = HibernateUtil.getSession();
             HibernateUtil.begin();
             
+            if (user.getPassword().length()<=31) user.encodePassword();
             session.update(user);
             
             HibernateUtil.commit();

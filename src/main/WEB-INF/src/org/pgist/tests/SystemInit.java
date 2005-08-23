@@ -118,7 +118,8 @@ public class SystemInit extends MatchingTask {
                 //user - admin
                 User admin = new User();
                 admin.setLoginname("admin");
-                admin.setOriginPassword("admin");
+                admin.setPassword("admin");
+                admin.encodePassword();
                 admin.setEmail("admin@pgist.org");
                 admin.setEnabled(true);
                 admin.setDeleted(false);
@@ -131,7 +132,8 @@ public class SystemInit extends MatchingTask {
                 //user - guest
                 User guest = new User();
                 guest.setLoginname("guest");
-                guest.setOriginPassword("guest");
+                guest.setPassword("guest");
+                guest.encodePassword();
                 guest.setEmail("guest@pgist.org");
                 guest.setEnabled(true);
                 guest.setDeleted(false);
@@ -149,7 +151,8 @@ public class SystemInit extends MatchingTask {
                     test.setInternal(false);
                     test.getRoles().add(roleGuest);
                     test.setLoginname(s);
-                    test.setOriginPassword(s);
+                    test.setPassword(s);
+                    test.encodePassword();
                     test.setEmail(s+"@pgist.org");
                     session.save(test);
                     System.out.println("---- successfully inserte a user: "+s);

@@ -61,8 +61,8 @@ public class BaseUser {
     }
 
 
-    public void setOriginPassword(String password) {
-        this.password = MD5.getDigest(password);
+    public void encodePassword() {
+        password = MD5.getDigest(password);
     }
 
     

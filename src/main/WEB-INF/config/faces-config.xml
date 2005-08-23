@@ -92,6 +92,23 @@
   <navigation-rule>
     <description>
     </description>
+    <from-view-id>/jsp/sysadmin/addUser.jsp</from-view-id>
+    <navigation-case>
+      <description>success</description>
+      <from-outcome>success</from-outcome>
+      <to-view-id>/jsp/sysadmin/listUser.jsp</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <description>failure</description>
+      <from-outcome>failure</from-outcome>
+      <to-view-id>/jsp/sysadmin/addUser.jsp</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+
+
+  <navigation-rule>
+    <description>
+    </description>
     <from-view-id>/jsp/sysadmin/editUser.jsp</from-view-id>
     <navigation-case>
       <description>success</description>

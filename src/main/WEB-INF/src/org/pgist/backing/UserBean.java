@@ -1,12 +1,8 @@
 package org.pgist.backing;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.component.UIData;
-import javax.faces.component.UISelectBoolean;
 import javax.faces.event.ActionEvent;
-import javax.faces.model.SelectItem;
 
 import org.pgist.dao.UserDAO;
 import org.pgist.exceptions.UserExistException;
@@ -105,15 +101,13 @@ public class UserBean extends ListTableBean {
         
         if (!JSFUtil.checkAdmin()) return "notAdmin";
         
+        System.out.println("111111111111111111111111111111111111111");
         try {
-            UserDAO.refresh(user);
-            user.getRoles().clear();
-            for (int i=0; i<selectedRoles.length; i++) {
-                Long id = new Long(selectedRoles[i]);
-                Role role = (Role) UserDAO.load(Role.class, id);
-                user.addRole(role);
-            }//for i
-            UserDAO.insertOrUpdate(user);
+            if (user.getId()==null) {//new user
+                UserDAO.addUser(user, selectedRoles);
+            } else {//update user
+                UserDAO.updateUser(user, selectedRoles);
+            }
             return "success";
         } catch(UserExistException uee) {
         } catch(Exception e) {

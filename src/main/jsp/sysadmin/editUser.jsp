@@ -15,14 +15,17 @@
   <h:outputText value="Edit User"/>
   
   <h:inputHidden id="id" value="#{UserBean.user.id}"/>
-  <h:panelGrid columns="2">
-    <h:outputText value="Login Name: " />
-    <h:inputText value="#{UserBean.user.loginname}"/>
-    <h:outputText value="Password: " />
-    <h:inputSecret value="#{UserBean.user.password}"/>
-    <h:outputText value="Email: " />
-    <h:inputText value="#{UserBean.user.email}"/>
-    <h:outputText value="Roles: " />
+  <h:panelGrid columns="3">
+    <h:outputLabel value="Login Name: " for="loginname"/>
+    <h:inputText id="loginname" value="#{UserBean.user.loginname}" required="true"/>
+      <h:message for="loginname"/>
+    <h:outputLabel value="Password: " for="password"/>
+    <h:inputSecret id="password" value="#{UserBean.user.password}" required="true"/>
+      <h:message for="password"/>
+    <h:outputLabel value="Email: " for="email"/>
+    <h:inputText id="email" value="#{UserBean.user.email}" required="true"/>
+      <h:message for="email"/>
+    <h:outputLabel value="Roles: " />
     <pg:multiSelect id="roles" columns="4" styleClass="selectManyCheckbox"
         key="id" label="name" value="#{UserBean.selectedRoles}"
         universalSet="#{UserBean.roles}" subSet="#{UserBean.user.roles}"/>

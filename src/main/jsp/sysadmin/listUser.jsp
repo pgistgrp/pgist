@@ -70,14 +70,14 @@
       <h:outputText rendered="#{!user.enabled}" style="color:red;" value="Disabled" />
     </h:column>
     
-    <pg:show forRole="admin">
     <h:column>
-      <f:facet name="header">
-        <h:outputText value="Selection"/>
-      </f:facet>
-      <h:selectBooleanCheckbox id="checked" rendered="#{!user.internal}" binding="#{UserBean.checked}"/>
+      <pg:show forRole="admin">
+        <f:facet name="header">
+          <h:outputText value="Selection"/>
+        </f:facet>
+        <h:selectBooleanCheckbox id="checked" rendered="#{!user.internal}" binding="#{UserBean.checked}"/>
+      </pg:show>
     </h:column>
-    </pg:show>
     
   </pg:listTable>
 
