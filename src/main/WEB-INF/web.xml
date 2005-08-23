@@ -10,6 +10,11 @@
 
 
   <context-param>
+      <param-name>org.pgist.RBAC_PROXY</param-name>
+      <param-value>org.pgist.util.RoleChecker</param-value>
+  </context-param>
+
+  <context-param>
       <param-name>org.pgist.THEME_MANAGER_PATH</param-name>
       <param-value></param-value>
   </context-param>

@@ -20,12 +20,14 @@
     <f:facet name="title"><h:outputText value="User List"/></f:facet>
     
     <f:facet name="toolbar">
+      <pg:show forRole="admin">
       <pg:toolbar id="toolbar" styleClass="toolbar">
         <pg:toolButton id="addUser" action="#{UserBean.addUser}" value="Add" />
         <pg:toolButton id="delUsers" actionListener="#{UserBean.delUsers}" confirm="Are you sure to delete user?" value="Delete" />
         <pg:toolButton id="enableUsers" actionListener="#{UserBean.enableUsers}" confirm="Are you sure to enable user?" value="Enable" />
         <pg:toolButton id="disableUsers" actionListener="#{UserBean.disableUsers}" confirm="Are you sure to disable user?" value="Disable" />
       </pg:toolbar>
+      </pg:show>
     </f:facet>
 
     <f:facet name="topScroller">
@@ -44,8 +46,13 @@
       <f:facet name="header">
         <h:outputText value="Login Name"/>
       </f:facet>
-      <h:inputHidden id="objectId" binding="#{UserBean.objectId}" value="#{user.id}"/>
-      <h:commandLink id="editUser" action="#{UserBean.editUser}" value="#{user.loginname}" />
+      <pg:show forRole="admin">
+        <h:inputHidden id="objectId" binding="#{UserBean.objectId}" value="#{user.id}"/>
+        <h:commandLink action="#{UserBean.editUser}" value="#{user.loginname}" />
+      </pg:show>
+      <pg:hide forRole="admin">
+        <h:outputText value="#{user.loginname}"/>
+      </pg:hide>
     </h:column>
     
     <h:column>
