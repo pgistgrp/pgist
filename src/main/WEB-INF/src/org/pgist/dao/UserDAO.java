@@ -243,7 +243,7 @@ public class UserDAO extends BaseDAO {
             Session session = HibernateUtil.getSession();
             HibernateUtil.begin();
             
-            UserDAO.refresh(user);
+            //UserDAO.refresh(user);
 
             StringBuffer hql = new StringBuffer("from User where loginname=:loginname and enabled=:enabled and deleted=:deleted and id!=:id");
             
@@ -267,9 +267,10 @@ public class UserDAO extends BaseDAO {
                 }//for i
             }
             
+            System.out.println("--> "+user.getPassword());
             if (user.getPassword().length()<=31) user.encodePassword();
             
-            session.save(user);
+            session.update(user);
             
             HibernateUtil.commit();
         } catch (Exception e) {

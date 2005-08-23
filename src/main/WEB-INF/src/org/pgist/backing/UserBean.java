@@ -6,7 +6,6 @@ import javax.faces.event.ActionEvent;
 
 import org.pgist.dao.UserDAO;
 import org.pgist.exceptions.UserExistException;
-import org.pgist.users.Role;
 import org.pgist.users.User;
 import org.pgist.util.JSFUtil;
 import org.pgist.util.ListTableBean;
@@ -101,7 +100,6 @@ public class UserBean extends ListTableBean {
         
         if (!JSFUtil.checkAdmin()) return "notAdmin";
         
-        System.out.println("111111111111111111111111111111111111111");
         try {
             if (user.getId()==null) {//new user
                 UserDAO.addUser(user, selectedRoles);
@@ -110,7 +108,9 @@ public class UserBean extends ListTableBean {
             }
             return "success";
         } catch(UserExistException uee) {
+            uee.printStackTrace();
         } catch(Exception e) {
+            e.printStackTrace();
         }
         
         return "failure";
