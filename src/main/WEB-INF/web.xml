@@ -10,7 +10,7 @@
 
 
   <context-param>
-      <param-name>org.pgist.RBAC_PROXY</param-name>
+      <param-name>org.pgist.RBAC_CHECKER</param-name>
       <param-value>org.pgist.util.RoleChecker</param-value>
   </context-param>
 

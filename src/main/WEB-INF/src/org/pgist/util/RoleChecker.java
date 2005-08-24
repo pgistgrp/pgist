@@ -11,7 +11,7 @@ import org.pgist.users.User;
  * @author kenny
  *
  */
-public class RoleChecker implements RbacProxy {
+public class RoleChecker implements RbacChecker {
 
     
     public boolean checkRole(String[] roles) {

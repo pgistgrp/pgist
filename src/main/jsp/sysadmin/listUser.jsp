@@ -21,12 +21,12 @@
     
     <f:facet name="toolbar">
       <pg:show forRole="admin">
-      <pg:toolbar id="toolbar" styleClass="toolbar">
-        <pg:toolButton id="addUser" action="#{UserBean.addUser}" value="Add" />
-        <pg:toolButton id="delUsers" actionListener="#{UserBean.delUsers}" confirm="Are you sure to delete user?" value="Delete" />
-        <pg:toolButton id="enableUsers" actionListener="#{UserBean.enableUsers}" confirm="Are you sure to enable user?" value="Enable" />
-        <pg:toolButton id="disableUsers" actionListener="#{UserBean.disableUsers}" confirm="Are you sure to disable user?" value="Disable" />
-      </pg:toolbar>
+        <pg:toolbar id="toolbar" styleClass="toolbar">
+          <pg:toolButton id="addUser" action="#{UserBean.addUser}" value="Add" />
+          <pg:toolButton id="delUsers" actionListener="#{UserBean.delUsers}" confirm="Are you sure to delete user?" value="Delete" />
+          <pg:toolButton id="enableUsers" actionListener="#{UserBean.enableUsers}" confirm="Are you sure to enable user?" value="Enable" />
+          <pg:toolButton id="disableUsers" actionListener="#{UserBean.disableUsers}" confirm="Are you sure to disable user?" value="Disable" />
+        </pg:toolbar>
       </pg:show>
     </f:facet>
 
@@ -70,8 +70,8 @@
       <h:outputText rendered="#{!user.enabled}" style="color:red;" value="Disabled" />
     </h:column>
     
-    <h:column>
-      <pg:show forRole="admin">
+    <h:column id="selection">
+      <pg:show forRole="admin" for="selection">
         <f:facet name="header">
           <h:outputText value="Selection"/>
         </f:facet>
