@@ -5,9 +5,9 @@ package org.pgist.glossary;
  * Glossary POJO
  * @author kenny
  *
- * @hibernate.class table="pgist_glossary"
+ * @hibernate.class table="pgist_glossary_term"
  */
-public class Glossary {
+public class Term {
 
     
     private Long id;
@@ -17,11 +17,11 @@ public class Glossary {
     private String source1;
     private String source2;
     private String source3;
-    private String term1;
-    private String term2;
-    private String term3;
-    private String term4;
-    private String term5;
+    private String relatedTerm1;
+    private String relatedTerm2;
+    private String relatedTerm3;
+    private String relatedTerm4;
+    private String relatedTerm5;
     private String link1;
     private String link2;
     private String link3;
@@ -59,7 +59,7 @@ public class Glossary {
     
     /**
      * @return
-     * @hibernate.property unique="true" not-null="true"
+     * @hibernate.property not-null="true"
      */
     public String getName() {
         return name;
@@ -173,27 +173,13 @@ public class Glossary {
      * @return
      * @hibernate.property not-null="true"
      */
-    public String getTerm1() {
-        return term1;
+    public String getRelatedTerm1() {
+        return relatedTerm1;
     }
 
 
-    public void setTerm1(String term1) {
-        this.term1 = term1;
-    }
-
-
-    /**
-     * @return
-     * @hibernate.property not-null="true"
-     */
-    public String getTerm2() {
-        return term2;
-    }
-
-
-    public void setTerm2(String term2) {
-        this.term2 = term2;
+    public void setRelatedTerm1(String term1) {
+        this.relatedTerm1 = term1;
     }
 
 
@@ -201,27 +187,13 @@ public class Glossary {
      * @return
      * @hibernate.property not-null="true"
      */
-    public String getTerm3() {
-        return term3;
+    public String getRelatedTerm2() {
+        return relatedTerm2;
     }
 
 
-    public void setTerm3(String term3) {
-        this.term3 = term3;
-    }
-
-
-    /**
-     * @return
-     * @hibernate.property not-null="true"
-     */
-    public String getTerm4() {
-        return term4;
-    }
-
-
-    public void setTerm4(String term4) {
-        this.term4 = term4;
+    public void setRelatedTerm2(String term2) {
+        this.relatedTerm2 = term2;
     }
 
 
@@ -229,13 +201,41 @@ public class Glossary {
      * @return
      * @hibernate.property not-null="true"
      */
-    public String getTerm5() {
-        return term5;
+    public String getRelatedTerm3() {
+        return relatedTerm3;
     }
 
 
-    public void setTerm5(String term5) {
-        this.term5 = term5;
+    public void setRelatedTerm3(String term3) {
+        this.relatedTerm3 = term3;
+    }
+
+
+    /**
+     * @return
+     * @hibernate.property not-null="true"
+     */
+    public String getRelatedTerm4() {
+        return relatedTerm4;
+    }
+
+
+    public void setRelatedTerm4(String term4) {
+        this.relatedTerm4 = term4;
+    }
+
+
+    /**
+     * @return
+     * @hibernate.property not-null="true"
+     */
+    public String getRelatedTerm5() {
+        return relatedTerm5;
+    }
+
+
+    public void setRelatedTerm5(String term5) {
+        this.relatedTerm5 = term5;
     }
 
 
@@ -267,4 +267,4 @@ public class Glossary {
     }
     
     
-}//class Glossary
+}//class Term
