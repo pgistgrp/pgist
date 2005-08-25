@@ -16,7 +16,7 @@
   <br>
   <h:commandLink action="listRole" value="Role Management" />
   <br>
-  <h:commandLink action="listGlossary" value="Glossary List" />
+  <h:commandLink action="listTerm" value="Glossary Term List" />
   <br>
   <h:commandLink action="listConversation" value="Conversation List" />
 

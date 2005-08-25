@@ -55,9 +55,9 @@
       <to-view-id>/jsp/sysadmin/listRole.jsp</to-view-id>
     </navigation-case>
     <navigation-case>
-        <description>list glossary</description>
-      <from-outcome>listGlossary</from-outcome>
-      <to-view-id>/jsp/glossary/listGlossary.jsp</to-view-id>
+        <description>list glossary terms</description>
+      <from-outcome>listTerm</from-outcome>
+      <to-view-id>/jsp/glossary/listTerm.jsp</to-view-id>
     </navigation-case>
     <navigation-case>
         <description>list conversation</description>
@@ -119,6 +119,62 @@
       <description>failure</description>
       <from-outcome>failure</from-outcome>
       <to-view-id>/jsp/sysadmin/editUser.jsp</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+
+
+  <navigation-rule>
+    <description>
+    </description>
+    <from-view-id>/jsp/glossary/listTerm.jsp</from-view-id>
+    <navigation-case>
+      <description>list terms</description>
+      <from-outcome>listTerm</from-outcome>
+      <to-view-id>/jsp/glossary/listTerm.jsp</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <description>add term</description>
+      <from-outcome>addTerm</from-outcome>
+      <to-view-id>/jsp/glossary/addTerm.jsp</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <description>edit term</description>
+      <from-outcome>editTerm</from-outcome>
+      <to-view-id>/jsp/glossary/editTerm.jsp</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+
+  
+  <navigation-rule>
+    <description>
+    </description>
+    <from-view-id>/jsp/glossary/addTerm.jsp</from-view-id>
+    <navigation-case>
+      <description>success</description>
+      <from-outcome>success</from-outcome>
+      <to-view-id>/jsp/glossary/listTerm.jsp</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <description>failure</description>
+      <from-outcome>failure</from-outcome>
+      <to-view-id>/jsp/glossary/addTerm.jsp</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+
+
+  <navigation-rule>
+    <description>
+    </description>
+    <from-view-id>/jsp/glossary/editTerm.jsp</from-view-id>
+    <navigation-case>
+      <description>success</description>
+      <from-outcome>success</from-outcome>
+      <to-view-id>/jsp/glossary/listTerm.jsp</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <description>failure</description>
+      <from-outcome>failure</from-outcome>
+      <to-view-id>/jsp/glossary/editTerm.jsp</to-view-id>
     </navigation-case>
   </navigation-rule>
 

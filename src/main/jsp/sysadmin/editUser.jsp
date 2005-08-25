@@ -15,6 +15,7 @@
   <h:outputText value="Edit User"/>
   
   <h:inputHidden id="id" value="#{UserBean.user.id}"/>
+  
   <h:panelGrid columns="3">
     <h:outputLabel value="Login Name: " for="loginname"/>
     <h:inputText id="loginname" value="#{UserBean.user.loginname}" required="true"/>

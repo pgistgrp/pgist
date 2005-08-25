@@ -123,7 +123,6 @@ public class UserBean extends ListTableBean {
      */
     public void delUsers(ActionEvent event) {
         UserDAO.delUsers(selectedIds(User.class, "id"));
-        
     }//delUsers()
     
     
