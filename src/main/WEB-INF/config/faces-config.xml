@@ -131,6 +131,45 @@
   <navigation-rule>
     <description>
     </description>
+    <from-view-id>/jsp/emails/listEmailTemplate.jsp</from-view-id>
+    <navigation-case>
+      <description>list templates</description>
+      <from-outcome>listTemplate</from-outcome>
+      <to-view-id>/jsp/emails/listEmailTemplate.jsp</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <description>add template</description>
+      <from-outcome>addTemplate</from-outcome>
+      <to-view-id>/jsp/emails/addTemplate.jsp</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <description>edit template</description>
+      <from-outcome>editTemplate</from-outcome>
+      <to-view-id>/jsp/emails/editTemplate.jsp</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+
+  
+  <navigation-rule>
+    <description>
+    </description>
+    <from-view-id>/jsp/emails/editTemplate.jsp</from-view-id>
+    <navigation-case>
+      <description>success</description>
+      <from-outcome>success</from-outcome>
+      <to-view-id>/jsp/emails/listEmailTemplate.jsp</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <description>failure</description>
+      <from-outcome>failure</from-outcome>
+      <to-view-id>/jsp/emails/editTemplate.jsp</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+
+
+  <navigation-rule>
+    <description>
+    </description>
     <from-view-id>/jsp/glossary/listTerm.jsp</from-view-id>
     <navigation-case>
       <description>list terms</description>

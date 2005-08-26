@@ -6,6 +6,8 @@ import javax.faces.event.ActionEvent;
 
 import org.pgist.dao.EmailTemplateDAO;
 import org.pgist.emails.EmailTemplate;
+import org.pgist.exceptions.TemplateExistException;
+import org.pgist.util.JSFUtil;
 import org.pgist.util.ListTableBean;
 
 
@@ -53,6 +55,44 @@ public class EmailTemplateBean extends ListTableBean {
         }
         
     }//listTemplate()
+    
+    
+    /**
+     * GoTo the "Edit Template" page
+     * @return
+     */
+    public String editTemplate() {
+        
+        if (!JSFUtil.checkAdmin()) return "notAdmin";
+        try {
+            template = (EmailTemplate) EmailTemplateDAO.load(EmailTemplate.class, selectedId());
+        } catch(Exception e) {
+        }
+        
+        return "editTemplate";
+        
+    }//editTemplate()
+    
+    
+    /**
+     * Save a modified Template
+     * @return
+     */
+    public String saveTemplate() {
+        
+        if (!JSFUtil.checkAdmin()) return "notAdmin";
+        
+        try {
+            EmailTemplateDAO.updateTemplate(template);
+            return "success";
+        } catch(TemplateExistException tee) {
+            tee.printStackTrace();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        return "failure";
+    }//saveTemplate()
     
     
 }//class EmailTemplateBean

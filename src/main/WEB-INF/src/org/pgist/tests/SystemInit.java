@@ -16,6 +16,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.util.ArrayHelper;
+import org.pgist.emails.EmailTemplate;
 import org.pgist.glossary.Term;
 import org.pgist.nlp.ConversationThread;
 import org.pgist.nlp.Post;
@@ -199,7 +200,15 @@ public class SystemInit extends MatchingTask {
                 term.setRelatedTerm3("term3");
                 term.setRelatedTerm4("term4");
                 term.setRelatedTerm5("term5");
+                term.setOwner(admin);
                 session.save(term);
+                
+                EmailTemplate template = new EmailTemplate();
+                template.setName("register user success");
+                template.setDescription("template for informing the new registered user");
+                template.setNotes("Required variables: ${user}");
+                template.setContent("");
+                session.save(template);
                 
                 transaction.commit();
             } catch(Exception ex) {
@@ -214,6 +223,7 @@ public class SystemInit extends MatchingTask {
             throw new BuildException(e);
         }
     }
+    
 
     private String[] getFiles() {
 
@@ -236,6 +246,7 @@ public class SystemInit extends MatchingTask {
 
         return ArrayHelper.toStringArray(files);
     }
+    
 
     private Configuration getConfiguration() throws Exception {
         Configuration cfg = new Configuration();

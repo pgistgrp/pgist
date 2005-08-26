@@ -1,5 +1,7 @@
 package org.pgist.glossary;
 
+import org.pgist.users.User;
+
 
 /**
  * Glossary POJO
@@ -27,6 +29,7 @@ public class Term {
     private String link3;
     private boolean internal = false;
     private boolean deleted = false;
+    private User owner;
     
     
     /**
@@ -264,6 +267,20 @@ public class Term {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+
+    /**
+     * @return
+     * @hibernate.many-to-one column="owner_id" class="org.pgist.users.User" casecad="all"
+     */
+    public User getOwner() {
+        return owner;
+    }
+
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
     
     

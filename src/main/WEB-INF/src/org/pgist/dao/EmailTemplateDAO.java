@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.pgist.emails.EmailTemplate;
 import org.pgist.util.HibernateUtil;
 import org.pgist.util.PageSetting;
 
@@ -57,6 +58,11 @@ public class EmailTemplateDAO extends BaseDAO {
 
         return list;
     }//getTemplateList()
+    
+
+    public static void updateTemplate(EmailTemplate template) throws Exception {
+        update(template);
+    }//updateTemplate()
 
     
 }//class EmailTemplateDAO

@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.pgist.exceptions.TermExistException;
 import org.pgist.glossary.Term;
 import org.pgist.util.HibernateUtil;
+import org.pgist.util.JSFUtil;
 import org.pgist.util.PageSetting;
 
 
@@ -86,6 +87,7 @@ public class GlossaryDAO extends BaseDAO {
                 throw new TermExistException("Term already exists!");
             }
             
+            term.setOwner(JSFUtil.getCurrentUser());
             session.save(term);
 
             HibernateUtil.commit();

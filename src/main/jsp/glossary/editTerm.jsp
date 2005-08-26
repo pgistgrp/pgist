@@ -16,7 +16,7 @@
   
   <h:inputHidden id="id" value="#{GlossaryBean.term.id}"/>
 
-  <h:panelGrid columns="1">
+  <h:panelGrid columns="3">
     <h:outputLabel value="Term Name: " for="name"/>
     <h:inputText id="name" value="#{GlossaryBean.term.name}" required="true"/>
       <h:message for="name"/>
@@ -38,6 +38,7 @@
       <h:inputText id="source3" value="#{GlossaryBean.term.source3}"/>
         <h:message for="source3"/>
     </h:panelGrid>
+    <h:outputText value=""/>
     <h:outputLabel value="Related Terms: " />
     <h:panelGrid columns="3">
       <h:outputLabel value="1." for="relatedTerm1"/>
@@ -56,6 +57,7 @@
       <h:inputText id="relatedTerm5" value="#{GlossaryBean.term.relatedTerm5}"/>
         <h:message for="relatedTerm5"/>
     </h:panelGrid>
+    <h:outputText value=""/>
     <h:outputLabel value="Links: " />
     <h:panelGrid columns="3">
       <h:outputLabel value="1." for="link1"/>
@@ -68,6 +70,7 @@
       <h:inputText id="link3" value="#{GlossaryBean.term.link3}"/>
         <h:message for="link3"/>
     </h:panelGrid>
+    <h:outputText value=""/>
   </h:panelGrid>
 
   <h:commandButton value="Commit" action="#{GlossaryBean.saveTerm}" type="submit"/>
