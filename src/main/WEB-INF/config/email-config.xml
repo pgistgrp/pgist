@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<server>
+  <property name="mail.smtp.host">localhost</property>
+  <property name="mail.transport.protocol">smtp</property>
+  <property name="mail.smtp.auth">true</property>
+  <from>kenny@localhost</from>
+  <username>kenny</username>
+  <password>123456</password>
+  <content-type>text/html</content-type>
+</server>
+
