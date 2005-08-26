@@ -64,5 +64,30 @@ public class EmailTemplateDAO extends BaseDAO {
         update(template);
     }//updateTemplate()
 
+
+    public static EmailTemplate getTemplateByName(String name) throws Exception {
+        EmailTemplate template = null;
+        try {
+            Session session = HibernateUtil.getSession();
+            HibernateUtil.begin();
+            
+            Query query = session.createQuery("from EmailTemplate where name=:name");
+            query.setString("name", name);
+            List list = query.list();
+            if (list.size()>0) {
+                template = (EmailTemplate) list.get(0);
+            }
+            HibernateUtil.commit();
+        } catch (Exception e) {
+            try {
+                HibernateUtil.rollback();
+            } catch(Exception ex) {
+            }
+            throw e;
+        }
+        
+        return template;
+    }//getTemplateByName()
+
     
 }//class EmailTemplateDAO

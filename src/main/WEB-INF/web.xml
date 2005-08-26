@@ -90,8 +90,8 @@
        <param-value>/WEB-INF/config</param-value>
     </init-param>
     <init-param>
-       <param-name>org.pgist.EMAIL_TEMPLATE_PATH</param-name>
-       <param-value>email-template</param-value>
+       <param-name>org.pgist.EMAIL_CONFIG</param-name>
+       <param-value>email-config.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>

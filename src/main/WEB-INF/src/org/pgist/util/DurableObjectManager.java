@@ -23,7 +23,7 @@ public class DurableObjectManager {
 
     
     public static final String CONFIG_PATH = "org.pgist.CONFIG_PATH";
-    public static final String EMAIL_TEMPLATE_PATH = "org.pgist.EMAIL_TEMPLATE_PATH";
+    public static final String EMAIL_CONFIG = "org.pgist.EMAIL_CONFIG";
     
     
     private static Hashtable ht = new Hashtable();
