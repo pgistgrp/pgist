@@ -55,6 +55,11 @@
       <to-view-id>/jsp/sysadmin/listRole.jsp</to-view-id>
     </navigation-case>
     <navigation-case>
+        <description>list email templates</description>
+      <from-outcome>listEmailTemplate</from-outcome>
+      <to-view-id>/jsp/emails/listEmailTemplate.jsp</to-view-id>
+    </navigation-case>
+    <navigation-case>
         <description>list glossary terms</description>
       <from-outcome>listTerm</from-outcome>
       <to-view-id>/jsp/glossary/listTerm.jsp</to-view-id>
@@ -237,6 +242,15 @@
     </description>
     <managed-bean-name>RoleBean</managed-bean-name>
     <managed-bean-class>org.pgist.backing.RoleBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+
+  <managed-bean>
+    <description>
+      Backing Bean : email templates admin bean
+    </description>
+    <managed-bean-name>EmailTemplateBean</managed-bean-name>
+    <managed-bean-class>org.pgist.backing.EmailTemplateBean</managed-bean-class>
     <managed-bean-scope>session</managed-bean-scope>
   </managed-bean>
 
