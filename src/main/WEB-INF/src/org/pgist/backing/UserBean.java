@@ -164,4 +164,3 @@ public class UserBean extends ListTableBean {
     
     
 }//class UserBean
-

@@ -20,6 +20,12 @@ import org.pgist.util.DurableObjectManager;
 public class SystemInitServlet extends HttpServlet {
 
     
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+    
+
     public void init(ServletConfig config) throws ServletException {
         
         //this line is required by the servlet specification

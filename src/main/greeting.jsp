@@ -24,7 +24,7 @@
       <td colspan="2">
         <h:commandButton id="submit" action="#{LoginBean.login}" value="Login" />
         &nbsp;&nbsp;&nbsp;&nbsp;
-        (<h:commandLink id="regist" action="register" value="Register" />)
+        (<h:commandLink id="regist" action="#{RegisterBean.registerUser}" value="Register" />)
       </td>
     </tr>
   </table>

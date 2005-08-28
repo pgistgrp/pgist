@@ -16,24 +16,35 @@
     <description></description>
     <from-view-id>/greeting.jsp</from-view-id>
     <navigation-case>
-      <description>
-          Indicates to the NavigationHandler that the response.jsp
-          view must be displayed if the Action referenced by a
-          UICommand component on the greeting.jsp view returns
-          the outcome "success".
-      </description>
+      <description>login success</description>
       <from-outcome>success</from-outcome>
       <to-view-id>/jsp/sysadmin/main.jsp</to-view-id>
     </navigation-case>
     <navigation-case>
-        <description>
-            Indicates to the NavigationHandler that the response.jsp
-            view must be displayed if the Action referenced by a
-            UICommand component on the greeting.jsp view returns
-            the outcome "failure".
-        </description>
+        <description>login failure</description>
       <from-outcome>failure</from-outcome>
       <to-view-id>/greeting.jsp</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <description>register new user</description>
+      <from-outcome>register</from-outcome>
+      <to-view-id>/register.jsp</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+
+  <navigation-rule>
+    <description>
+    </description>
+    <from-view-id>/register.jsp</from-view-id>
+    <navigation-case>
+      <description>success</description>
+      <from-outcome>success</from-outcome>
+      <to-view-id>/greeting.jsp</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <description>failure</description>
+      <from-outcome>failure</from-outcome>
+      <to-view-id>/register.jsp</to-view-id>
     </navigation-case>
   </navigation-rule>
 
@@ -263,6 +274,15 @@
     </description>
     <managed-bean-name>LoginBean</managed-bean-name>
     <managed-bean-class>org.pgist.backing.LoginBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+
+  <managed-bean>
+    <description>
+      Backing Bean : register bean
+    </description>
+    <managed-bean-name>RegisterBean</managed-bean-name>
+    <managed-bean-class>org.pgist.backing.RegisterBean</managed-bean-class>
     <managed-bean-scope>session</managed-bean-scope>
   </managed-bean>
 

@@ -60,7 +60,7 @@ public class PgistFilter implements Filter {
         String ignoreURL = filterConfig.getInitParameter("ignore-url");
         String[] array = ignoreURL.split(",");
         for (int i=0; i<array.length; i++) {
-            ignoreURLs.add(array[i]);
+            ignoreURLs.add(array[i].trim());
         }
     }
 

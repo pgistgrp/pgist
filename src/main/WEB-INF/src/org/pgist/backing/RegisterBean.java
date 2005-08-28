@@ -1,5 +1,10 @@
 package org.pgist.backing;
 
+import org.pgist.dao.UserDAO;
+import org.pgist.exceptions.UserExistException;
+import org.pgist.users.Role;
+import org.pgist.users.User;
+
 
 /**
  * Backing bean for register new user
@@ -9,34 +14,53 @@ package org.pgist.backing;
 public class RegisterBean {
 
     
-    public String register() {
-        /*
-        Registry registry = new Registry();
-        registry.setLoginname(loginname);
-        registry.setOriginPassword(password);
-        */
+    private User user;
+
+    
+    public User getUser() {
+        return user;
+    }
+
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
+    
+    /**
+     * GoTo the "Register User" page
+     * @return
+     */
+    public String registerUser() {
         
-        /*
-        User user = new User();
-        user.setLoginname(loginname);
-        user.setEmail(email);
-        user.setOriginPassword(password);
-        user.setDeleted(false);
+        user = new User();
         user.setEnabled(true);
+        user.setInternal(false);
+        user.setDeleted(false);
         
-        Role role = UserDAO.getRoleByName("member");
-        user.getRoles().add(role);
-        
+        return "register";
+    }//addUser()
+    
+    
+    /**
+     * execute "Register User"
+     * @return
+     */
+    public String doRegisterUser() {
         try {
-            UserDAO.addUser(user);
-            return mapping.findForward("success");
-        } catch(UserExistException e) {
-            request.setAttribute("PGISTMessage", e.getMessage());
+            Role role = UserDAO.getRoleByName("member");
+            user.getRoles().add(role);
+            if (user.getPassword().length()<32) user.encodePassword();
+            UserDAO.insert(user);
+            return "success";
+        } catch(UserExistException uee) {
+            uee.printStackTrace();
+        } catch(Exception e) {
+            e.printStackTrace();
         }
         
-        */
-        return null;
-    }//register()
-    
-    
+        return "failure";
+    }//doRegisterUser()
+
+
 }//class RegisterBean
