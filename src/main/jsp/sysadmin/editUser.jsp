@@ -21,7 +21,7 @@
     <h:inputText id="loginname" value="#{UserBean.user.loginname}" required="true"/>
       <h:message for="loginname"/>
     <h:outputLabel value="Password: " for="password"/>
-    <h:inputSecret id="password" value="#{UserBean.user.password}" required="true"/>
+    <pg:optionalInput id="password" secret="true" value="#{UserBean.user.password}" required="true"/>
       <h:message for="password"/>
     <h:outputLabel value="Email: " for="email"/>
     <h:inputText id="email" value="#{UserBean.user.email}" required="true"/>
