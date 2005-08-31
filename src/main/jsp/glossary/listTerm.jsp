@@ -21,6 +21,9 @@
     
     <f:facet name="toolbar">
       <pg:toolbar id="toolbar" styleClass="toolbar">
+        <h:selectOneMenu value="#{GlossaryBean.categoryFilter}" onchange="glossaryList_scroll(1);">
+          <f:selectItems value="#{GlossaryBean.categories}"/>
+        </h:selectOneMenu>
         <pg:toolButton id="addTerm" action="#{GlossaryBean.addTerm}" value="Add" />
         <pg:toolButton id="delTerms" actionListener="#{GlossaryBean.delTerms}" confirm="Are you sure to delete terms?" value="Delete" />
       </pg:toolbar>
@@ -44,6 +47,13 @@
       </f:facet>
       <h:inputHidden id="objectId" binding="#{GlossaryBean.objectId}" value="#{term.id}"/>
       <h:commandLink id="editTerm" action="#{GlossaryBean.editTerm}" value="#{term.name}" />
+    </h:column>
+    
+    <h:column>
+      <f:facet name="header">
+        <h:outputText value="Category"/>
+      </f:facet>
+      <h:outputText value="#{term.category}"/>
     </h:column>
     
     <h:column>

@@ -24,8 +24,10 @@ public class GlossaryBean extends ListTableBean {
     
     private List terms = null;
     private Term term = null;
+    private String categoryFilter;
     private String category;
     private List categories = new ArrayList();
+    private List filterCategories = new ArrayList();
 
 
     public List getTerms() {
@@ -45,6 +47,16 @@ public class GlossaryBean extends ListTableBean {
 
     public void setTerm(Term term) {
         this.term = term;
+    }
+
+
+    public String getCategoryFilter() {
+        return categoryFilter;
+    }
+
+
+    public void setCategoryFilter(String filter) {
+        this.categoryFilter = filter;
     }
 
 
@@ -68,15 +80,33 @@ public class GlossaryBean extends ListTableBean {
     }
 
 
+    public List getFilterCategories() {
+        return filterCategories;
+    }
+
+
+    public void setFilterCategories(List filterCategories) {
+        this.filterCategories = filterCategories;
+    }
+
+
     /**
      * List All terms.
      * @return
      */
     public void listTerm(ActionEvent event) {
-        
         try {
+            if (categoryFilter!=null) {
+                categoryFilter = categoryFilter.trim();
+                if (!"".equals(categoryFilter)) {
+                    pageSetting.set("categoryFilter", categoryFilter);
+                } else {
+                    pageSetting.set("categoryFilter", null);
+                }
+            }
             terms = GlossaryDAO.getTermList(pageSetting);
         } catch(Exception e) {
+            e.printStackTrace();
         }
         
     }//listGlossary()
@@ -103,6 +133,7 @@ public class GlossaryBean extends ListTableBean {
         try {
             term = (Term) GlossaryDAO.load(Term.class, selectedId());
         } catch(Exception e) {
+            e.printStackTrace();
         }
         
         return "editTerm";
@@ -140,6 +171,7 @@ public class GlossaryBean extends ListTableBean {
 
 
     public void setCategoryList(String _categories) {
+        SelectItem item;
         if (_categories!=null) {
             String[] pairs = _categories.split(",");
             for (int i=0; i<pairs.length; i++) {
@@ -148,12 +180,16 @@ public class GlossaryBean extends ListTableBean {
                 if (!"".equals(pair)) {
                     int index = pair.indexOf(':');
                     if (index>1 && index<pair.length()-1) {
-                        SelectItem item = new SelectItem(pair.substring(0, index), pair.substring(index+1));
-                        categories.add(item);
+                        item = new SelectItem(pair.substring(0, index), pair.substring(index+1));
+                        filterCategories.add(item);
                     }
                 }
             }//for i
         }
+
+        item = new SelectItem("", "All");
+        categories.add(item);
+        categories.addAll(filterCategories);
     }
 
 

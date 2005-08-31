@@ -33,11 +33,18 @@ public class GlossaryDAO extends BaseDAO {
             HibernateUtil.begin();
             
             StringBuffer hql = new StringBuffer("from Term as term where term.deleted=:deleted");
+
+            String categoryFilter = setting.get("categoryFilter");
+            if (categoryFilter!=null) {
+                hql.append(" and category=:categoryFilter");
+            }
+            
             String nameFilter = (String) setting.get("nameFilter");
             if (nameFilter!=null && !"".equals(nameFilter)) hql.append(" and name like :nameFilter");
             
             Query query = session.createQuery("select count(id) "+hql.toString());
             query.setBoolean("deleted", false);
+            if (categoryFilter!=null) query.setString("categoryFilter", categoryFilter);
             if (nameFilter!=null && !"".equals(nameFilter)) query.setString("nameFilter", "%"+nameFilter+"%");
             list = query.list();
             
@@ -47,6 +54,7 @@ public class GlossaryDAO extends BaseDAO {
                 hql.append(" order by term.id");
                 query = session.createQuery(hql.toString());
                 query.setBoolean("deleted", false);
+                if (categoryFilter!=null) query.setString("categoryFilter", categoryFilter);
                 if (nameFilter!=null && !"".equals(nameFilter)) query.setString("nameFilter", "%"+nameFilter+"%");
                 query.setFirstResult(setting.getFirstRow());
                 query.setMaxResults(setting.getRowOfPage());

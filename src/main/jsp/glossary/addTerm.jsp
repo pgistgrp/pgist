@@ -20,7 +20,7 @@
       <h:message for="name"/>
     <h:outputLabel value="Category: " for="category"/>
     <h:selectOneMenu id="category" value="#{GlossaryBean.term.category}">
-      <f:selectItems value="#{GlossaryBean.categories}" />
+      <f:selectItems value="#{GlossaryBean.filterCategories}" />
     </h:selectOneMenu>
       <h:message for="category"/>
     <h:outputLabel value="Short Definition: " for="shortDefinition"/>

@@ -323,7 +323,7 @@
     <managed-property>
       <description>The categories for glossaries</description>
       <property-name>categoryList</property-name>
-      <value>category1:category1, category2:category2</value>
+      <value>Developer:Developer, Public:Public, Puget:Puget Sound Region, Improvement:Transportation Improvement Programming</value>
     </managed-property>
   </managed-bean>
 
