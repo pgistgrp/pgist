@@ -30,6 +30,7 @@ public class Term {
     private boolean internal = false;
     private boolean deleted = false;
     private User owner;
+    private String category;
     
     
     /**
@@ -281,6 +282,20 @@ public class Term {
 
     public void setOwner(User owner) {
         this.owner = owner;
+    }
+
+
+    /**
+     * @return
+     * @hibernate.property not-null="true"
+     */
+    public String getCategory() {
+        return category;
+    }
+
+
+    public void setCategory(String category) {
+        this.category = category;
     }
     
     

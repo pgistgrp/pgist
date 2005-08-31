@@ -1,8 +1,10 @@
 package org.pgist.backing;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.event.ActionEvent;
+import javax.faces.model.SelectItem;
 
 import org.pgist.dao.GlossaryDAO;
 import org.pgist.exceptions.TermExistException;
@@ -22,6 +24,8 @@ public class GlossaryBean extends ListTableBean {
     
     private List terms = null;
     private Term term = null;
+    private String category;
+    private List categories = new ArrayList();
 
 
     public List getTerms() {
@@ -41,6 +45,26 @@ public class GlossaryBean extends ListTableBean {
 
     public void setTerm(Term term) {
         this.term = term;
+    }
+
+
+    public List getCategories() {
+        return categories;
+    }
+
+
+    public void setCategories(List categories) {
+        this.categories = categories;
+    }
+
+
+    public String getCategory() {
+        return category;
+    }
+
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
 
@@ -113,6 +137,24 @@ public class GlossaryBean extends ListTableBean {
     public void delTerms(ActionEvent event) {
         GlossaryDAO.delTerms(selectedIds(Term.class, "id"));
     }//delTerms()
+
+
+    public void setCategoryList(String _categories) {
+        if (_categories!=null) {
+            String[] pairs = _categories.split(",");
+            for (int i=0; i<pairs.length; i++) {
+                String pair = pairs[i];
+                if (pair!=null) pair = pair.trim();
+                if (!"".equals(pair)) {
+                    int index = pair.indexOf(':');
+                    if (index>1 && index<pair.length()-1) {
+                        SelectItem item = new SelectItem(pair.substring(0, index), pair.substring(index+1));
+                        categories.add(item);
+                    }
+                }
+            }//for i
+        }
+    }
 
 
 }//class GlossaryBean

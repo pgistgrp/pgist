@@ -320,6 +320,11 @@
     <managed-bean-name>GlossaryBean</managed-bean-name>
     <managed-bean-class>org.pgist.backing.GlossaryBean</managed-bean-class>
     <managed-bean-scope>session</managed-bean-scope>
+    <managed-property>
+      <description>The categories for glossaries</description>
+      <property-name>categoryList</property-name>
+      <value>category1:category1, category2:category2</value>
+    </managed-property>
   </managed-bean>
 
   <managed-bean>

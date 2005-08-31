@@ -20,6 +20,11 @@
     <h:outputLabel value="Term Name: " for="name"/>
     <h:inputText id="name" value="#{GlossaryBean.term.name}" required="true"/>
       <h:message for="name"/>
+    <h:outputLabel value="Category: " for="category"/>
+    <h:selectOneMenu id="category" value="#{GlossaryBean.term.category}">
+      <f:selectItems value="#{GlossaryBean.categories}" />
+    </h:selectOneMenu>
+      <h:message for="category"/>
     <h:outputLabel value="Short Definition: " for="shortDefinition"/>
     <h:inputTextarea id="shortDefinition" rows="2" cols="50" value="#{GlossaryBean.term.shortDefinition}" required="true"/>
       <h:message for="shortDefinition"/>

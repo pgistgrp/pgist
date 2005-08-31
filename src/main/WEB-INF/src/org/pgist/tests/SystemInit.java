@@ -201,6 +201,7 @@ public class SystemInit extends MatchingTask {
                 term.setRelatedTerm4("term4");
                 term.setRelatedTerm5("term5");
                 term.setOwner(admin);
+                term.setCategory("");
                 session.save(term);
                 
                 EmailTemplate template = new EmailTemplate();
