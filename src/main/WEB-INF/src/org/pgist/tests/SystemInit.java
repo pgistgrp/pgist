@@ -119,6 +119,8 @@ public class SystemInit extends MatchingTask {
                 //user - admin
                 User admin = new User();
                 admin.setLoginname("admin");
+                admin.setFirstname("Admin");
+                admin.setLastname("Admin");
                 admin.setPassword("admin");
                 admin.encodePassword();
                 admin.setEmail("admin@pgist.org");
@@ -133,6 +135,8 @@ public class SystemInit extends MatchingTask {
                 //user - guest
                 User guest = new User();
                 guest.setLoginname("guest");
+                guest.setFirstname("Guest");
+                guest.setLastname("Guest");
                 guest.setPassword("guest");
                 guest.encodePassword();
                 guest.setEmail("guest@pgist.org");
@@ -152,6 +156,8 @@ public class SystemInit extends MatchingTask {
                     test.setInternal(false);
                     test.getRoles().add(roleGuest);
                     test.setLoginname(s);
+                    test.setFirstname("Test"+i);
+                    test.setLastname("Guest"+i);
                     test.setPassword(s);
                     test.encodePassword();
                     test.setEmail(s+"@pgist.org");

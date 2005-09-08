@@ -21,6 +21,12 @@
     <h:outputLabel value="Password: " for="password"/>
     <h:inputSecret id="password" value="#{UserBean.user.password}" required="true"/>
       <h:message for="password"/>
+    <h:outputLabel value="First Name: " for="firstname"/>
+    <h:inputText id="firstname" value="#{UserBean.user.firstname}" required="true"/>
+      <h:message for="firstname"/>
+    <h:outputLabel value="Last Name: " for="lastname"/>
+    <h:inputText id="lastname" value="#{UserBean.user.lastname}" required="true"/>
+      <h:message for="lastname"/>
     <h:outputLabel value="Email: " for="email"/>
     <h:inputText id="email" value="#{UserBean.user.email}" required="true"/>
       <h:message for="email"/>

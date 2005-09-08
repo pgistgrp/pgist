@@ -19,12 +19,12 @@
 
     <f:facet name="title"><h:outputText value="Role List"/></f:facet>
     
-    <f:facet name="toolbar">
-      <pg:toolbar styleClass="toolbar">
-        <pg:toolButton id="addRole" action="addRole" value="Add Role" />
-        <pg:toolButton id="delRoles"  actionListener="#{RoleBean.delRoles}" confirm="Are you sure to delete role?" value="Delete Roles" />
-      </pg:toolbar>
-    </f:facet>
+    <!--f:facet name="toolbar"-->
+      <!--pg:toolbar styleClass="toolbar"-->
+        <!--pg:toolButton id="addRole" action="addRole" value="Add Role" /-->
+        <!--pg:toolButton id="delRoles"  actionListener="#{RoleBean.delRoles}" confirm="Are you sure to delete role?" value="Delete Roles" /-->
+      <!--/pg:toolbar>
+    <!--/f:facet-->
 
     <f:facet name="topScroller">
       <pg:scroller id="scroller1" align="left" styleClass="myclass" infoType="row" showPageGo="true" showRowsOfPage="true"/>
@@ -53,12 +53,12 @@
       <h:outputText value="#{role.description}" />
     </h:column>
     
-    <h:column>
-      <f:facet name="header">
-        <h:outputText value="Selection"/>
-      </f:facet>
-      <h:selectBooleanCheckbox id="checked" rendered="#{!role.internal}" binding="#{RoleBean.checked}"/>
-    </h:column>
+    <!--h:column-->
+      <!--f:facet name="header"-->
+        <!--h:outputText value="Selection"/-->
+      <!--/f:facet-->
+      <!--h:selectBooleanCheckbox id="checked" rendered="#{!role.internal}" binding="#{RoleBean.checked}"/-->
+    <!--/h:column-->
     
   </pg:listTable>
 

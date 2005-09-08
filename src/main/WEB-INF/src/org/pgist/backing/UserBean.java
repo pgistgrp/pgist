@@ -116,7 +116,40 @@ public class UserBean extends ListTableBean {
         return "failure";
     }//saveUser()
     
+
+    /**
+     * GoTo the "Edit Profile" page
+     * @return
+     */
+    public String editProfile() {
+        user = JSFUtil.getCurrentUser();
+        System.out.println("+++> "+user.getLastname()+"   --  "+user.getFirstname());
+        return "editProfile";
+    }//editProfile()
     
+    
+    /**
+     * Update the current user's profile
+     * @return
+     */
+    public String updateProfile() {
+        
+        //check user
+        //TODO
+        
+        try {
+            UserDAO.updateProfile(user);
+            return "success";
+        } catch(UserExistException uee) {
+            uee.printStackTrace();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        return "failure";
+    }//updateProfile()
+    
+
     /**
      * delete users
      * @return

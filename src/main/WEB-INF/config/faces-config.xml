@@ -71,6 +71,11 @@
       <to-view-id>/jsp/emails/listEmailTemplate.jsp</to-view-id>
     </navigation-case>
     <navigation-case>
+        <description>edit profile</description>
+      <from-outcome>editProfile</from-outcome>
+      <to-view-id>/jsp/sysadmin/editProfile.jsp</to-view-id>
+    </navigation-case>
+    <navigation-case>
         <description>list glossary terms</description>
       <from-outcome>listTerm</from-outcome>
       <to-view-id>/jsp/glossary/listTerm.jsp</to-view-id>
@@ -135,6 +140,23 @@
       <description>failure</description>
       <from-outcome>failure</from-outcome>
       <to-view-id>/jsp/sysadmin/editUser.jsp</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+
+
+  <navigation-rule>
+    <description>
+    </description>
+    <from-view-id>/jsp/sysadmin/editProfile.jsp</from-view-id>
+    <navigation-case>
+      <description>success</description>
+      <from-outcome>success</from-outcome>
+      <to-view-id>/jsp/sysadmin/main.jsp</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <description>failure</description>
+      <from-outcome>failure</from-outcome>
+      <to-view-id>/jsp/sysadmin/editProfile.jsp</to-view-id>
     </navigation-case>
   </navigation-rule>
 

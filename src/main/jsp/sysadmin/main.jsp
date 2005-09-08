@@ -18,6 +18,8 @@
   <br>
   <h:commandLink action="listEmailTemplate" value="Email Template List" />
   <br>
+  <h:commandLink action="#{UserBean.editProfile}" value="Edit Profile" />
+  <br>
   <h:commandLink action="listTerm" value="Glossary Term List" />
   <br>
   <h:commandLink action="listConversation" value="Conversation List" />

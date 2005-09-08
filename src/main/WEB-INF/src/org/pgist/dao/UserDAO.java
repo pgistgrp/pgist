@@ -552,4 +552,28 @@ public class UserDAO extends BaseDAO {
     }
 
 
+    /**
+     * Update the user profile
+     * @param user
+     */
+    public static void updateProfile(User user) throws Exception {
+        try {
+            Session session = HibernateUtil.getSession();
+            HibernateUtil.begin();
+            
+            if (user.getPassword().length()<=31) user.encodePassword();
+            
+            session.update(user);
+            
+            HibernateUtil.commit();
+        } catch (Exception e) {
+            try {
+                HibernateUtil.rollback();
+            } catch(Exception ex) {
+            }
+            throw e;
+        }
+    }//updateProfile()
+
+
 }//class UserDAO

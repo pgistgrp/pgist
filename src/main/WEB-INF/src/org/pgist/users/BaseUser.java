@@ -13,6 +13,8 @@ public class BaseUser {
     
     private Long id;
     private String loginname;
+    private String firstname;
+    private String lastname;
     protected String password;
     protected String email = "";
     private boolean enabled;
@@ -44,6 +46,34 @@ public class BaseUser {
     
     public void setLoginname(String loginname) {
         this.loginname = loginname;
+    }
+
+
+    /**
+     * @return
+     * @hibernate.property unique="true" not-null="true"
+     */
+    public String getFirstname() {
+        return firstname;
+    }
+
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+
+    /**
+     * @return
+     * @hibernate.property unique="true" not-null="true"
+     */
+    public String getLastname() {
+        return lastname;
+    }
+
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
 
