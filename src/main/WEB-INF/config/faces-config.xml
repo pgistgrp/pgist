@@ -76,6 +76,11 @@
       <to-view-id>/jsp/sysadmin/editProfile.jsp</to-view-id>
     </navigation-case>
     <navigation-case>
+        <description>list glossary categories</description>
+      <from-outcome>listCategory</from-outcome>
+      <to-view-id>/jsp/glossary/listCategory.jsp</to-view-id>
+    </navigation-case>
+    <navigation-case>
         <description>list glossary terms</description>
       <from-outcome>listTerm</from-outcome>
       <to-view-id>/jsp/glossary/listTerm.jsp</to-view-id>
@@ -196,6 +201,62 @@
       <description>failure</description>
       <from-outcome>failure</from-outcome>
       <to-view-id>/jsp/emails/editTemplate.jsp</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+
+
+  <navigation-rule>
+    <description>
+    </description>
+    <from-view-id>/jsp/glossary/listCategory.jsp</from-view-id>
+    <navigation-case>
+      <description>list category</description>
+      <from-outcome>listCategory</from-outcome>
+      <to-view-id>/jsp/glossary/listCategory.jsp</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <description>add category</description>
+      <from-outcome>addCategory</from-outcome>
+      <to-view-id>/jsp/glossary/addCategory.jsp</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <description>edit category</description>
+      <from-outcome>editCategory</from-outcome>
+      <to-view-id>/jsp/glossary/editCategory.jsp</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+
+  
+  <navigation-rule>
+    <description>
+    </description>
+    <from-view-id>/jsp/glossary/addCategory.jsp</from-view-id>
+    <navigation-case>
+      <description>success</description>
+      <from-outcome>success</from-outcome>
+      <to-view-id>/jsp/glossary/listCategory.jsp</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <description>failure</description>
+      <from-outcome>failure</from-outcome>
+      <to-view-id>/jsp/glossary/addCategory.jsp</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+
+
+  <navigation-rule>
+    <description>
+    </description>
+    <from-view-id>/jsp/glossary/editCategory.jsp</from-view-id>
+    <navigation-case>
+      <description>success</description>
+      <from-outcome>success</from-outcome>
+      <to-view-id>/jsp/glossary/listCategory.jsp</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <description>failure</description>
+      <from-outcome>failure</from-outcome>
+      <to-view-id>/jsp/glossary/editCategory.jsp</to-view-id>
     </navigation-case>
   </navigation-rule>
 
@@ -332,6 +393,15 @@
     </description>
     <managed-bean-name>EmailTemplateBean</managed-bean-name>
     <managed-bean-class>org.pgist.backing.EmailTemplateBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+
+  <managed-bean>
+    <description>
+      Backing Bean : category admin bean
+    </description>
+    <managed-bean-name>CategoryBean</managed-bean-name>
+    <managed-bean-class>org.pgist.backing.CategoryBean</managed-bean-class>
     <managed-bean-scope>session</managed-bean-scope>
   </managed-bean>
 

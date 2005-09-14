@@ -38,6 +38,9 @@
         <mapping resource="org/pgist/emails/EmailTemplate.hbm.xml"/>
 
         <mapping resource="org/pgist/glossary/Term.hbm.xml"/>
+        <mapping resource="org/pgist/glossary/TermCategory.hbm.xml"/>
+        <mapping resource="org/pgist/glossary/TermLink.hbm.xml"/>
+        <mapping resource="org/pgist/glossary/TermSource.hbm.xml"/>
 
         <mapping resource="org/pgist/nlp/ConversationThread.hbm.xml"/>
         <mapping resource="org/pgist/nlp/Post.hbm.xml"/>

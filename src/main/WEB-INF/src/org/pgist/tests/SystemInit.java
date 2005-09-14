@@ -18,6 +18,8 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.util.ArrayHelper;
 import org.pgist.emails.EmailTemplate;
 import org.pgist.glossary.Term;
+import org.pgist.glossary.TermLink;
+import org.pgist.glossary.TermSource;
 import org.pgist.nlp.ConversationThread;
 import org.pgist.nlp.Post;
 import org.pgist.users.Role;
@@ -195,19 +197,34 @@ public class SystemInit extends MatchingTask {
                 term.setShortDefinition("to move from one place to another");
                 term.setExtDefinition("The percific method to move from one place to another, especially with the help of some kind of vehcles.");
                 term.setInternal(true);
-                term.setLink1("link1");
-                term.setLink2("link2");
-                term.setLink3("link3");
-                term.setSource1("source1");
-                term.setSource2("source2");
-                term.setSource3("source3");
-                term.setRelatedTerm1("term1");
-                term.setRelatedTerm2("term2");
-                term.setRelatedTerm3("term3");
-                term.setRelatedTerm4("term4");
-                term.setRelatedTerm5("term5");
+                
+                TermLink link = new TermLink();
+                link.setLink("link1");
+                session.save(link);
+                term.getLinks().add(link);
+                link = new TermLink();
+                link.setLink("link2");
+                session.save(link);
+                term.getLinks().add(link);
+                link = new TermLink();
+                link.setLink("link3");
+                session.save(link);
+                term.getLinks().add(link);
+                
+                TermSource source = new TermSource();
+                source.setSource("source1");
+                session.save(source);
+                term.getSources().add(source);
+                source = new TermSource();
+                source.setSource("source2");
+                session.save(source);
+                term.getSources().add(source);
+                source = new TermSource();
+                source.setSource("source3");
+                session.save(source);
+                term.getSources().add(source);
+
                 term.setOwner(admin);
-                term.setCategory("");
                 session.save(term);
                 
                 EmailTemplate template = new EmailTemplate();

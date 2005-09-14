@@ -1,5 +1,10 @@
 package org.pgist.glossary;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.pgist.users.User;
 
 
@@ -16,21 +21,13 @@ public class Term {
     private String name;
     private String shortDefinition;
     private String extDefinition;
-    private String source1;
-    private String source2;
-    private String source3;
-    private String relatedTerm1;
-    private String relatedTerm2;
-    private String relatedTerm3;
-    private String relatedTerm4;
-    private String relatedTerm5;
-    private String link1;
-    private String link2;
-    private String link3;
+    private List relatedTerms = new ArrayList();
+    private List links = new ArrayList();
+    private List sources = new ArrayList();
     private boolean internal = false;
     private boolean deleted = false;
     private User owner;
-    private String category;
+    private Set categories = new HashSet();
     
     
     /**
@@ -91,155 +88,52 @@ public class Term {
 
     /**
      * @return
-     * @hibernate.property not-null="true"
+     * @hibernate.list table="pgist_glossary_term_link_link" lazy="true" cascade="none" order-by="name"
+     * @hibernate.collection-key column="term_id"
+     * @hibernate.collection-index column="indexes"
+     * @hibernate.collection-many-to-many column="link_id" class="org.pgist.glossary.TermLink"
      */
-    public String getLink1() {
-        return link1;
+    public List getLinks() {
+        return links;
     }
 
 
-    public void setLink1(String link1) {
-        this.link1 = link1;
+    public void setLinks(List links) {
+        this.links = links;
     }
 
 
     /**
      * @return
-     * @hibernate.property not-null="true"
+     * @hibernate.list table="pgist_glossary_term_term_link" lazy="true" cascade="none" order-by="name"
+     * @hibernate.collection-key column="related_term_id"
+     * @hibernate.collection-index column="indexes"
+     * @hibernate.collection-many-to-many class="org.pgist.glossary.Term"
      */
-    public String getLink2() {
-        return link2;
+    public List getRelatedTerms() {
+        return relatedTerms;
     }
 
 
-    public void setLink2(String link2) {
-        this.link2 = link2;
+    public void setRelatedTerms(List relatedTerms) {
+        this.relatedTerms = relatedTerms;
     }
 
 
     /**
      * @return
-     * @hibernate.property not-null="true"
+     * @hibernate.list table="pgist_glossary_term_source_link" lazy="true" cascade="none" order-by="name"
+     * @hibernate.collection-key column="term_id"
+     * @hibernate.collection-index column="indexes"
+     * @hibernate.collection-many-to-many column="source_id" class="org.pgist.glossary.TermSource"
      */
-    public String getLink3() {
-        return link3;
+    public List getSources() {
+        return sources;
     }
 
 
-    public void setLink3(String link3) {
-        this.link3 = link3;
-    }
-
-
-    /**
-     * @return
-     * @hibernate.property not-null="true"
-     */
-    public String getSource1() {
-        return source1;
-    }
-
-
-    public void setSource1(String source1) {
-        this.source1 = source1;
-    }
-
-
-    /**
-     * @return
-     * @hibernate.property not-null="true"
-     */
-    public String getSource2() {
-        return source2;
-    }
-
-
-    public void setSource2(String source2) {
-        this.source2 = source2;
-    }
-
-
-    /**
-     * @return
-     * @hibernate.property not-null="true"
-     */
-    public String getSource3() {
-        return source3;
-    }
-
-
-    public void setSource3(String source3) {
-        this.source3 = source3;
-    }
-
-
-    /**
-     * @return
-     * @hibernate.property not-null="true"
-     */
-    public String getRelatedTerm1() {
-        return relatedTerm1;
-    }
-
-
-    public void setRelatedTerm1(String term1) {
-        this.relatedTerm1 = term1;
-    }
-
-
-    /**
-     * @return
-     * @hibernate.property not-null="true"
-     */
-    public String getRelatedTerm2() {
-        return relatedTerm2;
-    }
-
-
-    public void setRelatedTerm2(String term2) {
-        this.relatedTerm2 = term2;
-    }
-
-
-    /**
-     * @return
-     * @hibernate.property not-null="true"
-     */
-    public String getRelatedTerm3() {
-        return relatedTerm3;
-    }
-
-
-    public void setRelatedTerm3(String term3) {
-        this.relatedTerm3 = term3;
-    }
-
-
-    /**
-     * @return
-     * @hibernate.property not-null="true"
-     */
-    public String getRelatedTerm4() {
-        return relatedTerm4;
-    }
-
-
-    public void setRelatedTerm4(String term4) {
-        this.relatedTerm4 = term4;
-    }
-
-
-    /**
-     * @return
-     * @hibernate.property not-null="true"
-     */
-    public String getRelatedTerm5() {
-        return relatedTerm5;
-    }
-
-
-    public void setRelatedTerm5(String term5) {
-        this.relatedTerm5 = term5;
+    public void setSources(List sources) {
+        this.sources = sources;
     }
 
 
@@ -287,15 +181,17 @@ public class Term {
 
     /**
      * @return
-     * @hibernate.property not-null="true"
+     * @hibernate.set lazy="false" table="pgist_glossary_term_categ_link" cascade="none" order-by="category_id"
+     * @hibernate.collection-key column="term_id"
+     * @hibernate.collection-many-to-many column="category_id" class="org.pgist.glossary.TermCategory"
      */
-    public String getCategory() {
-        return category;
+    public Set getCategories() {
+        return categories;
     }
 
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategories(Set categories) {
+        this.categories = categories;
     }
     
     

@@ -16,9 +16,11 @@
   <br>
   <h:commandLink action="listRole" value="Role Management" />
   <br>
-  <h:commandLink action="listEmailTemplate" value="Email Template List" />
+  <h:commandLink action="listEmailTemplate" value="Email Template Management" />
   <br>
   <h:commandLink action="#{UserBean.editProfile}" value="Edit Profile" />
+  <br>
+  <h:commandLink action="listCategory" value="Glossary Category Management" />
   <br>
   <h:commandLink action="listTerm" value="Glossary Term List" />
   <br>

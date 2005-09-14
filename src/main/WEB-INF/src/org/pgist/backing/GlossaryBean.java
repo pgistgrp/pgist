@@ -109,7 +109,7 @@ public class GlossaryBean extends ListTableBean {
             e.printStackTrace();
         }
         
-    }//listGlossary()
+    }//listTerm()
 
 
     /**
