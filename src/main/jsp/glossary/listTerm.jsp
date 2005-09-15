@@ -5,7 +5,8 @@
 <html>
 <head>
 <title>Glossary Management</title>
-<link rel=stylesheet href='<%= request.getContextPath() +"/styles/default.css"%>' type="text/css" media=all>
+<link rel=stylesheet href="<%= request.getContextPath() %>/styles/default.css" type="text/css" media=all>
+<script src="<%= request.getContextPath() %>/scripts/pgist-util.js" type="text/javascript">
 </head>
 
 <body>
@@ -21,9 +22,9 @@
     
     <f:facet name="toolbar">
       <pg:toolbar id="toolbar" styleClass="toolbar">
-        <h:selectOneMenu value="#{GlossaryBean.categoryFilter}" onchange="glossaryList_scroll(1);">
-          <f:selectItems value="#{GlossaryBean.categories}"/>
-        </h:selectOneMenu>
+        <pg:filter id="filter" styleClass="filterPanel" style="width:200; height:100;">
+          <h:outputText value="Test"/>
+        </pg:filter>
         <pg:toolButton id="addTerm" action="#{GlossaryBean.addTerm}" value="Add" />
         <pg:toolButton id="delTerms" actionListener="#{GlossaryBean.delTerms}" confirm="Are you sure to delete terms?" value="Delete" />
       </pg:toolbar>
@@ -53,7 +54,7 @@
       <f:facet name="header">
         <h:outputText value="Category"/>
       </f:facet>
-      <h:outputText value="#{term.category}"/>
+      <h:outputText value="#{term.categories}"/>
     </h:column>
     
     <h:column>
