@@ -1,6 +1,7 @@
 package org.pgist.backing;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.event.ActionEvent;
 
@@ -48,7 +49,7 @@ public class UserBean extends ListTableBean {
      * List All Users.
      * @return
      */
-    public void listUser(ActionEvent event) {
+    public void listUser(ActionEvent event, Map map) {
         
         try {
             users = UserDAO.getUserList(pageSetting);

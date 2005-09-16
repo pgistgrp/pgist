@@ -1,6 +1,7 @@
 package org.pgist.backing;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.event.ActionEvent;
 
@@ -47,7 +48,7 @@ public class CategoryBean extends ListTableBean {
      * List All Categories.
      * @return
      */
-    public void listCategory(ActionEvent event) {
+    public void listCategory(ActionEvent event, Map map) {
         try {
             categories = CategoryDAO.getCategoryList(pageSetting);
         } catch(Exception e) {

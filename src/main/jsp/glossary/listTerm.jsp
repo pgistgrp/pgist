@@ -6,7 +6,7 @@
 <head>
 <title>Glossary Management</title>
 <link rel=stylesheet href="<%= request.getContextPath() %>/styles/default.css" type="text/css" media=all>
-<script src="<%= request.getContextPath() %>/scripts/pgist-util.js" type="text/javascript">
+<script src="<%= request.getContextPath() %>/scripts/pgist-util.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -22,8 +22,12 @@
     
     <f:facet name="toolbar">
       <pg:toolbar id="toolbar" styleClass="toolbar">
-        <pg:filter id="filter" styleClass="filterPanel" style="width:200; height:100;">
-          <h:outputText value="Test"/>
+        <pg:filter id="filter" styleClass="filterPanel" style="width:300; height:200;">
+          <h:outputText value="Categories:"/>
+          <pg:multiSelect id="categoryFilter" columns="1" styleClass="selectManyCheckbox"
+              key="id" label="name" value="#{GlossaryBean.categoryFilter}"
+              universalSet="#{GlossaryBean.allCategories}" subSet="#{GlossaryBean.categories}"/>
+          <h:commandLink id="filterTerm" action="listTerm" value="Submit"/>
         </pg:filter>
         <pg:toolButton id="addTerm" action="#{GlossaryBean.addTerm}" value="Add" />
         <pg:toolButton id="delTerms" actionListener="#{GlossaryBean.delTerms}" confirm="Are you sure to delete terms?" value="Delete" />
@@ -38,10 +42,6 @@
       <pg:scroller id="scroller2" align="right" styleClass="myclass" infoType="row" showPageGo="true" showRowsOfPage="true"/>
     </f:facet>
 
-    <f:facet name="filter">
-      <!--pg:filter id="filter" /-->
-    </f:facet>
-
     <h:column>
       <f:facet name="header">
         <h:outputText value="Term Name"/>
@@ -54,14 +54,14 @@
       <f:facet name="header">
         <h:outputText value="Category"/>
       </f:facet>
-      <h:outputText value="#{term.categories}"/>
+      <h:outputText value="#{term.categoryList}"/>
     </h:column>
     
     <h:column>
       <f:facet name="header">
         <h:outputText value="Short Definition"/>
       </f:facet>
-      <h:outputText value="#{glossary.shortDefinition}"/>
+      <h:outputText value="#{term.shortDefinition}"/>
     </h:column>
     
     <h:column>

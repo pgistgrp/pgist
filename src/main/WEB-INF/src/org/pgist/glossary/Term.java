@@ -2,6 +2,7 @@ package org.pgist.glossary;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -181,7 +182,7 @@ public class Term {
 
     /**
      * @return
-     * @hibernate.set lazy="false" table="pgist_glossary_term_categ_link" cascade="none" order-by="category_id"
+     * @hibernate.set lazy="true" table="pgist_glossary_term_categ_link" cascade="none" order-by="category_id"
      * @hibernate.collection-key column="term_id"
      * @hibernate.collection-many-to-many column="category_id" class="org.pgist.glossary.TermCategory"
      */
@@ -192,6 +193,21 @@ public class Term {
 
     public void setCategories(Set categories) {
         this.categories = categories;
+    }
+    
+    
+    public String getCategoryList() {
+        StringBuffer sb = new StringBuffer();
+        
+        if (categories!=null) {
+            for (Iterator iter=categories.iterator(); iter.hasNext(); ) {
+                TermCategory category = (TermCategory) iter.next();
+                sb.append(category.getName());
+                if (iter.hasNext()) sb.append(", ");
+            }//for iter
+        }
+        
+        return sb.toString();
     }
     
     

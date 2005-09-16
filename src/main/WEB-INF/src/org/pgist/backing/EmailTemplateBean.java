@@ -1,6 +1,7 @@
 package org.pgist.backing;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.event.ActionEvent;
 
@@ -47,7 +48,7 @@ public class EmailTemplateBean extends ListTableBean {
      * List All Users.
      * @return
      */
-    public void listTemplate(ActionEvent event) {
+    public void listTemplate(ActionEvent event, Map map) {
         
         try {
             templates = EmailTemplateDAO.getTemplateList(pageSetting);

@@ -1,6 +1,7 @@
 package org.pgist.backing;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.event.ActionEvent;
 
@@ -37,7 +38,7 @@ public class RoleBean extends ListTableBean {
      * List All Roles.
      * @return
      */
-    public void listRole(ActionEvent event) {
+    public void listRole(ActionEvent event, Map map) {
         
         //pageSetting.set("nameFilter", nameFilter);
         try {

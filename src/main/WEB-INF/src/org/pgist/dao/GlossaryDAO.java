@@ -6,6 +6,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.pgist.exceptions.TermExistException;
 import org.pgist.glossary.Term;
+import org.pgist.glossary.TermCategory;
 import org.pgist.util.HibernateUtil;
 import org.pgist.util.JSFUtil;
 import org.pgist.util.PageSetting;
@@ -33,29 +34,37 @@ public class GlossaryDAO extends BaseDAO {
             HibernateUtil.begin();
             
             StringBuffer hql = new StringBuffer("from Term as term where term.deleted=:deleted");
-
-            String categoryFilter = setting.get("categoryFilter");
-            if (categoryFilter!=null) {
-                hql.append(" and category=:categoryFilter");
-            }
             
             String nameFilter = (String) setting.get("nameFilter");
             if (nameFilter!=null && !"".equals(nameFilter)) hql.append(" and name like :nameFilter");
+
+            String categoryFilter = (String) setting.get("categoryFilter");
+            if (categoryFilter==null || "".equals(categoryFilter)) {
+                hql.append(" and term.categories is empty");
+            } else {
+                hql.append(" and term.categories.id in (")
+                   .append(categoryFilter)
+                   .append(")");
+            }
             
-            Query query = session.createQuery("select count(id) "+hql.toString());
+            Query query = session.createQuery("select distinct count(term.id) "+hql.toString());
             query.setBoolean("deleted", false);
-            if (categoryFilter!=null) query.setString("categoryFilter", categoryFilter);
             if (nameFilter!=null && !"".equals(nameFilter)) query.setString("nameFilter", "%"+nameFilter+"%");
+            //if (categoryFilter!=null && !"".equals(categoryFilter)) {
+            //    query.setString("categoryFilter", categoryFilter);
+            //}
             list = query.list();
             
             if (list.size()>0) {
                 setting.setRowSize(((Integer)list.get(0)).intValue());
                 
                 hql.append(" order by term.id");
-                query = session.createQuery(hql.toString());
+                query = session.createQuery("select distinct term "+hql.toString());
                 query.setBoolean("deleted", false);
-                if (categoryFilter!=null) query.setString("categoryFilter", categoryFilter);
                 if (nameFilter!=null && !"".equals(nameFilter)) query.setString("nameFilter", "%"+nameFilter+"%");
+                //if (categoryFilter!=null && !"".equals(categoryFilter)) {
+                //    query.setString("categoryFilter", categoryFilter);
+                //}
                 query.setFirstResult(setting.getFirstRow());
                 query.setMaxResults(setting.getRowOfPage());
                 list = query.list();
@@ -77,9 +86,10 @@ public class GlossaryDAO extends BaseDAO {
     /**
      * Add a new term to glossary
      * @param term
+     * @param selectedCategories 
      * @throws Exception
      */
-    public static void addTerm(Term term) throws Exception {
+    public static void addTerm(Term term, String[] selectedCategories) throws Exception {
         try {
             Session session = HibernateUtil.getSession();
             HibernateUtil.begin();
@@ -93,6 +103,14 @@ public class GlossaryDAO extends BaseDAO {
             List list = query.list();
             if (list.size()>0) {
                 throw new TermExistException("Term already exists!");
+            }
+            
+            term.getCategories().clear();
+            if (selectedCategories!=null) {
+                for (int i=0; i<selectedCategories.length; i++) {
+                    TermCategory category = (TermCategory)session.load(TermCategory.class, new Long(selectedCategories[i]));
+                    term.getCategories().add(category);
+                }//for i
             }
             
             term.setOwner(JSFUtil.getCurrentUser());
@@ -112,9 +130,10 @@ public class GlossaryDAO extends BaseDAO {
     /**
      * Update the specified term
      * @param term
+     * @param selectedCategories 
      * @throws Exception
      */
-    public static void updateTerm(Term term) throws Exception {
+    public static void updateTerm(Term term, String[] selectedCategories) throws Exception {
         try {
             Session session = HibernateUtil.getSession();
             HibernateUtil.begin();
@@ -133,6 +152,14 @@ public class GlossaryDAO extends BaseDAO {
                 throw new TermExistException("Term already exists!");
             }
             
+            term.getCategories().clear();
+            if (selectedCategories!=null) {
+                for (int i=0; i<selectedCategories.length; i++) {
+                    TermCategory category = (TermCategory)session.load(TermCategory.class, new Long(selectedCategories[i]));
+                    term.getCategories().add(category);
+                }//for i
+            }
+
             session.update(term);
             
             HibernateUtil.commit();
@@ -169,6 +196,29 @@ public class GlossaryDAO extends BaseDAO {
             }
         }
     }//delTerms()
+
+
+    public static List getAllCategories() throws Exception {
+        List list = null;
+        
+        try {
+            Session session = HibernateUtil.getSession();
+            HibernateUtil.begin();
+            
+            Query query = session.createQuery("from TermCategory as category order by category.id");
+            list = query.list();
+            
+            HibernateUtil.commit();
+        } catch (Exception e) {
+            try {
+                HibernateUtil.rollback();
+            } catch(Exception ex) {
+            }
+            throw e;
+        }
+
+        return list;
+    }//getAllCategories()
 
 
 }//class GlossaryDAO

@@ -2,13 +2,14 @@ package org.pgist.backing;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.event.ActionEvent;
-import javax.faces.model.SelectItem;
 
 import org.pgist.dao.GlossaryDAO;
 import org.pgist.exceptions.TermExistException;
 import org.pgist.glossary.Term;
+import org.pgist.glossary.TermCategory;
 import org.pgist.util.JSFUtil;
 import org.pgist.util.ListTableBean;
 
@@ -24,9 +25,11 @@ public class GlossaryBean extends ListTableBean {
     
     private List terms = null;
     private Term term = null;
-    private String categoryFilter;
     private String category;
+    private String[] categoryFilter;
+    private String[] selectedCategories;
     private List categories = new ArrayList();
+    private List allCategories = new ArrayList();
     private List filterCategories = new ArrayList();
 
 
@@ -50,13 +53,28 @@ public class GlossaryBean extends ListTableBean {
     }
 
 
-    public String getCategoryFilter() {
+    public String[] getSelectedCategories() {
+        return selectedCategories;
+    }
+
+
+    public void setSelectedCategories(String[] selectedCategories) {
+        this.selectedCategories = selectedCategories;
+    }
+
+
+    public String[] getCategoryFilter() {
         return categoryFilter;
     }
 
 
-    public void setCategoryFilter(String filter) {
+    public void setCategoryFilter(String[] filter) {
         this.categoryFilter = filter;
+    }
+
+
+    public List getAllCategories() throws Exception {
+        return allCategories;
     }
 
 
@@ -94,21 +112,46 @@ public class GlossaryBean extends ListTableBean {
      * List All terms.
      * @return
      */
-    public void listTerm(ActionEvent event) {
+    public void listTerm(ActionEvent event, Map map) {
+        boolean postMode = "true".equals(map.get("postMode"));
         try {
-            if (categoryFilter!=null) {
-                categoryFilter = categoryFilter.trim();
-                if (!"".equals(categoryFilter)) {
-                    pageSetting.set("categoryFilter", categoryFilter);
+            allCategories = GlossaryDAO.getAllCategories();
+            categories.clear();
+            if (postMode) {//post
+                if (categoryFilter!=null) {
+                    if (categoryFilter.length>0) {
+                        StringBuffer buffer = new StringBuffer();
+                        for (int i=0; i<categoryFilter.length; i++) {
+                            if (i>0) buffer.append(',');
+                            buffer.append(categoryFilter[i]);
+                            for (int j=0, n=allCategories.size(); j<n; j++) {
+                                TermCategory one = (TermCategory) allCategories.get(j);
+                                if (categoryFilter[i].equals(one.getId())) {
+                                    categories.add(one);
+                                }
+                            }//for j
+                        }//for i
+                        pageSetting.set("categoryFilter", buffer.toString());
+                    } else {
+                        pageSetting.set("categoryFilter", null);
+                    }
                 } else {
                     pageSetting.set("categoryFilter", null);
                 }
+            } else {//get
+                StringBuffer buffer = new StringBuffer();
+                for (int i=0, n=allCategories.size(); i<n; i++) {
+                    TermCategory one = (TermCategory) allCategories.get(i);
+                    if (i>0) buffer.append(',');
+                    buffer.append(one.getId());
+                }//for i
+                pageSetting.set("categoryFilter", buffer.toString());
+                categories.addAll(allCategories);
             }
             terms = GlossaryDAO.getTermList(pageSetting);
         } catch(Exception e) {
             e.printStackTrace();
         }
-        
     }//listTerm()
 
 
@@ -150,9 +193,9 @@ public class GlossaryBean extends ListTableBean {
         
         try {
             if (term.getId()==null) {//new term
-                GlossaryDAO.addTerm(term);
+                GlossaryDAO.addTerm(term, selectedCategories);
             } else {//update term
-                GlossaryDAO.updateTerm(term);
+                GlossaryDAO.updateTerm(term, selectedCategories);
             }
             return "success";
         } catch(TermExistException tee) {
@@ -168,29 +211,6 @@ public class GlossaryBean extends ListTableBean {
     public void delTerms(ActionEvent event) {
         GlossaryDAO.delTerms(selectedIds(Term.class, "id"));
     }//delTerms()
-
-
-    public void setCategoryList(String _categories) {
-        SelectItem item;
-        if (_categories!=null) {
-            String[] pairs = _categories.split(",");
-            for (int i=0; i<pairs.length; i++) {
-                String pair = pairs[i];
-                if (pair!=null) pair = pair.trim();
-                if (!"".equals(pair)) {
-                    int index = pair.indexOf(':');
-                    if (index>1 && index<pair.length()-1) {
-                        item = new SelectItem(pair.substring(0, index), pair.substring(index+1));
-                        filterCategories.add(item);
-                    }
-                }
-            }//for i
-        }
-
-        item = new SelectItem("", "All");
-        categories.add(item);
-        categories.addAll(filterCategories);
-    }
 
 
 }//class GlossaryBean
