@@ -32,6 +32,7 @@
     <h:inputTextarea id="extDefinition" rows="10" cols="50" value="#{GlossaryBean.term.extDefinition}" required="true"/>
       <h:message for="extDefinition"/>
     <h:outputLabel value="Sources of Definition: " />
+    <pg:multiInput id="source" value="#{GlossaryBean.sources}" initValue="#{GlossaryBean.term.sources}"/>
   </h:panelGrid>
 
   <h:commandButton value="Commit" action="#{GlossaryBean.saveTerm}" type="submit"/>

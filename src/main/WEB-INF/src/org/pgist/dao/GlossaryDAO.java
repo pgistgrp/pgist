@@ -1,5 +1,6 @@
 package org.pgist.dao;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -7,6 +8,7 @@ import org.hibernate.Session;
 import org.pgist.exceptions.TermExistException;
 import org.pgist.glossary.Term;
 import org.pgist.glossary.TermCategory;
+import org.pgist.glossary.TermSource;
 import org.pgist.util.HibernateUtil;
 import org.pgist.util.JSFUtil;
 import org.pgist.util.PageSetting;
@@ -89,7 +91,7 @@ public class GlossaryDAO extends BaseDAO {
      * @param selectedCategories 
      * @throws Exception
      */
-    public static void addTerm(Term term, String[] selectedCategories) throws Exception {
+    public static void addTerm(Term term, String[] selectedCategories, String[] sources) throws Exception {
         try {
             Session session = HibernateUtil.getSession();
             HibernateUtil.begin();
@@ -113,6 +115,18 @@ public class GlossaryDAO extends BaseDAO {
                 }//for i
             }
             
+            for (int i=0; i<sources.length; i++) {
+                if (sources[i]!=null) {
+                    sources[i] = sources[i].trim();
+                    if (!"".equals(sources[i])) {
+                        TermSource one = new TermSource();
+                        one.setSource(sources[i]);
+                        session.save(one);
+                        term.getSources().add(one);
+                    }
+                }
+            }//for i
+
             term.setOwner(JSFUtil.getCurrentUser());
             session.save(term);
 
@@ -133,7 +147,7 @@ public class GlossaryDAO extends BaseDAO {
      * @param selectedCategories 
      * @throws Exception
      */
-    public static void updateTerm(Term term, String[] selectedCategories) throws Exception {
+    public static void updateTerm(Term term, String[] selectedCategories, String[] sources) throws Exception {
         try {
             Session session = HibernateUtil.getSession();
             HibernateUtil.begin();
@@ -159,6 +173,22 @@ public class GlossaryDAO extends BaseDAO {
                     term.getCategories().add(category);
                 }//for i
             }
+            
+            for (Iterator iter=term.getSources().iterator(); iter.hasNext(); ) {
+                session.delete(iter.next());
+            }//for iter
+            term.getSources().clear();
+            for (int i=0; i<sources.length; i++) {
+                if (sources[i]!=null) {
+                    sources[i] = sources[i].trim();
+                    if (!"".equals(sources[i])) {
+                        TermSource one = new TermSource();
+                        one.setSource(sources[i]);
+                        session.save(one);
+                        term.getSources().add(one);
+                    }
+                }
+            }//for i
 
             session.update(term);
             

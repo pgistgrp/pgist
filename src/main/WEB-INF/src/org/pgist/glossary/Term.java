@@ -123,7 +123,7 @@ public class Term {
 
     /**
      * @return
-     * @hibernate.list table="pgist_glossary_term_source_link" lazy="true" cascade="none" order-by="name"
+     * @hibernate.list table="pgist_glossary_term_source_link" lazy="false" cascade="none" order-by="name"
      * @hibernate.collection-key column="term_id"
      * @hibernate.collection-index column="indexes"
      * @hibernate.collection-many-to-many column="source_id" class="org.pgist.glossary.TermSource"

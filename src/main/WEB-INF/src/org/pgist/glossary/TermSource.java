@@ -42,4 +42,9 @@ public class TermSource {
     }
 
 
+    public String toString() {
+        return source;
+    }
+    
+    
 }//class TermSource

@@ -42,4 +42,9 @@ public class TermLink {
     }
 
 
+    public String toString() {
+        return link;
+    }
+
+
 }//class TermLink

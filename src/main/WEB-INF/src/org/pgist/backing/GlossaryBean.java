@@ -28,6 +28,7 @@ public class GlossaryBean extends ListTableBean {
     private String category;
     private String[] categoryFilter;
     private String[] selectedCategories;
+    private String[] sources;
     private List categories = new ArrayList();
     private List allCategories = new ArrayList();
     private List filterCategories = new ArrayList();
@@ -60,6 +61,16 @@ public class GlossaryBean extends ListTableBean {
 
     public void setSelectedCategories(String[] selectedCategories) {
         this.selectedCategories = selectedCategories;
+    }
+
+
+    public String[] getSources() {
+        return sources;
+    }
+
+
+    public void setSources(String[] sources) {
+        this.sources = sources;
     }
 
 
@@ -193,9 +204,9 @@ public class GlossaryBean extends ListTableBean {
         
         try {
             if (term.getId()==null) {//new term
-                GlossaryDAO.addTerm(term, selectedCategories);
+                GlossaryDAO.addTerm(term, selectedCategories, sources);
             } else {//update term
-                GlossaryDAO.updateTerm(term, selectedCategories);
+                GlossaryDAO.updateTerm(term, selectedCategories, sources);
             }
             return "success";
         } catch(TermExistException tee) {
