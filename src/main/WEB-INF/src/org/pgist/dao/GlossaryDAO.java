@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.pgist.exceptions.TermExistException;
 import org.pgist.glossary.Term;
 import org.pgist.glossary.TermCategory;
+import org.pgist.glossary.TermLink;
 import org.pgist.glossary.TermSource;
 import org.pgist.util.HibernateUtil;
 import org.pgist.util.JSFUtil;
@@ -91,7 +92,7 @@ public class GlossaryDAO extends BaseDAO {
      * @param selectedCategories 
      * @throws Exception
      */
-    public static void addTerm(Term term, String[] selectedCategories, String[] sources) throws Exception {
+    public static void addTerm(Term term, String[] selectedCategories, String[] sources, String[] links, String[] relatedTerms) throws Exception {
         try {
             Session session = HibernateUtil.getSession();
             HibernateUtil.begin();
@@ -127,6 +128,18 @@ public class GlossaryDAO extends BaseDAO {
                 }
             }//for i
 
+            for (int i=0; i<links.length; i++) {
+                if (links[i]!=null) {
+                    links[i] = links[i].trim();
+                    if (!"".equals(links[i])) {
+                        TermLink one = new TermLink();
+                        one.setLink(links[i]);
+                        session.save(one);
+                        term.getLinks().add(one);
+                    }
+                }
+            }//for i
+
             term.setOwner(JSFUtil.getCurrentUser());
             session.save(term);
 
@@ -147,7 +160,7 @@ public class GlossaryDAO extends BaseDAO {
      * @param selectedCategories 
      * @throws Exception
      */
-    public static void updateTerm(Term term, String[] selectedCategories, String[] sources) throws Exception {
+    public static void updateTerm(Term term, String[] selectedCategories, String[] sources, String[] links, String[] relatedTerms) throws Exception {
         try {
             Session session = HibernateUtil.getSession();
             HibernateUtil.begin();
@@ -186,6 +199,34 @@ public class GlossaryDAO extends BaseDAO {
                         one.setSource(sources[i]);
                         session.save(one);
                         term.getSources().add(one);
+                    }
+                }
+            }//for i
+
+            for (Iterator iter=term.getLinks().iterator(); iter.hasNext(); ) {
+                session.delete(iter.next());
+            }//for iter
+            term.getLinks().clear();
+            for (int i=0; i<links.length; i++) {
+                if (links[i]!=null) {
+                    links[i] = links[i].trim();
+                    if (!"".equals(links[i])) {
+                        TermLink one = new TermLink();
+                        one.setLink(links[i]);
+                        session.save(one);
+                        term.getLinks().add(one);
+                    }
+                }
+            }//for i
+
+            term.getRelatedTerms().clear();
+            for (int i=0; i<relatedTerms.length; i++) {
+                if (relatedTerms[i]!=null) {
+                    relatedTerms[i] = relatedTerms[i].trim();
+                    if (!"".equals(relatedTerms[i])) {
+                        //TODO
+                        Term one = new Term();
+                        term.getRelatedTerms().add(one);
                     }
                 }
             }//for i

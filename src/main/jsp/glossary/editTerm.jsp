@@ -33,6 +33,13 @@
       <h:message for="extDefinition"/>
     <h:outputLabel value="Sources of Definition: " />
     <pg:multiInput id="source" value="#{GlossaryBean.sources}" initValue="#{GlossaryBean.term.sources}"/>
+      <h:message for="source"/>
+    <h:outputLabel value="Realted Terms: " />
+    <pg:multiInput id="relatedTerm" value="#{GlossaryBean.relatedTerms}" initValue="#{GlossaryBean.term.relatedTerms}"/>
+      <h:message for="relatedTerm"/>
+    <h:outputLabel value="Links: " />
+    <pg:multiInput id="link" value="#{GlossaryBean.links}" initValue="#{GlossaryBean.term.links}"/>
+      <h:message for="link"/>
   </h:panelGrid>
 
   <h:commandButton value="Commit" action="#{GlossaryBean.saveTerm}" type="submit"/>
