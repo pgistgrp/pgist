@@ -1,5 +1,8 @@
 
-PGIST-TreeMap
+The person name in () means the one who want the TODO functions.
+
+
+PGIST-TreeMap (Michael)
 
 [] Client Side: limit cell content to be <= 256 characters. 
 [] Server Side: limit cell content to be <= 256 characters. 
@@ -17,7 +20,7 @@ PGIST-TreeMap
 
 
 
-Universal Voting
+Universal Voting (Guirong)
 
 [] 
 []
@@ -34,7 +37,7 @@ Universal Voting
 
 
 
-Gloassary Management
+Gloassary Management (Adam)
 
 [OK] Integrate DWR Ajax to pgist
 [] Use Ajax to relate one glossary term to many other terms
