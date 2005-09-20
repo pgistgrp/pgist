@@ -5,7 +5,20 @@
 <html>
 <head>
 <title>Edit Term</title>
-<link rel=stylesheet href='<%= request.getContextPath() +"/styles/default.css"%>' type="text/css" media=all>
+<link rel=stylesheet href='<%= request.getContextPath()%>/styles/default.css' type="text/css" media=all>
+<script type='text/javascript' src='<%= request.getContextPath()%>/dwr/interface/AjaxGlossary.js'></script>
+<script type='text/javascript' src='<%= request.getContextPath()%>/dwr/engine.js'></script>
+<script type='text/javascript' src='<%= request.getContextPath()%>/dwr/util.js'></script>
+<script type='text/javascript'>
+  var reply0 = function(data) {
+    //if (data != null && typeof data == 'object') alert(DWRUtil.toDescriptiveString(data, 2));
+    //else DWRUtil.setValue('d0', DWRUtil.toDescriptiveString(data, 1));
+    for (var i=0; i<data.length; i++) {
+      var one = data[i];
+      alert(one['id']+' --> '+one['name']);
+    }//for i
+  }
+</script>
 </head>
 
 <body>
@@ -42,6 +55,7 @@
       <h:message for="link"/>
   </h:panelGrid>
 
+  <input class='ibutton' type='button' onclick='AjaxGlossary.getTermList(reply0, 2);' value='Execute'  title='Calls AjaxGlossary.getTermList(). View source for details.'/>
   <h:commandButton value="Commit" action="#{GlossaryBean.saveTerm}" type="submit"/>
   
 </h:form>

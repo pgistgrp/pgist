@@ -44,6 +44,7 @@ public class GlossaryDAO extends BaseDAO {
             String categoryFilter = (String) setting.get("categoryFilter");
             if (categoryFilter==null || "".equals(categoryFilter)) {
                 hql.append(" and term.categories is empty");
+            } else if ("all".equals(categoryFilter)) {
             } else {
                 hql.append(" and term.categories.id in (")
                    .append(categoryFilter)
@@ -116,29 +117,33 @@ public class GlossaryDAO extends BaseDAO {
                 }//for i
             }
             
-            for (int i=0; i<sources.length; i++) {
-                if (sources[i]!=null) {
-                    sources[i] = sources[i].trim();
-                    if (!"".equals(sources[i])) {
-                        TermSource one = new TermSource();
-                        one.setSource(sources[i]);
-                        session.save(one);
-                        term.getSources().add(one);
+            if (sources!=null) {
+                for (int i=0; i<sources.length; i++) {
+                    if (sources[i]!=null) {
+                        sources[i] = sources[i].trim();
+                        if (!"".equals(sources[i])) {
+                            TermSource one = new TermSource();
+                            one.setSource(sources[i]);
+                            session.save(one);
+                            term.getSources().add(one);
+                        }
                     }
-                }
-            }//for i
+                }//for i
+            }
 
-            for (int i=0; i<links.length; i++) {
-                if (links[i]!=null) {
-                    links[i] = links[i].trim();
-                    if (!"".equals(links[i])) {
-                        TermLink one = new TermLink();
-                        one.setLink(links[i]);
-                        session.save(one);
-                        term.getLinks().add(one);
+            if (links!=null) {
+                for (int i=0; i<links.length; i++) {
+                    if (links[i]!=null) {
+                        links[i] = links[i].trim();
+                        if (!"".equals(links[i])) {
+                            TermLink one = new TermLink();
+                            one.setLink(links[i]);
+                            session.save(one);
+                            term.getLinks().add(one);
+                        }
                     }
-                }
-            }//for i
+                }//for i
+            }
 
             term.setOwner(JSFUtil.getCurrentUser());
             session.save(term);
@@ -165,8 +170,6 @@ public class GlossaryDAO extends BaseDAO {
             Session session = HibernateUtil.getSession();
             HibernateUtil.begin();
             
-            //UserDAO.refresh(user);
-
             StringBuffer hql = new StringBuffer("from Term where name=:name and deleted=:deleted and id!=:id");
             
             Query query = session.createQuery(hql.toString());
@@ -191,45 +194,51 @@ public class GlossaryDAO extends BaseDAO {
                 session.delete(iter.next());
             }//for iter
             term.getSources().clear();
-            for (int i=0; i<sources.length; i++) {
-                if (sources[i]!=null) {
-                    sources[i] = sources[i].trim();
-                    if (!"".equals(sources[i])) {
-                        TermSource one = new TermSource();
-                        one.setSource(sources[i]);
-                        session.save(one);
-                        term.getSources().add(one);
+            if (sources!=null) {
+                for (int i=0; i<sources.length; i++) {
+                    if (sources[i]!=null) {
+                        sources[i] = sources[i].trim();
+                        if (!"".equals(sources[i])) {
+                            TermSource one = new TermSource();
+                            one.setSource(sources[i]);
+                            session.save(one);
+                            term.getSources().add(one);
+                        }
                     }
-                }
-            }//for i
+                }//for i
+            }
 
             for (Iterator iter=term.getLinks().iterator(); iter.hasNext(); ) {
                 session.delete(iter.next());
             }//for iter
             term.getLinks().clear();
-            for (int i=0; i<links.length; i++) {
-                if (links[i]!=null) {
-                    links[i] = links[i].trim();
-                    if (!"".equals(links[i])) {
-                        TermLink one = new TermLink();
-                        one.setLink(links[i]);
-                        session.save(one);
-                        term.getLinks().add(one);
+            if (links!=null) {
+                for (int i=0; i<links.length; i++) {
+                    if (links[i]!=null) {
+                        links[i] = links[i].trim();
+                        if (!"".equals(links[i])) {
+                            TermLink one = new TermLink();
+                            one.setLink(links[i]);
+                            session.save(one);
+                            term.getLinks().add(one);
+                        }
                     }
-                }
-            }//for i
+                }//for i
+            }
 
             term.getRelatedTerms().clear();
-            for (int i=0; i<relatedTerms.length; i++) {
-                if (relatedTerms[i]!=null) {
-                    relatedTerms[i] = relatedTerms[i].trim();
-                    if (!"".equals(relatedTerms[i])) {
-                        //TODO
-                        Term one = new Term();
-                        term.getRelatedTerms().add(one);
+            if (relatedTerms!=null) {
+                for (int i=0; i<relatedTerms.length; i++) {
+                    if (relatedTerms[i]!=null) {
+                        relatedTerms[i] = relatedTerms[i].trim();
+                        if (!"".equals(relatedTerms[i])) {
+                            //TODO
+                            Term one = new Term();
+                            term.getRelatedTerms().add(one);
+                        }
                     }
-                }
-            }//for i
+                }//for i
+            }
 
             session.update(term);
             
