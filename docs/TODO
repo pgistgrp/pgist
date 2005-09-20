@@ -1,0 +1,54 @@
+
+PGIST-TreeMap
+
+[] Client Side: limit cell content to be <= 256 characters. 
+[] Server Side: limit cell content to be <= 256 characters. 
+[] User can upload/download image
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+
+
+
+Universal Voting
+
+[] 
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+
+
+
+Gloassary Management
+
+[OK] Integrate DWR Ajax to pgist
+[] Use Ajax to relate one glossary term to many other terms
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+
+
+
+
