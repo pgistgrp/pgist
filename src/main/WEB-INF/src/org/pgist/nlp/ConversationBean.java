@@ -2,6 +2,7 @@ package org.pgist.nlp;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -48,7 +49,7 @@ public class ConversationBean extends ListTableBean {
      * List All Users.
      * @return
      */
-    public void listConversation(ActionEvent event) {
+    public void listConversation(ActionEvent event, Map map) {
         
         try {
             conversations = ConversationDAO.getConversationList(pageSetting);
