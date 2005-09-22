@@ -6,12 +6,12 @@ PGIST-TreeMap (Michael)
 
 [] Client Side: limit cell content to be <= 256 characters. 
 [] Server Side: limit cell content to be <= 256 characters. 
+[] split node table to multiple tables
+[] Mutual exclusive: upload/text input box
 [] User can upload/download image
-[]
-[]
-[]
-[]
-[]
+[] Click on conbar, toggle the display of slate
+[] filter the tree display
+[] trumbnails: 128, 64, 32, 16, 8
 []
 []
 []
