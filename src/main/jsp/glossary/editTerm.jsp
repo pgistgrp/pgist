@@ -7,18 +7,9 @@
 <title>Edit Term</title>
 <link rel=stylesheet href='<%= request.getContextPath()%>/styles/default.css' type="text/css" media=all>
 <script type='text/javascript' src='<%= request.getContextPath()%>/dwr/interface/AjaxGlossary.js'></script>
+<script type='text/javascript' src='<%= request.getContextPath()%>/scripts/pgist-util.js'></script>
 <script type='text/javascript' src='<%= request.getContextPath()%>/dwr/engine.js'></script>
 <script type='text/javascript' src='<%= request.getContextPath()%>/dwr/util.js'></script>
-<script type='text/javascript'>
-  var reply0 = function(data) {
-    //if (data != null && typeof data == 'object') alert(DWRUtil.toDescriptiveString(data, 2));
-    //else DWRUtil.setValue('d0', DWRUtil.toDescriptiveString(data, 1));
-    for (var i=0; i<data.length; i++) {
-      var one = data[i];
-      alert(one['id']+' --> '+one['name']);
-    }//for i
-  }
-</script>
 </head>
 
 <body>
@@ -44,18 +35,18 @@
     <h:outputLabel value="Extended Definition: " for="extDefinition"/>
     <h:inputTextarea id="extDefinition" rows="10" cols="50" value="#{GlossaryBean.term.extDefinition}" required="true"/>
       <h:message for="extDefinition"/>
-    <h:outputLabel value="Sources of Definition: " />
+    <h:outputLabel value="Sources of Definition: "/>
     <pg:multiInput id="source" value="#{GlossaryBean.sources}" initValue="#{GlossaryBean.term.sources}"/>
       <h:message for="source"/>
-    <h:outputLabel value="Realted Terms: " />
-    <pg:multiInput id="relatedTerm" value="#{GlossaryBean.relatedTerms}" initValue="#{GlossaryBean.term.relatedTerms}"/>
-      <h:message for="relatedTerm"/>
-    <h:outputLabel value="Links: " />
+    <h:outputLabel value="Realted Terms: "/>
+    <pg:ajaxSelect id="relatedTerms" value="#{GlossaryBean.relatedTerms}" ajax="AjaxGlossary.getTermList"
+      initValue="#{GlossaryBean.term.relatedTerms}" key="id" label="name"/>
+      <h:message for="relatedTerms"/>
+    <h:outputLabel value="Links: "/>
     <pg:multiInput id="link" value="#{GlossaryBean.links}" initValue="#{GlossaryBean.term.links}"/>
       <h:message for="link"/>
   </h:panelGrid>
 
-  <input class='ibutton' type='button' onclick='AjaxGlossary.getTermList(reply0, 2);' value='Execute'  title='Calls AjaxGlossary.getTermList(). View source for details.'/>
   <h:commandButton value="Commit" action="#{GlossaryBean.saveTerm}" type="submit"/>
   
 </h:form>

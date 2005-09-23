@@ -53,7 +53,7 @@ public class GlossaryDAO extends BaseDAO {
             
             Query query = session.createQuery("select distinct count(term.id) "+hql.toString());
             query.setBoolean("deleted", false);
-            if (nameFilter!=null && !"".equals(nameFilter)) query.setString("nameFilter", "%"+nameFilter+"%");
+            if (nameFilter!=null && !"".equals(nameFilter)) query.setString("nameFilter", nameFilter);
             //if (categoryFilter!=null && !"".equals(categoryFilter)) {
             //    query.setString("categoryFilter", categoryFilter);
             //}
@@ -62,10 +62,10 @@ public class GlossaryDAO extends BaseDAO {
             if (list.size()>0) {
                 setting.setRowSize(((Integer)list.get(0)).intValue());
                 
-                hql.append(" order by term.id");
+                hql.append(" order by term.name");
                 query = session.createQuery("select distinct term "+hql.toString());
                 query.setBoolean("deleted", false);
-                if (nameFilter!=null && !"".equals(nameFilter)) query.setString("nameFilter", "%"+nameFilter+"%");
+                if (nameFilter!=null && !"".equals(nameFilter)) query.setString("nameFilter", nameFilter);
                 //if (categoryFilter!=null && !"".equals(categoryFilter)) {
                 //    query.setString("categoryFilter", categoryFilter);
                 //}
@@ -95,6 +95,52 @@ public class GlossaryDAO extends BaseDAO {
      */
     public static void addTerm(Term term, String[] selectedCategories, String[] sources, String[] links, String[] relatedTerms) throws Exception {
         try {
+            if (sources!=null) {
+                for (int i=0; i<sources.length; i++) {
+                    if (sources[i]!=null) {
+                        sources[i] = sources[i].trim();
+                        if (!"".equals(sources[i])) {
+                            TermSource one = new TermSource();
+                            one.setSource(sources[i]);
+                            term.getSources().add(one);
+                        }
+                    }
+                }//for i
+            }
+
+            if (links!=null) {
+                for (int i=0; i<links.length; i++) {
+                    if (links[i]!=null) {
+                        links[i] = links[i].trim();
+                        if (!"".equals(links[i])) {
+                            TermLink one = new TermLink();
+                            one.setLink(links[i]);
+                            term.getLinks().add(one);
+                        }
+                    }
+                }//for i
+            }
+
+            if (relatedTerms!=null) {
+                for (int i=0; i<relatedTerms.length; i++) {
+                    if (relatedTerms[i]!=null) {
+                        relatedTerms[i] = relatedTerms[i].trim();
+                        if (!"".equals(relatedTerms[i])) {
+                            Term one = (Term) load(Term.class, new Long(relatedTerms[i]));
+                            term.getRelatedTerms().add(one);
+                        }
+                    }
+                }//for i
+            }
+            
+            term.getCategories().clear();
+            if (selectedCategories!=null) {
+                for (int i=0; i<selectedCategories.length; i++) {
+                    TermCategory category = (TermCategory)load(TermCategory.class, new Long(selectedCategories[i]));
+                    term.getCategories().add(category);
+                }//for i
+            }
+            
             Session session = HibernateUtil.getSession();
             HibernateUtil.begin();
             
@@ -109,41 +155,14 @@ public class GlossaryDAO extends BaseDAO {
                 throw new TermExistException("Term already exists!");
             }
             
-            term.getCategories().clear();
-            if (selectedCategories!=null) {
-                for (int i=0; i<selectedCategories.length; i++) {
-                    TermCategory category = (TermCategory)session.load(TermCategory.class, new Long(selectedCategories[i]));
-                    term.getCategories().add(category);
-                }//for i
-            }
-            
-            if (sources!=null) {
-                for (int i=0; i<sources.length; i++) {
-                    if (sources[i]!=null) {
-                        sources[i] = sources[i].trim();
-                        if (!"".equals(sources[i])) {
-                            TermSource one = new TermSource();
-                            one.setSource(sources[i]);
-                            session.save(one);
-                            term.getSources().add(one);
-                        }
-                    }
-                }//for i
-            }
-
-            if (links!=null) {
-                for (int i=0; i<links.length; i++) {
-                    if (links[i]!=null) {
-                        links[i] = links[i].trim();
-                        if (!"".equals(links[i])) {
-                            TermLink one = new TermLink();
-                            one.setLink(links[i]);
-                            session.save(one);
-                            term.getLinks().add(one);
-                        }
-                    }
-                }//for i
-            }
+            for (Iterator iter=term.getLinks().iterator(); iter.hasNext(); ) {
+                TermLink one = (TermLink) iter.next();
+                session.saveOrUpdate(one);
+            }//for iter
+            for (Iterator iter=term.getSources().iterator(); iter.hasNext(); ) {
+                TermSource one = (TermSource) iter.next();
+                session.saveOrUpdate(one);
+            }//for iter
 
             term.setOwner(JSFUtil.getCurrentUser());
             session.save(term);
@@ -167,6 +186,57 @@ public class GlossaryDAO extends BaseDAO {
      */
     public static void updateTerm(Term term, String[] selectedCategories, String[] sources, String[] links, String[] relatedTerms) throws Exception {
         try {
+            term.getSources().clear();
+            if (sources!=null) {
+                for (int i=0; i<sources.length; i++) {
+                    if (sources[i]!=null) {
+                        sources[i] = sources[i].trim();
+                        if (!"".equals(sources[i])) {
+                            TermSource one = new TermSource();
+                            one.setSource(sources[i]);
+                            term.getSources().add(one);
+                        }
+                    }
+                }//for i
+            }
+
+            term.getLinks().clear();
+            if (links!=null) {
+                for (int i=0; i<links.length; i++) {
+                    if (links[i]!=null) {
+                        links[i] = links[i].trim();
+                        if (!"".equals(links[i])) {
+                            TermLink one = new TermLink();
+                            one.setLink(links[i]);
+                            term.getLinks().add(one);
+                        }
+                    }
+                }//for i
+            }
+
+            term.getRelatedTerms().clear();
+            if (relatedTerms!=null) {
+                for (int i=0; i<relatedTerms.length; i++) {
+                    if (relatedTerms[i]!=null) {
+                        relatedTerms[i] = relatedTerms[i].trim();
+                        if (!"".equals(relatedTerms[i])) {
+                            Term one = (Term) load(Term.class, new Long(relatedTerms[i]));
+                            //one term should not relate itself.
+                            if (one.getId().longValue()==term.getId().longValue()) continue;
+                            term.getRelatedTerms().add(one);
+                        }
+                    }
+                }//for i
+            }
+
+            term.getCategories().clear();
+            if (selectedCategories!=null) {
+                for (int i=0; i<selectedCategories.length; i++) {
+                    TermCategory category = (TermCategory)load(TermCategory.class, new Long(selectedCategories[i]));
+                    term.getCategories().add(category);
+                }//for i
+            }
+            
             Session session = HibernateUtil.getSession();
             HibernateUtil.begin();
             
@@ -182,65 +252,16 @@ public class GlossaryDAO extends BaseDAO {
                 throw new TermExistException("Term already exists!");
             }
             
-            term.getCategories().clear();
-            if (selectedCategories!=null) {
-                for (int i=0; i<selectedCategories.length; i++) {
-                    TermCategory category = (TermCategory)session.load(TermCategory.class, new Long(selectedCategories[i]));
-                    term.getCategories().add(category);
-                }//for i
-            }
-            
-            for (Iterator iter=term.getSources().iterator(); iter.hasNext(); ) {
-                session.delete(iter.next());
-            }//for iter
-            term.getSources().clear();
-            if (sources!=null) {
-                for (int i=0; i<sources.length; i++) {
-                    if (sources[i]!=null) {
-                        sources[i] = sources[i].trim();
-                        if (!"".equals(sources[i])) {
-                            TermSource one = new TermSource();
-                            one.setSource(sources[i]);
-                            session.save(one);
-                            term.getSources().add(one);
-                        }
-                    }
-                }//for i
-            }
-
             for (Iterator iter=term.getLinks().iterator(); iter.hasNext(); ) {
-                session.delete(iter.next());
+                TermLink one = (TermLink) iter.next();
+                session.saveOrUpdate(one);
             }//for iter
-            term.getLinks().clear();
-            if (links!=null) {
-                for (int i=0; i<links.length; i++) {
-                    if (links[i]!=null) {
-                        links[i] = links[i].trim();
-                        if (!"".equals(links[i])) {
-                            TermLink one = new TermLink();
-                            one.setLink(links[i]);
-                            session.save(one);
-                            term.getLinks().add(one);
-                        }
-                    }
-                }//for i
-            }
+            for (Iterator iter=term.getSources().iterator(); iter.hasNext(); ) {
+                TermSource one = (TermSource) iter.next();
+                session.saveOrUpdate(one);
+            }//for iter
 
-            term.getRelatedTerms().clear();
-            if (relatedTerms!=null) {
-                for (int i=0; i<relatedTerms.length; i++) {
-                    if (relatedTerms[i]!=null) {
-                        relatedTerms[i] = relatedTerms[i].trim();
-                        if (!"".equals(relatedTerms[i])) {
-                            //TODO
-                            Term one = new Term();
-                            term.getRelatedTerms().add(one);
-                        }
-                    }
-                }//for i
-            }
-
-            session.update(term);
+            session.saveOrUpdate(term);
             
             HibernateUtil.commit();
         } catch (Exception e) {

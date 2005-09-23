@@ -5,7 +5,11 @@
 <html>
 <head>
 <title>Add New Term</title>
-<link rel=stylesheet href='<%= request.getContextPath() +"/styles/default.css"%>' type="text/css" media=all>
+<link rel=stylesheet href='<%= request.getContextPath()%>/styles/default.css' type="text/css" media=all>
+<script type='text/javascript' src='<%= request.getContextPath()%>/dwr/interface/AjaxGlossary.js'></script>
+<script type='text/javascript' src='<%= request.getContextPath()%>/scripts/pgist-util.js'></script>
+<script type='text/javascript' src='<%= request.getContextPath()%>/dwr/engine.js'></script>
+<script type='text/javascript' src='<%= request.getContextPath()%>/dwr/util.js'></script>
 </head>
 
 <body>
@@ -29,6 +33,16 @@
     <h:outputLabel value="Extended Definition: " for="extDefinition"/>
     <h:inputTextarea id="extDefinition" rows="10" cols="50" value="#{GlossaryBean.term.extDefinition}" required="true"/>
       <h:message for="extDefinition"/>
+    <h:outputLabel value="Sources of Definition: "/>
+    <pg:multiInput id="source" value="#{GlossaryBean.sources}" initValue="#{GlossaryBean.term.sources}"/>
+      <h:message for="source"/>
+    <h:outputLabel value="Realted Terms: "/>
+    <pg:ajaxSelect id="relatedTerms" value="#{GlossaryBean.relatedTerms}" ajax="AjaxGlossary.getTermList"
+      initValue="#{GlossaryBean.term.relatedTerms}" key="id" label="name"/>
+      <h:message for="relatedTerms"/>
+    <h:outputLabel value="Links: "/>
+    <pg:multiInput id="link" value="#{GlossaryBean.links}" initValue="#{GlossaryBean.term.links}"/>
+      <h:message for="link"/>
   </h:panelGrid>
 
   <h:commandButton value="Commit" action="#{GlossaryBean.saveTerm}" type="submit"/>
