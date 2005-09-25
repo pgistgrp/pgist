@@ -28,7 +28,7 @@
         universalSet="#{GlossaryBean.allCategories}" subSet="#{GlossaryBean.term.categories}"/>
       <h:message for="category"/>
     <h:outputLabel value="Short Definition: " for="shortDefinition"/>
-    <h:inputTextarea id="shortDefinition" rows="2" cols="50" value="#{GlossaryBean.term.shortDefinition}" required="true"/>
+    <h:inputTextarea id="shortDefinition" rows="2" cols="50" value="#{GlossaryBean.term.shortDefinition}"/>
       <h:message for="shortDefinition"/>
     <h:outputLabel value="Extended Definition: " for="extDefinition"/>
     <h:inputTextarea id="extDefinition" rows="10" cols="50" value="#{GlossaryBean.term.extDefinition}" required="true"/>

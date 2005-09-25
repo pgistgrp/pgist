@@ -51,7 +51,7 @@ public class GlossaryDAO extends BaseDAO {
                    .append(")");
             }
             
-            Query query = session.createQuery("select distinct count(term.id) "+hql.toString());
+            Query query = session.createQuery("select count(distinct term.id) "+hql.toString());
             query.setBoolean("deleted", false);
             if (nameFilter!=null && !"".equals(nameFilter)) query.setString("nameFilter", nameFilter);
             //if (categoryFilter!=null && !"".equals(categoryFilter)) {

@@ -1,7 +1,6 @@
 package org.pgist.tests;
 
 import java.io.File;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,11 +16,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.util.ArrayHelper;
 import org.pgist.emails.EmailTemplate;
-import org.pgist.glossary.Term;
-import org.pgist.glossary.TermLink;
-import org.pgist.glossary.TermSource;
-import org.pgist.nlp.ConversationThread;
-import org.pgist.nlp.Post;
+import org.pgist.glossary.TermCategory;
 import org.pgist.users.Role;
 import org.pgist.users.User;
 
@@ -168,6 +163,7 @@ public class SystemInit extends MatchingTask {
                 }//for i
                 
                 //test nlp
+                /*
                 ConversationThread thread = new ConversationThread();
                 thread.setEnabled(true);
                 thread.setDeleted(false);
@@ -176,7 +172,10 @@ public class SystemInit extends MatchingTask {
                 post.setTitle("This is A");
                 post.setOwner(admin);
                 post.setParent(null);
-                post.setContent("content of A");
+                TextContent content = new TextContent();
+                content.setContent("content of A");
+                session.saveOrUpdate(content);
+                post.setContent(content);
                 post.setTime(new Date());
                 post.setTone(1);
                 thread.setRoot(post);
@@ -185,47 +184,41 @@ public class SystemInit extends MatchingTask {
                 post1.setOwner(admin);
                 post1.setParent(post);
                 post.addPost(post1);
-                post1.setContent("content of B");
+                content = new TextContent();
+                content.setContent("content of B");
+                session.saveOrUpdate(content);
+                post1.setContent(content);
                 post1.setTime(new Date());
                 post1.setTone(2);
                 session.saveOrUpdate(post);
                 session.saveOrUpdate(post1);
                 session.saveOrUpdate(thread);
-                
-                Term term = new Term();
-                term.setName("transport");
-                term.setShortDefinition("to move from one place to another");
-                term.setExtDefinition("The percific method to move from one place to another, especially with the help of some kind of vehcles.");
-                term.setInternal(true);
-                
-                TermLink link = new TermLink();
-                link.setLink("link1");
-                session.save(link);
-                term.getLinks().add(link);
-                link = new TermLink();
-                link.setLink("link2");
-                session.save(link);
-                term.getLinks().add(link);
-                link = new TermLink();
-                link.setLink("link3");
-                session.save(link);
-                term.getLinks().add(link);
-                
-                TermSource source = new TermSource();
-                source.setSource("source1");
-                session.save(source);
-                term.getSources().add(source);
-                source = new TermSource();
-                source.setSource("source2");
-                session.save(source);
-                term.getSources().add(source);
-                source = new TermSource();
-                source.setSource("source3");
-                session.save(source);
-                term.getSources().add(source);
+                */
 
-                term.setOwner(admin);
-                session.save(term);
+                //Predefined categories
+                TermCategory category = new TermCategory();
+                category.setName("Developer");
+                category.setInternal(true);
+                category.setDescription("category for developers");
+                session.save(category);
+                
+                category = new TermCategory();
+                category.setName("Public");
+                category.setInternal(true);
+                category.setDescription("category for public");
+                session.save(category);
+                
+                category = new TermCategory();
+                category.setName("Puget Sound Region");
+                category.setInternal(true);
+                category.setDescription("category for terms related to things in our area, specifically");
+                session.save(category);
+
+                category = new TermCategory();
+                category.setName("Transportation Improvement Programming");
+                category.setInternal(true);
+                category.setDescription("For things related to planning and decision-making, as opposed to general terms like monorail, ethanol, etc.");
+                session.save(category);
                 
                 EmailTemplate template = new EmailTemplate();
                 template.setName("register user success");
@@ -290,4 +283,4 @@ public class SystemInit extends MatchingTask {
     }
 
 
-}
+}//class SystemInit
