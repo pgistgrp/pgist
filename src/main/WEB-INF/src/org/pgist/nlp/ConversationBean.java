@@ -79,7 +79,7 @@ public class ConversationBean extends ListTableBean {
         post.setParent(null);
         post.setTime(new Date());
         post.setTitle("");
-        post.setContent("");
+        post.setContent(null);
         post.setOwner(JSFUtil.getCurrentUser());
         post.setTone(1);
         
@@ -120,7 +120,9 @@ public class ConversationBean extends ListTableBean {
         Post parent = (Post) ConversationDAO.load(Post.class, id);
         post.setParent(parent);
         post.setOwner(JSFUtil.getCurrentUser());
-        post.setContent(s);
+        TextContent content = new TextContent();
+        content.setContent(s);
+        post.setContent(content);
         post.setTime(new Date());
         post.setTitle("");
         post.setTone(tone.intValue());

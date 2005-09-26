@@ -20,7 +20,7 @@ public class Post implements Node {
     private Long id;
     private Post parent;
     private String title;
-    private String content;
+    private Content content;
     private Set children = new HashSet();
     private User owner;
     private Date time;
@@ -71,14 +71,14 @@ public class Post implements Node {
     
     /**
      * @return
-     * @hibernate.property type="text" not-null="true"
+     * @hibernate.hibernate.one-to-one class="org.pgist.nlp.Content"
      */
-    public String getContent() {
+    public Content getContent() {
         return content;
     }
     
     
-    public void setContent(String content) {
+    public void setContent(Content content) {
         this.content = content;
     }
     
