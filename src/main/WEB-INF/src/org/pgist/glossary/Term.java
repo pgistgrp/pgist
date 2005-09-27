@@ -22,9 +22,9 @@ public class Term {
     private String name;
     private String shortDefinition;
     private String extDefinition;
-    private List relatedTerms = new ArrayList();
-    private List links = new ArrayList();
-    private List sources = new ArrayList();
+    private Set relatedTerms = new HashSet();
+    private Set links = new HashSet();
+    private Set sources = new HashSet();
     private boolean internal = false;
     private boolean deleted = false;
     private User owner;
@@ -89,51 +89,48 @@ public class Term {
 
     /**
      * @return
-     * @hibernate.list table="pgist_glossary_term_link_link" lazy="true" cascade="none" order-by="name"
-     * @hibernate.collection-key column="term_id"
-     * @hibernate.collection-index column="indexes"
+     * @hibernate.set lazy="false" table="pgist_glossary_term_link_link" cascade="none" order-by="link_id"
+     * @hibernate.collection-key  column="term_id"
      * @hibernate.collection-many-to-many column="link_id" class="org.pgist.glossary.TermLink"
      */
-    public List getLinks() {
+    public Set getLinks() {
         return links;
     }
 
 
-    public void setLinks(List links) {
+    public void setLinks(Set links) {
         this.links = links;
     }
 
 
     /**
      * @return
-     * @hibernate.list table="pgist_glossary_term_term_link" lazy="true" cascade="none" order-by="name"
-     * @hibernate.collection-key column="related_term_id"
-     * @hibernate.collection-index column="indexes"
-     * @hibernate.collection-many-to-many class="org.pgist.glossary.Term"
+     * @hibernate.set lazy="false" table="pgist_glossary_term_term_link" cascade="none" order-by="term_id"
+     * @hibernate.collection-key  column="related_term_id"
+     * @hibernate.collection-many-to-many column="term_id" class="org.pgist.glossary.Term"
      */
-    public List getRelatedTerms() {
+    public Set getRelatedTerms() {
         return relatedTerms;
     }
 
 
-    public void setRelatedTerms(List relatedTerms) {
+    public void setRelatedTerms(Set relatedTerms) {
         this.relatedTerms = relatedTerms;
     }
 
 
     /**
      * @return
-     * @hibernate.list table="pgist_glossary_term_source_link" lazy="false" cascade="none" order-by="name"
-     * @hibernate.collection-key column="term_id"
-     * @hibernate.collection-index column="indexes"
+     * @hibernate.set lazy="false" table="pgist_glossary_term_source_link" cascade="none" order-by="source_id"
+     * @hibernate.collection-key  column="term_id"
      * @hibernate.collection-many-to-many column="source_id" class="org.pgist.glossary.TermSource"
      */
-    public List getSources() {
+    public Set getSources() {
         return sources;
     }
 
 
-    public void setSources(List sources) {
+    public void setSources(Set sources) {
         this.sources = sources;
     }
 

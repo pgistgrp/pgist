@@ -189,14 +189,13 @@ public class GloassaryImport extends MatchingTask {
                     
                     //second pass, process related terms
                     //read and reject the first line
-                    /*
                     in.readLine();
                     count = 1;
                     while ((line = in.readLine())!=null) {
                         
                         if ("".equals(line)) continue;
                         String[] values = ((String[][]) ExcelCSVParser.parse(line))[0];
-                        System.out.println(" Related terms, Line "+(++count)+"  --->  "+values[0]);
+                        //System.out.println(" Related terms, Line "+(++count)+"  --->  "+values[0]);
                         
                         query = session.createQuery("from Term where name=:name");
                         query.setString("name", values[0]);
@@ -206,11 +205,17 @@ public class GloassaryImport extends MatchingTask {
                             if (values.length>j && !"".equals(values[j])) {
                                 query = session.createQuery("from Term where name=:name");
                                 query.setString("name", values[j]);
-                                System.out.println("---> "+values[j]);
-                                Term one = (Term) query.iterate().next();
-                                if (one!=null) {
-                                    System.out.println("found ---> "+one.getName());
-                                    theTerm.getRelatedTerms().add(one);
+                                //System.out.println("---> "+values[j]);
+                                Iterator iter = query.iterate();
+                                if (iter.hasNext()) {
+                                    Term one = (Term) iter.next();
+                                    if (one!=null) {
+                                        //System.out.println("found ---> "+one.getName());
+                                        theTerm.getRelatedTerms().add(one);
+                                        one.getRelatedTerms().add(theTerm);
+                                    }
+                                } else {
+                                    System.out.println("xxxx term "+values[j]+" not found!");
                                 }
                             }
                         }//for j
@@ -219,7 +224,6 @@ public class GloassaryImport extends MatchingTask {
                     }//while second pass
                     
                     in.close();
-                    */
                 }//for iter
                 
                 transaction.commit();
