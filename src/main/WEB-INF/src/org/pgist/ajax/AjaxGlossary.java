@@ -27,7 +27,7 @@ public class AjaxGlossary {
         setting.setPage(page);
         setting.set("categoryFilter", "all");
         if (searchFilter!=null) {
-            searchFilter = searchFilter.trim();
+            searchFilter = searchFilter.toUpperCase().trim();
             if (!"".equals(searchFilter)) setting.set("nameFilter", searchFilter+"%");
         }
         try {

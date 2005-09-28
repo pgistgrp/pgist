@@ -225,6 +225,7 @@ public class GlossaryBean extends ListTableBean {
         if (!JSFUtil.checkAdmin()) return "notAdmin";
         
         try {
+            term.setName(term.getName().toUpperCase().trim());
             if (term.getId()==null) {//new term
                 GlossaryDAO.addTerm(term, selectedCategories, sources, links, relatedTerms);
             } else {//update term

@@ -120,7 +120,7 @@ public class GloassaryImport extends MatchingTask {
                         Term term = new Term();
                         
                         //name
-                        term.setName(values[0]);
+                        term.setName(values[0].toUpperCase().trim());
                         
                         //short definition
                         if (values.length>1) {
@@ -198,14 +198,15 @@ public class GloassaryImport extends MatchingTask {
                         //System.out.println(" Related terms, Line "+(++count)+"  --->  "+values[0]);
                         
                         query = session.createQuery("from Term where name=:name");
-                        query.setString("name", values[0]);
+                        query.setString("name", values[0].toUpperCase().trim());
                         Term theTerm = (Term) query.iterate().next();
                         
                         for (int j=6; j<11; j++) {
-                            if (values.length>j && !"".equals(values[j])) {
+                            if (values.length>j && !"".equals(values[j].trim())) {
+                                String value = values[j].toUpperCase().trim();
                                 query = session.createQuery("from Term where name=:name");
-                                query.setString("name", values[j]);
-                                //System.out.println("---> "+values[j]);
+                                query.setString("name", value);
+                                //System.out.println("---> "+value);
                                 Iterator iter = query.iterate();
                                 if (iter.hasNext()) {
                                     Term one = (Term) iter.next();
@@ -215,7 +216,7 @@ public class GloassaryImport extends MatchingTask {
                                         one.getRelatedTerms().add(theTerm);
                                     }
                                 } else {
-                                    System.out.println("xxxx term "+values[j]+" not found!");
+                                    System.out.println("xxxx term "+value+" not found!");
                                 }
                             }
                         }//for j
