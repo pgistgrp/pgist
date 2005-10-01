@@ -44,9 +44,9 @@
         <mapping resource="org/pgist/glossary/TermLink.hbm.xml"/>
         <mapping resource="org/pgist/glossary/TermSource.hbm.xml"/>
 
-        <mapping resource="org/pgist/nlp/ConversationThread.hbm.xml"/>
-        <mapping resource="org/pgist/nlp/Post.hbm.xml"/>
-        <mapping resource="org/pgist/nlp/Content.hbm.xml"/>
+        <mapping resource="org/pgist/discourse/Discourse.hbm.xml"/>
+        <mapping resource="org/pgist/discourse/Opinion.hbm.xml"/>
+        <mapping resource="org/pgist/discourse/Content.hbm.xml"/>
 
         <!--class-cache class="org.hibernate.test.Simple" region="Simple" usage="read-write"/-->
 
@@ -55,4 +55,3 @@
 
 
 </hibernate-configuration>
-

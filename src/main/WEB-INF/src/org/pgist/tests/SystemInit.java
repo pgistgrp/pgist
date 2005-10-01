@@ -1,6 +1,7 @@
 package org.pgist.tests;
 
 import java.io.File;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,6 +16,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.util.ArrayHelper;
+import org.pgist.discourse.Discourse;
+import org.pgist.discourse.Opinion;
+import org.pgist.discourse.TextContent;
 import org.pgist.emails.EmailTemplate;
 import org.pgist.glossary.TermCategory;
 import org.pgist.users.Role;
@@ -162,39 +166,51 @@ public class SystemInit extends MatchingTask {
                     System.out.println("---- successfully inserte a user: "+s);
                 }//for i
                 
-                //test nlp
-                /*
-                ConversationThread thread = new ConversationThread();
-                thread.setEnabled(true);
-                thread.setDeleted(false);
-                thread.setTitle("This is the first thread");
-                Post post = new Post();
-                post.setTitle("This is A");
-                post.setOwner(admin);
-                post.setParent(null);
+                //discourse object
+                Discourse discourse = new Discourse();
+                discourse.setDeleted(false);
+                discourse.setEnabled(true);
+                discourse.setTitle("This is my test!");
+                Opinion opinion = new Opinion();
                 TextContent content = new TextContent();
-                content.setContent("content of A");
-                session.saveOrUpdate(content);
-                post.setContent(content);
-                post.setTime(new Date());
-                post.setTone(1);
-                thread.setRoot(post);
-                Post post1 = new Post();
-                post1.setTitle("This is B");
-                post1.setOwner(admin);
-                post1.setParent(post);
-                post.addPost(post1);
+                content.setContent("This is the contents!");
+                opinion.setContent(content);
+                opinion.setOwner(admin);
+                opinion.setTime(new Date());
+                opinion.setTitle("The root node");
+                opinion.setTone(1);
+                discourse.setRoot(opinion);
+                session.save(content);
+                
+                Opinion opinion1 = new Opinion();
                 content = new TextContent();
-                content.setContent("content of B");
-                session.saveOrUpdate(content);
-                post1.setContent(content);
-                post1.setTime(new Date());
-                post1.setTone(2);
-                session.saveOrUpdate(post);
-                session.saveOrUpdate(post1);
-                session.saveOrUpdate(thread);
-                */
+                content.setContent("This is the first reply!");
+                opinion1.setContent(content);
+                opinion1.setOwner(guest);
+                opinion1.setTime(new Date());
+                opinion1.setTitle("The second node");
+                opinion1.setTone(1);
+                opinion1.setParent(opinion);
+                opinion.getChildren().add(opinion1);
+                session.save(content);
+                
+                Opinion opinion2 = new Opinion();
+                content = new TextContent();
+                content.setContent("This is the second reply!");
+                opinion2.setContent(content);
+                opinion2.setOwner(guest);
+                opinion2.setTime(new Date());
+                opinion2.setTitle("The third node");
+                opinion2.setTone(1);
+                opinion2.setParent(opinion1);
+                opinion1.getChildren().add(opinion2);
+                session.save(content);
 
+                session.save(opinion);
+                session.save(opinion1);
+                session.save(opinion2);
+                session.save(discourse);
+                
                 //Predefined categories
                 TermCategory category = new TermCategory();
                 category.setName("Developer");

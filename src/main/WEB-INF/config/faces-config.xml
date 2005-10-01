@@ -86,9 +86,9 @@
       <to-view-id>/jsp/glossary/listTerm.jsp</to-view-id>
     </navigation-case>
     <navigation-case>
-        <description>list conversation</description>
-      <from-outcome>listConversation</from-outcome>
-      <to-view-id>/jsp/nlp/index.jsp</to-view-id>
+        <description>list discourse</description>
+      <from-outcome>listDiscourse</from-outcome>
+      <to-view-id>/jsp/discourse/index.jsp</to-view-id>
     </navigation-case>
   </navigation-rule>
 
@@ -320,16 +320,16 @@
   <navigation-rule>
     <description>
     </description>
-    <from-view-id>/jsp/nlp/index.jsp</from-view-id>
+    <from-view-id>/jsp/discourse/index.jsp</from-view-id>
     <navigation-case>
       <description>success</description>
       <from-outcome>success</from-outcome>
-      <to-view-id>/jsp/nlp/main.jsp</to-view-id>
+      <to-view-id>/jsp/discourse/main.jsp</to-view-id>
     </navigation-case>
     <navigation-case>
-      <description>newConversation</description>
-      <from-outcome>newConversation</from-outcome>
-      <to-view-id>/jsp/nlp/newConversation.jsp</to-view-id>
+      <description>newDiscourse</description>
+      <from-outcome>newDiscourse</from-outcome>
+      <to-view-id>/jsp/discourse/newDiscourse.jsp</to-view-id>
     </navigation-case>
   </navigation-rule>
 
@@ -337,16 +337,16 @@
   <navigation-rule>
     <description>
     </description>
-    <from-view-id>/jsp/nlp/newConversation.jsp</from-view-id>
+    <from-view-id>/jsp/discourse/newDiscourse.jsp</from-view-id>
     <navigation-case>
       <description>success</description>
       <from-outcome>success</from-outcome>
-      <to-view-id>/jsp/nlp/main.jsp</to-view-id>
+      <to-view-id>/jsp/discourse/main.jsp</to-view-id>
     </navigation-case>
     <navigation-case>
       <description>failure</description>
       <from-outcome>failure</from-outcome>
-      <to-view-id>/jsp/nlp/newConversation.jsp</to-view-id>
+      <to-view-id>/jsp/discourse/newDiscourse.jsp</to-view-id>
     </navigation-case>
   </navigation-rule>
 
@@ -416,10 +416,10 @@
 
   <managed-bean>
     <description>
-      Backing Bean : conversation admin bean
+      Backing Bean : discourse admin bean
     </description>
-    <managed-bean-name>ConversationBean</managed-bean-name>
-    <managed-bean-class>org.pgist.nlp.ConversationBean</managed-bean-class>
+    <managed-bean-name>DiscourseBean</managed-bean-name>
+    <managed-bean-class>org.pgist.backing.DiscourseBean</managed-bean-class>
     <managed-bean-scope>session</managed-bean-scope>
   </managed-bean>
 

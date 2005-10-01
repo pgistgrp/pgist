@@ -71,7 +71,7 @@
     </target>
 
 
-    <target name="initdb">
+    <target name="initdb" depends="compile, mapping">
         <taskdef name="SystemInit" classname="org.pgist.tests.SystemInit">
             <classpath refid="classpath"/>
         </taskdef>
@@ -79,7 +79,7 @@
     </target>
 
 
-    <target name="import">
+    <target name="import" depends="compile, mapping">
         <taskdef name="GloassaryImport" classname="org.pgist.tests.GloassaryImport">
             <classpath refid="classpath"/>
         </taskdef>
@@ -88,6 +88,14 @@
                 <filename name="GlossDefs.csv"/>
             </fileset>
         </GloassaryImport>
+    </target>
+
+
+    <target name="test" depends="compile, mapping">
+        <taskdef name="SimpleTest" classname="org.pgist.tests.SimpleTest">
+            <classpath refid="classpath"/>
+        </taskdef>
+        <SimpleTest config="main/WEB-INF/src/hibernate.cfg.xml"/>
     </target>
 
 

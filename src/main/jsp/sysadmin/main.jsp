@@ -24,7 +24,7 @@
   <br>
   <h:commandLink action="listTerm" value="Glossary Term List" />
   <br>
-  <h:commandLink action="listConversation" value="Conversation List" />
+  <h:commandLink action="listDiscourse" value="Discourse Object" />
 
 </h:form>
 </f:view>
