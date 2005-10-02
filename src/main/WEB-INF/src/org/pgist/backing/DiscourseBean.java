@@ -78,9 +78,6 @@ public class DiscourseBean extends ListTableBean {
     public String readDiscourse() throws Exception {
         discourse = (Discourse) DiscourseDAO.load(Discourse.class, selectedId());
         opinion = (Opinion) discourse.getRoot();
-        System.out.println(opinion.getId()+" ---> "+opinion.getContent());
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        request.setAttribute("discourse", discourse);
         return "success";
     }//readDiscourse()
     

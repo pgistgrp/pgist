@@ -1,6 +1,7 @@
 package org.pgist.tests;
 
 import java.io.File;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,6 +16,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.pgist.discourse.Opinion;
+import org.pgist.discourse.TextContent;
+import org.pgist.users.User;
 
 
 /**
@@ -73,12 +76,45 @@ public class SimpleTest extends MatchingTask {
                 session = sessionFactory.openSession();
                 Transaction transaction = session.beginTransaction();
                 
-                Query query = session.createQuery("from Opinion");
-                for (Iterator iter=query.iterate(); iter.hasNext(); ) {
-                    Opinion one = (Opinion) iter.next();
-                    //Opinion two = (Opinion) one.getRoot();
-                    System.out.println("---> "+one.getContent());
-                }//for iter
+                User admin = null;
+                Query query = session.createQuery("from User where loginname=:loginname");
+                query.setString("loginname", "admin");
+                Iterator iter=query.iterate();
+                if (iter.hasNext()) admin = (User) iter.next();
+                
+                query = session.createQuery("from Opinion where id=45");
+                iter=query.iterate();
+                if (iter.hasNext()) {
+                    Opinion parent = (Opinion) iter.next();
+                    
+                    Opinion child = new Opinion();
+                    child.setTitle("Let me test.");
+                    child.setOwner(admin);
+                    child.setParent(parent);
+                    child.setTime(new Date());
+                    child.setTone(1);
+                    TextContent content = new TextContent();
+                    content.setContent("This is another child.");
+                    session.save(content);
+                    child.setContent(content);
+                    session.save(child);
+                    parent.getChildren().add(child);
+                    
+                    child = new Opinion();
+                    child.setTitle("test again!");
+                    child.setOwner(admin);
+                    child.setParent(parent);
+                    child.setTime(new Date());
+                    child.setTone(1);
+                    content = new TextContent();
+                    content.setContent("This is the third child.");
+                    session.save(content);
+                    child.setContent(content);
+                    session.save(child);
+                    parent.getChildren().add(child);
+                    
+                    session.saveOrUpdate(parent);
+                }
                 
                 transaction.commit();
             } catch(Exception ex) {

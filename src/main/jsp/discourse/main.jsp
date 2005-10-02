@@ -26,7 +26,10 @@
       </pg:doUpTree>
     </f:facet>
     
-    <f:facet name="treemap"></f:facet>
+    <f:facet name="treemap">
+      <pg:doTreeMap id="doTreeMap" styleClass="" depth="3">
+      </pg:doTreeMap>
+    </f:facet>
     
     <f:facet name="downtree"></f:facet>
     
