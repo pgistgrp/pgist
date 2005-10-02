@@ -35,7 +35,10 @@
     
     <f:facet name="footer"></f:facet>
     
-    <f:facet name="conbar"></f:facet>
+    <f:facet name="conbar">
+      <pg:doConbar id="doConbar" styleClass="">
+      </pg:doConbar>
+    </f:facet>
     
     <f:facet name="target"></f:facet>
     
