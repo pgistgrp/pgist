@@ -29,6 +29,7 @@ public class Opinion implements Node {
     
     /**
      * @return
+     * Notes: the id comes from one-to-one mapped Content object.
      * @hibernate.id generator-class="foreign"
      * @hibernate.generator-param name="property" value="content"
      */
