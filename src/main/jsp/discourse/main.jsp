@@ -7,6 +7,7 @@
 <title>Discourse Slate</title>
 <link rel=stylesheet href='<%= request.getContextPath()%>/styles/default.css' type="text/css" media=all>
 <link rel=stylesheet href='<%= request.getContextPath()%>/styles/treemap.css' type="text/css" media=all>
+<script type='text/javascript' src='<%= request.getContextPath()%>/dwr/util.js'></script>
 </head>
 
 <body>
