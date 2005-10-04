@@ -8,6 +8,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpServletRequest;
 
+import org.pgist.component.UIAction;
 import org.pgist.dao.DiscourseDAO;
 import org.pgist.discourse.Discourse;
 import org.pgist.discourse.Opinion;
@@ -79,6 +80,15 @@ public class DiscourseBean extends ListTableBean {
         discourse = (Discourse) DiscourseDAO.load(Discourse.class, selectedId());
         opinion = (Opinion) discourse.getRoot();
         return "success";
+    }//readDiscourse()
+    
+    
+    public void readDiscourse(ActionEvent event) throws Exception {
+        UIAction component = (UIAction) event.getComponent();
+        Map params = component.getParams();
+        System.out.println(params.get("treeId")+"  --->  "+params.get("nodeId"));
+        discourse = (Discourse) DiscourseDAO.load(Discourse.class, new Long((String) params.get("treeId")));
+        opinion = (Opinion) DiscourseDAO.load(Opinion.class, new Long((String) params.get("nodeId")));
     }//readDiscourse()
     
     

@@ -27,7 +27,7 @@
     </f:facet>
     
     <f:facet name="treemap">
-      <pg:doTreeMap id="doTreeMap" styleClass="" depth="3">
+      <pg:doTreeMap id="doTreeMap" styleClass="" depth="3" actionListener="#{DiscourseBean.readDiscourse}">
       </pg:doTreeMap>
     </f:facet>
     
@@ -40,7 +40,10 @@
       </pg:doConbar>
     </f:facet>
     
-    <f:facet name="target"></f:facet>
+    <f:facet name="target">
+      <pg:doTarget id="doTarget" styleClass="">
+      </pg:doTarget>
+    </f:facet>
     
     <f:facet name="focus"></f:facet>
   
