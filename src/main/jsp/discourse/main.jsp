@@ -46,7 +46,10 @@
       </pg:doTarget>
     </f:facet>
     
-    <f:facet name="focus"></f:facet>
+    <f:facet name="focus">
+      <pg:doFocus id="doFocus" styleClass="">
+      </pg:doFocus>
+    </f:facet>
   
   </pg:doLayout>
 
