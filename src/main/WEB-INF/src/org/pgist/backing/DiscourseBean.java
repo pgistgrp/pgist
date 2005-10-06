@@ -8,14 +8,17 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.myfaces.custom.fileupload.UploadedFile;
 import org.pgist.component.UIAction;
 import org.pgist.dao.DiscourseDAO;
 import org.pgist.discourse.Discourse;
+import org.pgist.discourse.ImageContent;
 import org.pgist.discourse.Opinion;
 import org.pgist.discourse.TextContent;
 import org.pgist.model.Tree;
 import org.pgist.util.JSFUtil;
 import org.pgist.util.ListTableBean;
+import org.pgist.util.PgistFile;
 
 
 /**
@@ -86,10 +89,55 @@ public class DiscourseBean extends ListTableBean {
     public void readDiscourse(ActionEvent event) throws Exception {
         UIAction component = (UIAction) event.getComponent();
         Map params = component.getParams();
-        System.out.println(params.get("treeId")+"  --->  "+params.get("nodeId"));
         discourse = (Discourse) DiscourseDAO.load(Discourse.class, new Long((String) params.get("treeId")));
         opinion = (Opinion) DiscourseDAO.load(Opinion.class, new Long((String) params.get("nodeId")));
     }//readDiscourse()
+    
+    
+    public void newOpinion(ActionEvent event) throws Exception {
+        UIAction component = (UIAction) event.getComponent();
+        Map params = component.getParams();
+        discourse = (Discourse) DiscourseDAO.load(Discourse.class, new Long((String) params.get("treeId")));
+        opinion = (Opinion) DiscourseDAO.load(Opinion.class, new Long((String) params.get("nodeId")));
+        Opinion opin = new Opinion();
+        String punctuate = (String) params.get("punctuate");
+        opin.setTone(Integer.parseInt(punctuate));
+        String cttType = (String) params.get("cttType");
+        if ("0".equals(cttType)) {//text
+            String cttText = (String) params.get("cttText");
+            if (cttText!=null) {
+                cttText = cttText.trim();
+                TextContent content = new TextContent();
+                content.setContent(cttText);
+                DiscourseDAO.insert(content);
+                opin.setContent(content);
+            }
+        } else if ("1".equals(cttType)) {
+            UploadedFile image = (UploadedFile) params.get("cttImage");
+            PgistFile file = new PgistFile();
+            file.setName(image.getName());
+            DiscourseDAO.insert(file);
+            try {
+                file.receive(image.getInputStream());
+                ImageContent cttImage = new ImageContent();
+                cttImage.setFile(file);
+                DiscourseDAO.insert(cttImage);
+                opin.setContent(cttImage);
+            } catch(Exception e) {
+                e.printStackTrace();
+                DiscourseDAO.delete(file);
+            }
+        }
+        opin.setOwner(JSFUtil.getCurrentUser());
+        opin.setParent(opinion);
+        opin.setTime(new Date());
+        DiscourseDAO.insert(opin);
+        
+        opinion.addOpinion(opin);
+        DiscourseDAO.update(opinion);
+        
+        opinion = opin;
+    }//newOpinion()
     
     
     public String newDiscourse() throws Exception {

@@ -10,11 +10,11 @@ package org.pgist.discourse;
 public abstract class Content {
 
     
-    public static final int TEXT   = 1;
-    public static final int IAMGE  = 2;
-    public static final int PDF    = 3;
-    public static final int LINK   = 4;
-    public static final int ARCGIS = 5;
+    public static final int TEXT   = 0;
+    public static final int IAMGE  = 1;
+    public static final int PDF    = 2;
+    public static final int LINK   = 3;
+    public static final int ARCGIS = 4;
     
     
     private Long id;

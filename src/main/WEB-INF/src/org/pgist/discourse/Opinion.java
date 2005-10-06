@@ -19,7 +19,7 @@ public class Opinion implements Node {
     
     private Long id;
     private Opinion parent;
-    private String title;
+    private String title = "";
     private Content content;
     private Set children = new HashSet();
     private User owner;

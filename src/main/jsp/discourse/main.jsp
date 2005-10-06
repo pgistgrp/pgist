@@ -13,7 +13,7 @@
 <body>
 
 <f:view>
-<h:form id="discourseForm">
+<h:form id="discourseForm" enctype="multipart/form-data">
 
   <pg:doLayout id="doLayout" styleClass="" tree="#{DiscourseBean.discourse}" node="#{DiscourseBean.opinion}"
     key="id" label="name">
@@ -47,7 +47,7 @@
     </f:facet>
     
     <f:facet name="focus">
-      <pg:doFocus id="doFocus" styleClass="">
+      <pg:doFocus id="doFocus" styleClass="" actionListener="#{DiscourseBean.newOpinion}">
       </pg:doFocus>
     </f:facet>
   

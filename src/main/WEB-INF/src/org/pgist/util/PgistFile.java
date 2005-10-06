@@ -1,5 +1,9 @@
 package org.pgist.util;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+
 
 /**
  * 
@@ -39,6 +43,17 @@ public class PgistFile {
 
     public void setName(String name) {
         this.name = name;
+    }
+    
+    
+    public void receive(InputStream inputStream) throws Exception {
+        BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream("/tmp/"+id));
+        byte[] b = new byte[1024];
+        int n=0;
+        while ((n=inputStream.read(b))>0) {
+            outputStream.write(b, 0, n);
+        }//while
+        outputStream.close();
     }
 
 

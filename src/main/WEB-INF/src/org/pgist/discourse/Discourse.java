@@ -21,7 +21,7 @@ public class Discourse implements Tree {
     private Opinion root;
     private boolean enabled;
     private boolean deleted;
-    private String title;
+    private String title = "";
     
     
     /**

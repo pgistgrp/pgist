@@ -11,7 +11,7 @@ package org.pgist.discourse;
 public class TextContent extends Content {
 
 
-    private String content;
+    private String content = "";
 
 
     /**
