@@ -1,6 +1,7 @@
 package org.pgist.util;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
@@ -47,7 +48,10 @@ public class PgistFile {
     
     
     public void receive(InputStream inputStream) throws Exception {
-        BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream("/tmp/"+id));
+        File file = (File) DurableObjectManager.get(DurableObjectManager.MANAGED_FILE_PATH);
+        file = new File(file, id.toString());
+        System.out.println("---> "+file.getAbsolutePath());
+        BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file));
         byte[] b = new byte[1024];
         int n=0;
         while ((n=inputStream.read(b))>0) {

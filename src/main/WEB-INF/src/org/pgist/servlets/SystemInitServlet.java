@@ -31,6 +31,8 @@ public class SystemInitServlet extends HttpServlet {
         //this line is required by the servlet specification
         super.init(config);
         
+        System.out.println();
+        
         //create an instance of DurableObjectManager
         DurableObjectManager manager = DurableObjectManager.getInstance();
         
@@ -71,10 +73,26 @@ public class SystemInitServlet extends HttpServlet {
             } else {
                 System.out.println("PGIST: email template path - "+template.getPath()+" not exist");
             }
+            
+            //MANAGED_FILE_PATH
+            String managedFilePath = config.getInitParameter(DurableObjectManager.MANAGED_FILE_PATH);
+            File filePath = new File(managedFilePath);
+            if (filePath.exists()) {
+                DurableObjectManager.put(DurableObjectManager.MANAGED_FILE_PATH, filePath);
+                System.out.println("PGIST: email template path - "+filePath.getPath());
+            } else {
+                if (!filePath.mkdir()) {
+                    System.out.println("PGIST: email template path - "+filePath.getPath()+" not exist");
+                } else {
+                    DurableObjectManager.put(DurableObjectManager.MANAGED_FILE_PATH, filePath);
+                    System.out.println("PGIST: email template path - "+filePath.getPath());
+                }
+            }
         } catch(Exception e) {
             e.printStackTrace();
         }
         
+        System.out.println();
     }//init()
     
     

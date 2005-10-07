@@ -114,6 +114,10 @@
        <param-name>org.pgist.EMAIL_CONFIG</param-name>
        <param-value>email-config.xml</param-value>
     </init-param>
+    <init-param>
+       <param-name>org.pgist.MANAGED_FILE_PATH</param-name>
+       <param-value>/tmp/upload_files</param-value>
+    </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
 
