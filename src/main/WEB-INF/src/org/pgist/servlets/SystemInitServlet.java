@@ -79,13 +79,13 @@ public class SystemInitServlet extends HttpServlet {
             File filePath = new File(managedFilePath);
             if (filePath.exists()) {
                 DurableObjectManager.put(DurableObjectManager.MANAGED_FILE_PATH, filePath);
-                System.out.println("PGIST: email template path - "+filePath.getPath());
+                System.out.println("PGIST: managed file path - "+filePath.getPath());
             } else {
                 if (!filePath.mkdir()) {
-                    System.out.println("PGIST: email template path - "+filePath.getPath()+" not exist");
+                    System.out.println("PGIST: managed file path - "+filePath.getPath()+" not exist");
                 } else {
                     DurableObjectManager.put(DurableObjectManager.MANAGED_FILE_PATH, filePath);
-                    System.out.println("PGIST: email template path - "+filePath.getPath());
+                    System.out.println("PGIST: managed file path - "+filePath.getPath());
                 }
             }
         } catch(Exception e) {

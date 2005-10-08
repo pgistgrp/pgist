@@ -2,6 +2,7 @@ package org.pgist.util;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
@@ -12,7 +13,7 @@ import java.io.InputStream;
  * @hibernate.class table="pgist_files"
  *
  */
-public class PgistFile {
+public class PgistFile implements IFile {
 
 
     private Long id;
@@ -59,6 +60,15 @@ public class PgistFile {
         }//while
         outputStream.close();
     }
+
+
+    public InputStream getStream() throws Exception {
+        if (id==null) return null;
+        
+        File file = (File) DurableObjectManager.get(DurableObjectManager.MANAGED_FILE_PATH);
+        file = new File(file, id.toString());
+        return new FileInputStream(file);
+    }//getStream()
 
 
 }//class PgistFile

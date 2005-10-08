@@ -18,7 +18,7 @@ public class ImageContent extends Content {
 
     /**
      * @return
-     * @hibernate.one-to-one class="org.pgist.util.PgistFile"
+     * @hibernate.many-to-one name="file" column="file_id"  class="org.pgist.util.PgistFile"
      */
     public PgistFile getFile() {
         return file;

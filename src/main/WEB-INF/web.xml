@@ -123,6 +123,12 @@
 
 
   <servlet>
+    <servlet-name>DownloadServlet</servlet-name>
+    <servlet-class>org.pgist.servlets.DownloadServlet</servlet-class>
+  </servlet>
+
+
+  <servlet>
     <servlet-name>Faces Servlet</servlet-name>
     <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
     <init-param>
@@ -161,6 +167,12 @@
   <servlet-mapping>
     <servlet-name>dwr-invoker</servlet-name>
     <url-pattern>/dwr/*</url-pattern>
+  </servlet-mapping>
+
+
+  <servlet-mapping>
+    <servlet-name>DownloadServlet</servlet-name>
+    <url-pattern>/files/*</url-pattern>
   </servlet-mapping>
 
 
