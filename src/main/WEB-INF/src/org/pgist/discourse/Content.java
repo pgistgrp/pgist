@@ -12,8 +12,8 @@ public abstract class Content {
     
     public static final int TEXT   = 0;
     public static final int IAMGE  = 1;
-    public static final int PDF    = 2;
-    public static final int LINK   = 3;
+    public static final int LINK   = 2;
+    public static final int PDF    = 3;
     public static final int ARCGIS = 4;
     
     

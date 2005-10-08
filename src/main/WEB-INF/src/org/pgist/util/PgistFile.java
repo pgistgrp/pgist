@@ -51,7 +51,6 @@ public class PgistFile implements IFile {
     public void receive(InputStream inputStream) throws Exception {
         File file = (File) DurableObjectManager.get(DurableObjectManager.MANAGED_FILE_PATH);
         file = new File(file, id.toString());
-        System.out.println("---> "+file.getAbsolutePath());
         BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file));
         byte[] b = new byte[1024];
         int n=0;

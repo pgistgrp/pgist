@@ -13,6 +13,7 @@ import org.pgist.component.UIAction;
 import org.pgist.dao.DiscourseDAO;
 import org.pgist.discourse.Discourse;
 import org.pgist.discourse.ImageContent;
+import org.pgist.discourse.LinkContent;
 import org.pgist.discourse.Opinion;
 import org.pgist.discourse.TextContent;
 import org.pgist.model.Tree;
@@ -126,6 +127,15 @@ public class DiscourseBean extends ListTableBean {
             } catch(Exception e) {
                 e.printStackTrace();
                 DiscourseDAO.delete(file);
+            }
+        } else if ("2".equals(cttType)) {
+            String cttLink = (String) params.get("cttLink");
+            if (cttLink!=null) {
+                cttLink = cttLink.trim();
+                LinkContent content = new LinkContent();
+                content.setLink(cttLink);
+                DiscourseDAO.insert(content);
+                opin.setContent(content);
             }
         }
         opin.setOwner(JSFUtil.getCurrentUser());

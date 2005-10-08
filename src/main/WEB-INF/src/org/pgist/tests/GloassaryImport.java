@@ -267,7 +267,7 @@ public class GloassaryImport extends MatchingTask {
                 files.add( f.getAbsolutePath() );
             }
         }
-
+        
         return ArrayHelper.toStringArray(files);
     }
     
