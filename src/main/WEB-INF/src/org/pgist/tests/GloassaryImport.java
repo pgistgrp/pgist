@@ -124,6 +124,13 @@ public class GloassaryImport extends MatchingTask {
                         
                         //short definition
                         if (values.length>1) {
+                            if (values[1].length()<=0) {//copy from ext definition
+                                if (values[2].length()>50) {
+                                    values[1] = values[2].substring(0, 47)+"...";
+                                } else {
+                                    values[1] = values[2];
+                                }
+                            }
                             term.setShortDefinition(values[1]);
                         }
                         
