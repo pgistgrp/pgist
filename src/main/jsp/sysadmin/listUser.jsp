@@ -13,7 +13,7 @@
 <f:view>
 <h:form id="userAdminForm">
 
-  <pg:listTable id="userList" width="80%" rowSize="10" pageSize="10" binding="#{UserBean.data}"
+  <pg:listTable id="userList" width="100%" rowSize="10" pageSize="10" binding="#{UserBean.data}"
                 actionBinding="#{UserBean.listUser}" pageSetting="#{UserBean.pageSetting}"
                 value="#{UserBean.users}" var="user">
 

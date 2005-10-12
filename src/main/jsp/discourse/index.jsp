@@ -13,7 +13,7 @@
 <f:view>
 <h:form id="discourseListForm">
 
-  <pg:listTable id="discourseList" width="80%" rowSize="10" pageSize="10" binding="#{DiscourseBean.data}"
+  <pg:listTable id="discourseList" width="100%" rowSize="10" pageSize="10" binding="#{DiscourseBean.data}"
                 actionBinding="#{DiscourseBean.listDiscourse}" pageSetting="#{DiscourseBean.pageSetting}"
                 value="#{DiscourseBean.discourses}" var="discourse">
 

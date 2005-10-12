@@ -15,7 +15,7 @@
 
 <pg:show forRole="admin">
 
-  <pg:listTable id="emailTemplateList" width="80%" rowSize="10" pageSize="10" binding="#{EmailTemplateBean.data}"
+  <pg:listTable id="emailTemplateList" width="100%" rowSize="10" pageSize="10" binding="#{EmailTemplateBean.data}"
                 actionBinding="#{EmailTemplateBean.listTemplate}" pageSetting="#{EmailTemplateBean.pageSetting}"
                 value="#{EmailTemplateBean.templates}" var="template">
 

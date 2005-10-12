@@ -14,7 +14,7 @@
 <f:view>
 <h:form id="glossaryAdminForm">
 
-  <pg:listTable id="glossaryList" width="80%" rowSize="10" pageSize="10" binding="#{GlossaryBean.data}"
+  <pg:listTable id="glossaryList" width="100%" rowSize="10" pageSize="10" binding="#{GlossaryBean.data}"
                 actionBinding="#{GlossaryBean.listTerm}" pageSetting="#{GlossaryBean.pageSetting}"
                 value="#{GlossaryBean.terms}" var="term">
 

@@ -13,7 +13,7 @@
 <f:view>
 <h:form id="roleAdminForm">
 
-  <pg:listTable id="roleList" width="80%" rowSize="10" pageSize="10" binding="#{RoleBean.data}"
+  <pg:listTable id="roleList" width="100%" rowSize="10" pageSize="10" binding="#{RoleBean.data}"
                 actionBinding="#{RoleBean.listRole}" pageSetting="#{RoleBean.pageSetting}"
                 value="#{RoleBean.roles}" var="role">
 

@@ -13,7 +13,7 @@
 <f:view>
 <h:form id="glossaryCategoryAdminForm">
 
-  <pg:listTable id="categoryList" width="80%" rowSize="10" pageSize="10" binding="#{CategoryBean.data}"
+  <pg:listTable id="categoryList" width="100%" rowSize="10" pageSize="10" binding="#{CategoryBean.data}"
                 actionBinding="#{CategoryBean.listCategory}" pageSetting="#{CategoryBean.pageSetting}"
                 value="#{CategoryBean.categories}" var="category">
 
