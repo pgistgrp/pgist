@@ -33,6 +33,7 @@ public class DiscourseBean extends ListTableBean {
     private List discourses;
     private Discourse discourse;
     private Opinion opinion;
+    private String content;
     
 
     public List getDiscourses() {
@@ -64,6 +65,16 @@ public class DiscourseBean extends ListTableBean {
         this.opinion = opinion;
     }
 
+
+    public String getContent() {
+        return content;
+    }
+
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+    
 
     /**
      * List All Discourses.
@@ -156,7 +167,7 @@ public class DiscourseBean extends ListTableBean {
         discourse.setEnabled(true);
         discourse.setTitle("");
         
-        Opinion opinion = new Opinion();
+        opinion = new Opinion();
         opinion.setOwner(JSFUtil.getCurrentUser());
         opinion.setParent(null);
         opinion.setTime(new Date());
@@ -165,19 +176,28 @@ public class DiscourseBean extends ListTableBean {
         opinion.setOwner(JSFUtil.getCurrentUser());
         opinion.setTone(1);
         
+        content = "";
+        
         discourse.setRoot(opinion);
         
-        return "newConversation";
+        return "newDiscourse";
     }//newDiscourse()
     
     
     public String saveNewDiscourse() throws Exception {
         try {
-            DiscourseDAO.insert(discourse.getRoot());
-            DiscourseDAO.insert(discourse);
-            objectId.setValue(discourse.getId());
-            HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-            request.setAttribute("thread", discourse);
+            String title = discourse.getTitle();
+            if (title==null || "".equals(title)) return "failure";
+            
+            if (content==null || "".equals(content)) return "failure";
+            
+            TextContent text = new TextContent();
+            text.setContent(content);
+            opinion.setContent(text);
+            
+            DiscourseDAO.insertOrUpdate(opinion);
+            DiscourseDAO.insertOrUpdate(discourse);
+            
             return "success";
         } catch(Exception e) {
             return "failure";
@@ -212,6 +232,6 @@ public class DiscourseBean extends ListTableBean {
         
         return opinion;
     }//saveOpinion()
-    
+
 
 }//class DiscourseBean
