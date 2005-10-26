@@ -14,7 +14,7 @@ import org.pgist.discourse.ImageContent;
 import org.pgist.discourse.LinkContent;
 import org.pgist.discourse.Opinion;
 import org.pgist.discourse.TextContent;
-import org.pgist.model.Tree;
+import org.pgist.model.ITree;
 import org.pgist.util.JSFUtil;
 import org.pgist.util.ListTableBean;
 import org.pgist.util.PgistFile;
@@ -132,6 +132,11 @@ public class DiscourseBean extends ListTableBean {
                 ImageContent cttImage = new ImageContent();
                 cttImage.setFile(file);
                 DiscourseDAO.insert(cttImage);
+                file = new PgistFile();
+                file.setName("thumbnail");
+                DiscourseDAO.insert(file);
+                cttImage.setThumbnail1(file);
+                cttImage.generateThumbnails();
                 opin.setContent(cttImage);
             } catch(Exception e) {
                 e.printStackTrace();
@@ -203,10 +208,10 @@ public class DiscourseBean extends ListTableBean {
     }//saveNewDiscourse()
     
     
-    public static Tree getDiscourse(ActionEvent event, Long id) {
-        Tree tree = null;
+    public static ITree getDiscourse(ActionEvent event, Long id) {
+        ITree tree = null;
         try {
-            tree = (Tree) DiscourseDAO.load(Discourse.class, id);
+            tree = (ITree) DiscourseDAO.load(Discourse.class, id);
         } catch(Exception e) {
             e.printStackTrace();
         }

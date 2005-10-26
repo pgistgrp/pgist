@@ -4,8 +4,8 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Stack;
 
-import org.pgist.model.Node;
-import org.pgist.model.Tree;
+import org.pgist.model.INode;
+import org.pgist.model.ITree;
 
 
 /**
@@ -14,7 +14,7 @@ import org.pgist.model.Tree;
  * @hibernate.class table="pgist_discourse"
  *
  */
-public class Discourse implements Tree {
+public class Discourse implements ITree {
     
     
     private Long id;
@@ -42,12 +42,12 @@ public class Discourse implements Tree {
      * @return
      * @hibernate.many-to-one column="root_id" class="org.pgist.discourse.Opinion" casecad="all"
      */
-    public Node getRoot() {
+    public INode getRoot() {
         return root;
     }
 
 
-    public void setRoot(Node root) {
+    public void setRoot(INode root) {
         this.root = (Opinion) root;
     }
 
@@ -103,7 +103,7 @@ public class Discourse implements Tree {
         stack.push(root);
         
         while (!stack.empty()) {
-            Node node = (Node) stack.pop();
+            INode node = (INode) stack.pop();
             count++;
             
             Set kids = node.getChildren();
@@ -118,19 +118,19 @@ public class Discourse implements Tree {
     }//getNodesCount()
     
     
-    public Node findNode(Long nodeId) {
+    public INode findNode(Long nodeId) {
         if (root.getId().longValue()==nodeId.longValue()) return root;
         
         Stack stack = new Stack();
         stack.push(root);
         
         while (!stack.empty()) {
-            Node one = (Node) stack.pop();
+            INode one = (INode) stack.pop();
             
             Set kids = one.getChildren();
             if (kids!=null) {
                 for (Iterator iter=kids.iterator(); iter.hasNext(); ) {
-                    Node kid = (Node) iter.next();
+                    INode kid = (INode) iter.next();
                     if (kid.getId().longValue()==nodeId.longValue()) return kid;
                     stack.push(kid);
                 }//for iter

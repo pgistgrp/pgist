@@ -46,7 +46,7 @@ public class DownloadServlet extends HttpServlet {
             Long id = new Long((String) request.getParameter("id"));
             PgistFile file = (PgistFile) BaseDAO.load(PgistFile.class, id);
             response.setContentType(context.getMimeType(file.getName()));
-            InputStream stream = file.getStream();
+            InputStream stream = file.getInputStream();
             int n;
             byte[] b = new byte[1024];
             while ((n=stream.read(b))>0) {

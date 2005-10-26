@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
+
+import org.pgist.model.IFile;
 
 
 /**
@@ -61,13 +64,32 @@ public class PgistFile implements IFile {
     }
 
 
-    public InputStream getStream() throws Exception {
+    public InputStream getInputStream() throws Exception {
         if (id==null) return null;
         
         File file = (File) DurableObjectManager.get(DurableObjectManager.MANAGED_FILE_PATH);
         file = new File(file, id.toString());
         return new FileInputStream(file);
-    }//getStream()
+    }//getInputStream()
+
+
+    public OutputStream getOutputStream() throws Exception {
+        if (id==null) return null;
+        
+        File file = (File) DurableObjectManager.get(DurableObjectManager.MANAGED_FILE_PATH);
+        file = new File(file, id.toString());
+        return new FileOutputStream(file);
+    }//getOutputStream()
+
+
+    public String getPath() throws Exception {
+        if (id==null) return null;
+        
+        File file = (File) DurableObjectManager.get(DurableObjectManager.MANAGED_FILE_PATH);
+        file = new File(file, id.toString());
+        
+        return file.getAbsolutePath();
+    }//getPath()
 
 
 }//class PgistFile

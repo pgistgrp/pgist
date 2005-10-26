@@ -1,5 +1,7 @@
 package org.pgist.discourse;
 
+import org.pgist.model.IText;
+
 
 /**
  * Context: text
@@ -8,7 +10,7 @@ package org.pgist.discourse;
  * @hibernate.joined-subclass-key column="id"
  *
  */
-public class TextContent extends Content {
+public class TextContent extends Content implements IText {
 
 
     private String content = "";
@@ -36,6 +38,11 @@ public class TextContent extends Content {
     public int getType() {
         return TEXT;
     }
+
+
+    public String getText() {
+        return content;
+    }//getText()
     
     
 }//class TextContent

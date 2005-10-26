@@ -1,5 +1,7 @@
 package org.pgist.discourse;
 
+import org.pgist.model.IContent;
+
 
 /**
  * 
@@ -7,7 +9,7 @@ package org.pgist.discourse;
  * @hibernate.class table="pgist_discourse_content"
  *
  */
-public abstract class Content {
+public abstract class Content implements IContent {
 
     
     public static final int TEXT   = 0;

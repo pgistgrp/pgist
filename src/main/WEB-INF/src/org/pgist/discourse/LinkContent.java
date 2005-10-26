@@ -1,5 +1,7 @@
 package org.pgist.discourse;
 
+import org.pgist.model.ILink;
+
 
 /**
  * Context: link
@@ -8,7 +10,7 @@ package org.pgist.discourse;
  * @hibernate.joined-subclass-key column="id"
  *
  */
-public class LinkContent extends Content {
+public class LinkContent extends Content implements ILink {
 
 
     private String link;

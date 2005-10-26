@@ -4,7 +4,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.pgist.model.Node;
+import org.pgist.model.IContent;
+import org.pgist.model.INode;
 import org.pgist.users.User;
 
 
@@ -14,7 +15,7 @@ import org.pgist.users.User;
  * @hibernate.class table="pgist_disourse_opinion"
  *
  */
-public class Opinion implements Node {
+public class Opinion implements INode {
     
     
     private Long id;
@@ -47,12 +48,12 @@ public class Opinion implements Node {
      * @return
      * @hibernate.many-to-one column="parent_id" class="org.pgist.discourse.Opinion" casecad="all"
      */
-    public Node getParent() {
+    public INode getParent() {
         return parent;
     }
     
     
-    public void setParent(Node parent) {
+    public void setParent(INode parent) {
         this.parent = (Opinion) parent;
     }
     
@@ -75,7 +76,7 @@ public class Opinion implements Node {
      * @return
      * @hibernate.one-to-one name="content" cascade="all" class="org.pgist.discourse.Content"
      */
-    public Content getContent() {
+    public IContent getContent() {
         return content;
     }
     
@@ -150,7 +151,7 @@ public class Opinion implements Node {
     
     public int getDepth() {
         int depth = 0;
-        Node one = this;
+        INode one = this;
         while (one.getParent()!=null) {
             depth++;
             one = one.getParent();
