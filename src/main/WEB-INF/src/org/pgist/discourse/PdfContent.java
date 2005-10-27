@@ -1,5 +1,7 @@
 package org.pgist.discourse;
 
+import org.pgist.model.IFile;
+import org.pgist.model.IPdf;
 import org.pgist.util.PgistFile;
 
 
@@ -10,7 +12,7 @@ import org.pgist.util.PgistFile;
  * @hibernate.joined-subclass-key column="id"
  *
  */
-public class PdfContent extends Content {
+public class PdfContent extends Content implements IPdf {
 
 
     private PgistFile file;
@@ -18,7 +20,7 @@ public class PdfContent extends Content {
 
     /**
      * @return
-     * @hibernate.one-to-one class="org.pgist.util.PgistFile"
+     * @hibernate.many-to-one name="file" column="file_id"  class="org.pgist.util.PgistFile"
      */
     public PgistFile getFile() {
         return file;
@@ -37,6 +39,11 @@ public class PdfContent extends Content {
 
     public int getType() {
         return PDF;
+    }
+
+
+    public IFile getPDF() {
+        return file;
     }
     
     

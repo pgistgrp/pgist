@@ -22,6 +22,10 @@ public class ImageContent extends Content implements IImage {
 
     private PgistFile file;
     private PgistFile thumbnail1;
+    private PgistFile thumbnail2;
+    private PgistFile thumbnail3;
+    private PgistFile thumbnail4;
+    private PgistFile thumbnail5;
 
 
     /**
@@ -52,6 +56,62 @@ public class ImageContent extends Content implements IImage {
     }
 
 
+    /**
+     * @return
+     * @hibernate.many-to-one name="thumb2" column="thumb2_id"  class="org.pgist.util.PgistFile"
+     */
+    public PgistFile getThumbnail2() {
+        return thumbnail2;
+    }
+
+
+    public void setThumbnail2(PgistFile thumbnail2) {
+        this.thumbnail2 = thumbnail2;
+    }
+
+
+    /**
+     * @return
+     * @hibernate.many-to-one name="thumb3" column="thumb3_id"  class="org.pgist.util.PgistFile"
+     */
+    public PgistFile getThumbnail3() {
+        return thumbnail3;
+    }
+
+
+    public void setThumbnail3(PgistFile thumbnail3) {
+        this.thumbnail3 = thumbnail3;
+    }
+
+
+    /**
+     * @return
+     * @hibernate.many-to-one name="thumb4" column="thumb4_id"  class="org.pgist.util.PgistFile"
+     */
+    public PgistFile getThumbnail4() {
+        return thumbnail4;
+    }
+
+
+    public void setThumbnail4(PgistFile thumbnail4) {
+        this.thumbnail4 = thumbnail4;
+    }
+
+
+    /**
+     * @return
+     * @hibernate.many-to-one name="thumb5" column="thumb5_id"  class="org.pgist.util.PgistFile"
+     */
+    public PgistFile getThumbnail5() {
+        return thumbnail5;
+    }
+
+
+    public void setThumbnail5(PgistFile thumbnail5) {
+        this.thumbnail5 = thumbnail5;
+    }
+
+
     public Object getContentAsObject() {
         return file;
     }
@@ -65,14 +125,27 @@ public class ImageContent extends Content implements IImage {
     public void generateThumbnails() throws Exception {
         if (file==null) return;
         if (thumbnail1==null) return;
+        if (thumbnail2==null) return;
+        if (thumbnail3==null) return;
+        if (thumbnail4==null) return;
+        if (thumbnail5==null) return;
+        generateThumbnail(thumbnail1, 128);
+        generateThumbnail(thumbnail2, 64);
+        generateThumbnail(thumbnail3, 32);
+        generateThumbnail(thumbnail4, 16);
+        generateThumbnail(thumbnail5, 8);
+    }//generateThumbnails()
+    
+    
+    private void generateThumbnail(PgistFile thumbnail, int size) throws Exception {
         
         Image image = Toolkit.getDefaultToolkit().getImage(file.getPath());
         MediaTracker mediaTracker = new MediaTracker(new Container());
         mediaTracker.addImage(image, 0);
         mediaTracker.waitForID(0);
         
-        int thumbWidth = 64;
-        int thumbHeight = 64;
+        int thumbWidth = size;
+        int thumbHeight = size;
         double thumbRatio = (double)thumbWidth / (double)thumbHeight;
         int imageWidth = image.getWidth(null);
         int imageHeight = image.getHeight(null);
@@ -90,7 +163,7 @@ public class ImageContent extends Content implements IImage {
         graphics2D.drawImage(image, 0, 0, thumbWidth, thumbHeight, null);
         
         // save thumbnail image to OUTFILE
-        BufferedOutputStream out = new BufferedOutputStream(thumbnail1.getOutputStream());
+        BufferedOutputStream out = new BufferedOutputStream(thumbnail.getOutputStream());
         JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
         JPEGEncodeParam param = encoder.
           getDefaultJPEGEncodeParam(thumbImage);
@@ -100,11 +173,31 @@ public class ImageContent extends Content implements IImage {
         encoder.setJPEGEncodeParam(param);
         encoder.encode(thumbImage);
         out.close(); 
-    }//generateThumbnails()
+    }//generateThumbnail()
     
     
-    public IFile getThumbnail() {
-        return thumbnail1;
+    public IFile getThumbnail(int depth) {
+        IFile thumbnail = null;
+        switch (depth) {
+            case 1:
+                thumbnail = thumbnail1;
+                break;
+            case 2:
+                thumbnail = thumbnail2;
+                break;
+            case 3:
+                thumbnail = thumbnail3;
+                break;
+            case 4:
+                thumbnail = thumbnail4;
+                break;
+            case 5:
+                thumbnail = thumbnail5;
+                break;
+            default:
+                ;
+        }//swith
+        return thumbnail;
     }//getThumbnail()
     
     

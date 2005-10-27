@@ -35,12 +35,12 @@ public class SystemInit extends MatchingTask {
     
     private List fileSets = new LinkedList();
     private String configurationFile = null;
-
+    
     
     public void addFileset(FileSet set) {
         fileSets.add(set);
     }
-
+    
     
     /**
      * Set a properties file

@@ -28,7 +28,7 @@
     </f:facet>
     
     <f:facet name="treemap">
-      <pg:doTreeMap id="doTreeMap" styleClass="" depth="3" actionListener="#{DiscourseBean.readDiscourse}">
+      <pg:doTreeMap id="doTreeMap" styleClass="" depth="5" actionListener="#{DiscourseBean.readDiscourse}">
       </pg:doTreeMap>
     </f:facet>
     

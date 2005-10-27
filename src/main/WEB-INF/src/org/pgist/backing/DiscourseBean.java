@@ -13,6 +13,7 @@ import org.pgist.discourse.Discourse;
 import org.pgist.discourse.ImageContent;
 import org.pgist.discourse.LinkContent;
 import org.pgist.discourse.Opinion;
+import org.pgist.discourse.PdfContent;
 import org.pgist.discourse.TextContent;
 import org.pgist.model.ITree;
 import org.pgist.util.JSFUtil;
@@ -133,9 +134,25 @@ public class DiscourseBean extends ListTableBean {
                 cttImage.setFile(file);
                 DiscourseDAO.insert(cttImage);
                 file = new PgistFile();
-                file.setName("thumbnail");
+                file.setName("thumbnail1");
                 DiscourseDAO.insert(file);
                 cttImage.setThumbnail1(file);
+                file = new PgistFile();
+                file.setName("thumbnail2");
+                DiscourseDAO.insert(file);
+                cttImage.setThumbnail2(file);
+                file = new PgistFile();
+                file.setName("thumbnail3");
+                DiscourseDAO.insert(file);
+                cttImage.setThumbnail3(file);
+                file = new PgistFile();
+                file.setName("thumbnail4");
+                DiscourseDAO.insert(file);
+                cttImage.setThumbnail4(file);
+                file = new PgistFile();
+                file.setName("thumbnail5");
+                DiscourseDAO.insert(file);
+                cttImage.setThumbnail5(file);
                 cttImage.generateThumbnails();
                 opin.setContent(cttImage);
             } catch(Exception e) {
@@ -150,6 +167,21 @@ public class DiscourseBean extends ListTableBean {
                 content.setLink(cttLink);
                 DiscourseDAO.insert(content);
                 opin.setContent(content);
+            }
+        } else if ("3".equals(cttType)) {
+            UploadedFile pdf = (UploadedFile) params.get("cttPDF");
+            PgistFile file = new PgistFile();
+            file.setName(pdf.getName());
+            DiscourseDAO.insert(file);
+            try {
+                file.receive(pdf.getInputStream());
+                PdfContent cttPDF = new PdfContent();
+                cttPDF.setFile(file);
+                DiscourseDAO.insert(cttPDF);
+                opin.setContent(cttPDF);
+            } catch(Exception e) {
+                e.printStackTrace();
+                DiscourseDAO.delete(file);
             }
         }
         opin.setOwner(JSFUtil.getCurrentUser());
