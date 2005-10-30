@@ -243,6 +243,13 @@ public class SystemInit extends MatchingTask {
                 template.setContent("");
                 session.save(template);
                 
+                template = new EmailTemplate();
+                template.setName("do_reply_reminder");
+                template.setDescription("template for alerting the new reply");
+                template.setNotes("Required variables: ${discourse}, ${origin}, ${reply}");
+                template.setContent("Dear user,\n\n${reply.user.name} replied your post.");
+                session.save(template);
+                
                 transaction.commit();
             } catch(Exception ex) {
                 ex.printStackTrace();

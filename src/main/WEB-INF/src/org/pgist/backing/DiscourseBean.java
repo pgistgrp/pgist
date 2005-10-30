@@ -1,6 +1,7 @@
 package org.pgist.backing;
 
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ import org.pgist.discourse.LinkContent;
 import org.pgist.discourse.Opinion;
 import org.pgist.discourse.PdfContent;
 import org.pgist.discourse.TextContent;
+import org.pgist.emails.EmailSender;
 import org.pgist.model.ITree;
 import org.pgist.util.JSFUtil;
 import org.pgist.util.ListTableBean;
@@ -33,6 +35,7 @@ public class DiscourseBean extends ListTableBean {
     private Discourse discourse;
     private Opinion opinion;
     private String content;
+    private boolean emailRemind = false;
     
 
     public List getDiscourses() {
@@ -62,6 +65,16 @@ public class DiscourseBean extends ListTableBean {
 
     public void setOpinion(Opinion opinion) {
         this.opinion = opinion;
+    }
+
+
+    public boolean isEmailRemind() {
+        return emailRemind;
+    }
+
+
+    public void setEmailRemind(boolean emailRemind) {
+        this.emailRemind = emailRemind;
     }
 
 
@@ -110,7 +123,10 @@ public class DiscourseBean extends ListTableBean {
         Map params = component.getParams();
         discourse = (Discourse) DiscourseDAO.load(Discourse.class, new Long((String) params.get("treeId")));
         opinion = (Opinion) DiscourseDAO.load(Opinion.class, new Long((String) params.get("nodeId")));
+        
         Opinion opin = new Opinion();
+        opin.setEmailRemind("true".equals(params.get("emailReminder")));
+        
         String punctuate = (String) params.get("punctuate");
         opin.setTone(Integer.parseInt(punctuate));
         String cttType = (String) params.get("cttType");
@@ -192,6 +208,15 @@ public class DiscourseBean extends ListTableBean {
         opinion.addOpinion(opin);
         DiscourseDAO.update(opinion);
         
+        if (opinion.isEmailRemind()) {
+            Hashtable values = new Hashtable();
+            values.put("discourse", discourse);
+            values.put("origin", opinion);
+            values.put("reply", opin);
+            EmailSender.send(opinion.getOwner().getEmail(), "Reply to your opinion at PGIST.",
+                    "do_reply_reminder", values);
+        }
+        
         opinion = opin;
     }//newOpinion()
     
@@ -215,6 +240,8 @@ public class DiscourseBean extends ListTableBean {
         
         discourse.setRoot(opinion);
         
+        emailRemind = false;
+        
         return "newDiscourse";
     }//newDiscourse()
     
@@ -229,6 +256,8 @@ public class DiscourseBean extends ListTableBean {
             TextContent text = new TextContent();
             text.setContent(content);
             opinion.setContent(text);
+            
+            if (emailRemind) opinion.setEmailRemind(true);
             
             DiscourseDAO.insertOrUpdate(opinion);
             DiscourseDAO.insertOrUpdate(discourse);

@@ -3,9 +3,9 @@
   <property name="mail.smtp.host">localhost</property>
   <property name="mail.transport.protocol">smtp</property>
   <property name="mail.smtp.auth">true</property>
-  <from>kenny@localhost</from>
-  <username>kenny</username>
-  <password>kenny</password>
-  <content-type>text/html</content-type>
+  <from>pgist@localhost</from>
+  <username>pgist</username>
+  <password>pgistmnbvcxz</password>
+  <content-type>text/plain</content-type>
 </server>
 

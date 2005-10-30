@@ -25,6 +25,7 @@ public class Opinion implements INode {
     private Set children = new HashSet();
     private User owner;
     private Date time;
+    private boolean emailRemind;
     private int tone;
     
     
@@ -130,6 +131,20 @@ public class Opinion implements INode {
     }
     
     
+    /**
+     * @return
+     * @hibernate.property not-null="true"
+     */
+    public boolean isEmailRemind() {
+        return emailRemind;
+    }
+
+
+    public void setEmailRemind(boolean emailRemind) {
+        this.emailRemind = emailRemind;
+    }
+
+
     /**
      * @return
      * @hibernate.property not-null="true"

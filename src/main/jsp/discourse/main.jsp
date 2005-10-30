@@ -8,6 +8,7 @@
 <link rel=stylesheet href='<%= request.getContextPath()%>/styles/default.css' type="text/css" media=all>
 <link rel=stylesheet href='<%= request.getContextPath()%>/styles/treemap.css' type="text/css" media=all>
 <script type='text/javascript' src='<%= request.getContextPath()%>/dwr/util.js'></script>
+<script type='text/javascript' src='<%= request.getContextPath()%>/scripts/pgist-util.js'></script>
 </head>
 
 <body>
