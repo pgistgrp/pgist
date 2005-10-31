@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.pgist.model.IContent;
 import org.pgist.model.INode;
+import org.pgist.model.IUser;
 import org.pgist.users.User;
 
 
@@ -107,7 +108,7 @@ public class Opinion implements INode {
      * @return
      * @hibernate.many-to-one column="owner_id" class="org.pgist.users.User" casecad="all"
      */
-    public User getOwner() {
+    public IUser getOwner() {
         return owner;
     }
     

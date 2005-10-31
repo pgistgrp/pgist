@@ -24,7 +24,7 @@
     <f:facet name="view"></f:facet>
     
     <f:facet name="uptree">
-      <pg:doUpTree id="doUpTree" styleClass="">
+      <pg:doUpTree id="doUpTree" styleClass="" actionListener="#{DiscourseBean.readDiscourse}">
       </pg:doUpTree>
     </f:facet>
     

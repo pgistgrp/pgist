@@ -1,5 +1,6 @@
 package org.pgist.users;
 
+import org.pgist.model.IUser;
 import org.pgist.util.MD5;
 
 
@@ -8,7 +9,7 @@ import org.pgist.util.MD5;
  * @author kenny
  *
  */
-public class BaseUser {
+public class BaseUser implements IUser {
     
     
     private Long id;
