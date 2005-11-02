@@ -3,8 +3,9 @@
   <property name="mail.smtp.host">localhost</property>
   <property name="mail.transport.protocol">smtp</property>
   <property name="mail.smtp.auth">true</property>
+  <property name="mail.smtp.port">9025</property>
   <from>pgist@localhost</from>
-  <username>pgist</username>
+  <username>pgist@localhost</username>
   <password>pgistmnbvcxz</password>
   <content-type>text/plain</content-type>
 </server>
