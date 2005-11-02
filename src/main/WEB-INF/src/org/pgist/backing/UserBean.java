@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.faces.event.ActionEvent;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.pgist.dao.UserDAO;
 import org.pgist.exceptions.UserExistException;
 import org.pgist.users.User;
@@ -23,6 +24,7 @@ public class UserBean extends ListTableBean {
     private List users = null;
     private User user = new User();
     private String[] selectedRoles;
+    private Long userId = null;
 
 
     public List getUsers() {
@@ -42,6 +44,16 @@ public class UserBean extends ListTableBean {
     
     public void setUser(User user) {
         this.user = user;
+    }
+
+
+    public Long getUserId() {
+        return userId;
+    }
+
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
 
@@ -71,6 +83,7 @@ public class UserBean extends ListTableBean {
         user.setEnabled(true);
         user.setInternal(false);
         user.setDeleted(false);
+        userId = null;
         
         return "addUser";
     }//addUser()
@@ -83,9 +96,15 @@ public class UserBean extends ListTableBean {
     public String editUser() {
         
         if (!JSFUtil.checkAdmin()) return "notAdmin";
+        
         try {
-            user = (User) UserDAO.load(User.class, selectedId());
+            User realUser = (User) UserDAO.load(User.class, selectedId());
+            userId = realUser.getId();
+            user = new User();
+            BeanUtils.copyProperties(user, realUser);
+            user.setId(null);
         } catch(Exception e) {
+            e.printStackTrace();
         }
         
         return "editUser";
@@ -94,19 +113,15 @@ public class UserBean extends ListTableBean {
     
     
     /**
-     * Save a new/modified User
+     * Insert a new User
      * @return
      */
-    public String saveUser() {
+    public String insertUser() {
         
         if (!JSFUtil.checkAdmin()) return "notAdmin";
         
         try {
-            if (user.getId()==null) {//new user
-                UserDAO.addUser(user, selectedRoles);
-            } else {//update user
-                UserDAO.updateUser(user, selectedRoles);
-            }
+            UserDAO.addUser(user, selectedRoles);
             return "success";
         } catch(UserExistException uee) {
             uee.printStackTrace();
@@ -115,7 +130,32 @@ public class UserBean extends ListTableBean {
         }
         
         return "failure";
-    }//saveUser()
+    }//insertUser()
+    
+
+    /**
+     * update a modified User
+     * @return
+     */
+    public String updateUser() {
+        
+        if (!JSFUtil.checkAdmin()) return "notAdmin";
+
+        try {
+            User realUser = (User) UserDAO.load(User.class, userId);
+            BeanUtils.copyProperties(realUser, user);
+            realUser.setId(userId);
+            
+            UserDAO.updateUser(realUser, selectedRoles);
+            return "success";
+        } catch(UserExistException uee) {
+            uee.printStackTrace();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        return "failure";
+    }//updateUser()
     
 
     /**

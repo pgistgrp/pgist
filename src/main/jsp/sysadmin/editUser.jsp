@@ -14,7 +14,7 @@
 <h:form id="userEditForm">
   <h:outputText value="Edit User"/>
   
-  <h:inputHidden id="id" value="#{UserBean.user.id}"/>
+  <h:inputHidden id="id" value="#{UserBean.userId}"/>
   
   <h:panelGrid columns="3">
     <h:outputLabel value="Login Name: " for="loginname"/>
@@ -38,7 +38,7 @@
         universalSet="#{UserBean.roles}" subSet="#{UserBean.user.roles}"/>
   </h:panelGrid>
 
-  <h:commandButton value="Commit" action="#{UserBean.saveUser}" type="submit"/>
+  <h:commandButton value="Commit" action="#{UserBean.updateUser}" type="submit"/>
   
 </h:form>
 </f:view>

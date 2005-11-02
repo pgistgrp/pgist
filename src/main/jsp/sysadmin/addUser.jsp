@@ -36,7 +36,7 @@
         universalSet="#{UserBean.roles}" subSet="#{UserBean.user.roles}"/>
   </h:panelGrid>
 
-  <h:commandButton value="Commit" action="#{UserBean.saveUser}" type="submit"/>
+  <h:commandButton value="Commit" action="#{UserBean.insertUser}" type="submit"/>
   
 </h:form>
 </f:view>

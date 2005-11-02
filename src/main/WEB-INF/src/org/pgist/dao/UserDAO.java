@@ -267,7 +267,7 @@ public class UserDAO extends BaseDAO {
                 }//for i
             }
             
-            System.out.println("--> "+user.getPassword());
+            System.out.println("-------------------> "+user.getEmail());
             if (user.getPassword().length()<=31) user.encodePassword();
             
             session.update(user);
