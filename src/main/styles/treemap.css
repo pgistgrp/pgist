@@ -57,6 +57,26 @@ td.innerright {
   margin-left: 3px;
 }
 
+td.hidetop {
+  border-bottom: 1px solid #aaa;
+  margin-left: 3px;
+  cursor: pointer; cursor: hand;
+}
+
+td.hidenone {
+  cursor: pointer; cursor: hand;
+}
+
+td.hideleft {
+  cursor: pointer; cursor: hand;
+}
+
+td.hideright {
+  border-left: 1px solid #aaa;
+  margin-left: 3px;
+  cursor: pointer; cursor: hand;
+}
+
 td.first {
   border-top: 1px solid black;
   border-left: 1px solid #aaa;
