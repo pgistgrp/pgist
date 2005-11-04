@@ -24,13 +24,13 @@ td.outtop {
   border-top: 1px solid black;
   border-left: 1px solid black;
   border-right: 1px solid black;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #aaa;
   margin-left: 3px;
 }
 
 td.outleft {
   border-left: 1px solid black;
-  border-right: 1px solid black;
+  border-right: 1px solid #aaa;
   border-bottom: 1px solid black;
   margin-left: 3px;
 }
@@ -42,7 +42,7 @@ td.outright {
 }
 
 td.innertop {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #aaa;
   margin-left: 3px;
 }
 

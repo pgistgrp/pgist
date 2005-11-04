@@ -134,6 +134,7 @@ public class DiscourseBean extends ListTableBean {
             String cttText = (String) params.get("cttText");
             if (cttText!=null) {
                 cttText = cttText.trim();
+                cttText = cttText.replace("\n", "<br>");
                 TextContent content = new TextContent();
                 content.setContent(cttText);
                 DiscourseDAO.insert(content);
