@@ -13,10 +13,10 @@ public class BaseUser implements IUser {
     
     
     private Long id;
-    private String loginname;
-    private String firstname;
-    private String lastname;
-    protected String password;
+    private String loginname = "";
+    private String firstname = "";
+    private String lastname = "";
+    protected String password = "";
     protected String email = "";
     private boolean enabled;
     private boolean deleted;
