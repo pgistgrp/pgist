@@ -52,7 +52,7 @@ public class BaseUser implements IUser {
 
     /**
      * @return
-     * @hibernate.property unique="true" not-null="true"
+     * @hibernate.property unique="false" not-null="true"
      */
     public String getFirstname() {
         return firstname;
@@ -66,7 +66,7 @@ public class BaseUser implements IUser {
 
     /**
      * @return
-     * @hibernate.property unique="true" not-null="true"
+     * @hibernate.property unique="false" not-null="true"
      */
     public String getLastname() {
         return lastname;
