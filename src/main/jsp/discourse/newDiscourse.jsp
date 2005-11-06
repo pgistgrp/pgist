@@ -21,9 +21,6 @@
     <h:outputLabel value="Content: " for="content"/>
     <h:inputTextarea id="content" value="#{DiscourseBean.content}" rows="8" cols="40"/>
       <h:message for="content"/>
-    <h:selectBooleanCheckbox title="emailRemind" value="#{DiscourseBean.emailRemind}"/>
-    <h:outputText value="Would you like email reminding when someone reply you?"/>
-      <h:message for="content"/>
   </h:panelGrid>
 
   <h:commandButton value="Create" action="#{DiscourseBean.saveNewDiscourse}" type="submit"/>

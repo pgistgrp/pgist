@@ -35,7 +35,6 @@ public class DiscourseBean extends ListTableBean {
     private Discourse discourse;
     private Opinion opinion;
     private String content;
-    private boolean emailRemind = false;
     
 
     public List getDiscourses() {
@@ -65,16 +64,6 @@ public class DiscourseBean extends ListTableBean {
 
     public void setOpinion(Opinion opinion) {
         this.opinion = opinion;
-    }
-
-
-    public boolean isEmailRemind() {
-        return emailRemind;
-    }
-
-
-    public void setEmailRemind(boolean emailRemind) {
-        this.emailRemind = emailRemind;
     }
 
 
@@ -125,7 +114,7 @@ public class DiscourseBean extends ListTableBean {
         opinion = (Opinion) DiscourseDAO.load(Opinion.class, new Long((String) params.get("nodeId")));
         
         Opinion opin = new Opinion();
-        opin.setEmailRemind("true".equals(params.get("emailReminder")));
+        opin.setEmailRemind(true);
         
         String punctuate = (String) params.get("punctuate");
         opin.setTone(Integer.parseInt(punctuate));
@@ -241,8 +230,6 @@ public class DiscourseBean extends ListTableBean {
         
         discourse.setRoot(opinion);
         
-        emailRemind = false;
-        
         return "newDiscourse";
     }//newDiscourse()
     
@@ -258,7 +245,7 @@ public class DiscourseBean extends ListTableBean {
             text.setContent(content);
             opinion.setContent(text);
             
-            if (emailRemind) opinion.setEmailRemind(true);
+            opinion.setEmailRemind(true);
             
             DiscourseDAO.insertOrUpdate(opinion);
             DiscourseDAO.insertOrUpdate(discourse);
