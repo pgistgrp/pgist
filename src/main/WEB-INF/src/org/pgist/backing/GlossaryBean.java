@@ -188,6 +188,17 @@ public class GlossaryBean extends ListTableBean {
     }//listTerm()
 
 
+    public String viewTerm() {
+        try {
+            term = (Term) GlossaryDAO.load(Term.class, selectedId());
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        return "viewTerm";
+    }//viewTerm()
+    
+    
     /**
      * add new Term to glossary
      * @return

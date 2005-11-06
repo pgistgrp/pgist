@@ -276,6 +276,11 @@
       <to-view-id>/jsp/glossary/addTerm.jsp</to-view-id>
     </navigation-case>
     <navigation-case>
+      <description>view term</description>
+      <from-outcome>viewTerm</from-outcome>
+      <to-view-id>/jsp/glossary/viewTerm.jsp</to-view-id>
+    </navigation-case>
+    <navigation-case>
       <description>edit term</description>
       <from-outcome>editTerm</from-outcome>
       <to-view-id>/jsp/glossary/editTerm.jsp</to-view-id>

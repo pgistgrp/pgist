@@ -47,7 +47,7 @@
         <h:outputText value="Term Name"/>
       </f:facet>
       <h:inputHidden id="objectId" binding="#{GlossaryBean.objectId}" value="#{term.id}"/>
-      <h:commandLink id="editTerm" action="#{GlossaryBean.editTerm}" value="#{term.name}" />
+      <h:commandLink id="viewTerm" action="#{GlossaryBean.viewTerm}" value="#{term.name}" />
     </h:column>
     
     <h:column>
@@ -64,6 +64,13 @@
       <h:outputText value="#{term.shortDefinition}"/>
     </h:column>
     
+    <h:column>
+      <f:facet name="header">
+        <h:outputText value="Edit"/>
+      </f:facet>
+      <h:commandLink id="editTerm" action="#{GlossaryBean.editTerm}" value="Edit" />
+    </h:column>
+
     <h:column>
       <f:facet name="header">
         <h:outputText value="Selection"/>
