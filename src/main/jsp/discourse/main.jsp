@@ -38,7 +38,7 @@
     <f:facet name="footer"></f:facet>
     
     <f:facet name="conbar">
-      <pg:doConbar id="doConbar" styleClass="" actionListener="#{DiscourseBean.readDiscourse}">
+      <pg:doConbar id="doConbar" styleClass="" actionListener="#{DiscourseBean.readDiscourse}" logo="/images/PgisTreeLogo.jpg">
       </pg:doConbar>
     </f:facet>
     
