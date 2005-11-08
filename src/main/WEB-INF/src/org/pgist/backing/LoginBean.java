@@ -81,10 +81,10 @@ public class LoginBean {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         User user = (User) session.getAttribute("user");
         if (user!=null) {
-            session.setAttribute("user", null);
-            session.invalidate();
+            //session.setAttribute("user", null);
+            //session.invalidate();
         }
-        return "login";
+        return "logout";
     }//logout()
     
     

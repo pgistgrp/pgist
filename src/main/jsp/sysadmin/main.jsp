@@ -25,6 +25,8 @@
   <h:commandLink action="listTerm" value="Glossary Term List" />
   <br>
   <h:commandLink action="listDiscourse" value="Discourse Object" />
+  <br>
+  <h:commandLink action="#{LoginBean.logout}" value="Logout" />
 
 </h:form>
 </f:view>

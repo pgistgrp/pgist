@@ -72,6 +72,8 @@ public class PgistFilter implements Filter {
         String ctxPath = req.getContextPath();
         path = path.substring(ctxPath.length());
         
+        System.out.println("PgistFilter: "+path);
+        
         if (!ignoreURLs.contains(path)) {
             HttpSession session = req.getSession();
             if (session.getAttribute("user")==null) {

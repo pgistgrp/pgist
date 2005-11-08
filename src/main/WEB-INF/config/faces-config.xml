@@ -21,7 +21,7 @@
       <to-view-id>/jsp/sysadmin/main.jsp</to-view-id>
     </navigation-case>
     <navigation-case>
-        <description>login failure</description>
+      <description>login failure</description>
       <from-outcome>failure</from-outcome>
       <to-view-id>/greeting.jsp</to-view-id>
     </navigation-case>
@@ -89,6 +89,11 @@
         <description>list discourse</description>
       <from-outcome>listDiscourse</from-outcome>
       <to-view-id>/jsp/discourse/index.jsp</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <description>logout</description>
+      <from-outcome>logout</from-outcome>
+      <to-view-id>/jsp/sysadmin/index.jsp</to-view-id>
     </navigation-case>
   </navigation-rule>
 
