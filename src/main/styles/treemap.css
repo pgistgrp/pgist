@@ -77,6 +77,16 @@ td.hideright {
   cursor: pointer; cursor: hand;
 }
 
+.imperative {
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  font-family: sans-serif;
+  font-weight: bold;
+  float: left;
+  vertical-align: top;
+}
+
 td.first {
   border-top: 1px solid black;
   border-left: 1px solid #aaa;
