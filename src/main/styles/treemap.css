@@ -87,6 +87,12 @@ td.hideright {
   vertical-align: top;
 }
 
+.discourse {
+  font-weight: bold;
+  color: white;
+  background-color: black;
+}
+
 td.first {
   border-top: 1px solid black;
   border-left: 1px solid #aaa;
