@@ -31,6 +31,11 @@
         <property name="show_sql">true</property>
 
 
+        <mapping resource="org/pgist/wfengine/Activity.hbm.xml"/>
+        <mapping resource="org/pgist/wfengine/Workflow.hbm.xml"/>
+        <mapping resource="org/pgist/wfengine/WorkflowEnvironment.hbm.xml"/>
+        
+        
         <mapping resource="org/pgist/users/User.hbm.xml"/>
         <mapping resource="org/pgist/users/Role.hbm.xml"/>
         <mapping resource="org/pgist/users/Registry.hbm.xml"/>
