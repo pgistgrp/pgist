@@ -1,25 +1,3 @@
-
-body { background: #d0d0d0; margin: 4px; }
-table { background: #fff; }
-p { margin-top: 1em; margin-bottom: 0; }
-p:first-child { margin-top: 0; }
-p.first { margin-top: 0; }
-a:link, a:visited { color: blue; text-decoration: none; }
-a:hover { color: blue; text-decoration: underline; }
-a.empty { display: block; width: 100%; height: 100%; text-decoration: none; }
-div.body { padding: 4px 4px 8px 4px; max-width: 40em; }
-.clickable { cursor: pointer; cursor: hand; }
-div.maxwidthbody { width: expression(document.body.clientWidth > (640/12)*parseInt(document.body.currentStyle.fontSize) ? "40em" : "auto"); }
-div.headers { float: right; padding: 1px; border: 1px solid #aaa; color: #666; }
-div.headers .subject { font-weight: bold; }
-span.author { float: right; margin: 0; padding: 2px 0 0 0;
-              font-style: italic; font-size: 10px; color: #666; }
-tr { vertical-align: top; }
-tr.subtree { margin-top: 2px; }
-
-td { font-family: sans-serif; font-size: 11px; }
-td.reply, td.support, td.oppose, td.query { min-width: 8em; }
-
 td.outtop {
   border-top: 1px solid black;
   border-left: 1px solid black;
@@ -113,78 +91,6 @@ td.hideright {
 a {
 	text-decoration: none;
 }
-
-
-td.first {
-  border-top: 1px solid black;
-  border-left: 1px solid #aaa;
-  border-right: 1px solid #aaa;
-  border-bottom: 1px solid black;
-  margin-left: 3px;
-}
-td.reply {
-  border-bottom: 1px solid black;
-  border-left: 1px solid #aaa;
-  border-right: 1px solid #aaa;
-  margin-left: 3px;
-}
-td.support { border-top: 1px solid #cfc; border-left: 1px solid #eee; }
-td.oppose { border-top: 1px solid #a00; border-left: 1px solid #aaa; }
-td.empty { min-width: 0; }
-span.tiny { font-size: 4px; }
-td.firstlevel { border-left: 6px solid #bbb; }
-td:first-child { border-left: none; margin-left: 0; }
-table.query { margin-top: 6px; clear: both; }
-td.query { border-top: 1px solid #f80; border-left: 4px solid #f80;
-           font-size: 10px; padding: 2px 2px 6px; }
-td.count { font-size: 12px; text-align: right; padding: 1px; }
-tr.query td.count { color: #f80; font-weight: bold; }
-tr.unanswered td.count { color: #f00; font-weight: normal; }
-
-td.context { color: #666; background: #d0d0d0; }
-td.context a {
-  font-style: italic; font-size: 10px;
-  color: blue; text-decoration: underline;
-  cursor: pointer; cursor: hand;
-}
-td.context span.author { float: none; font-size: 9px; margin-left: 1em; }
-td.arrow { color: #a00; padding-right: 1px; background: #d0d0d0; }
-code.line { display: block; font-size: 0.8em; font-family: lucida console, monaco, monospace; }
-.index a { font-family: sans-serif; font-size: 14px; font-weight: bold; }
-.threadinfo { font-family: sans-serif; font-size: 11px; color: #666; }
-
-td.conbar { color: blue; background: #d0d0d0; }
-td.conbar a{
-  color: blue;
-  font-size: 10px;
-  text-decoration: none;
-  cursor: pointer; cursor: hand;
-}
-td.conbar1 { color: red; background: #d0d0d0; }
-td.conbar1 a{
-  color: red;
-  font-size: 10px;
-  text-decoration: none;
-  cursor: pointer; cursor: hand;
-}
-
-td.focus { color: #666; background: #d0d0d0; }
-td.focus div{
-  color: red;
-  width:100%;
-  height:150px;
-  overflow:auto;
-}
-td.focus textarea{
-  width:100%;
-  height:200px;
-}
-
-#popup { visibility: hidden; position: absolute; width: 200px;
-    border: 1px solid #000; background: #fff; padding: 2px;
-    font-family: sans-serif; font-size: 10px; }
-#popup span.author { display: inline;
-    float: none; font-size: 9px; margin-left: 1em; }
 
 td.CurrentLink {
   color: red;
