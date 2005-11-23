@@ -1,0 +1,95 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass beamer
+\begin_preamble
+%\usetheme{Luebeck}
+%\setbeamercovered{transparent}
+\end_preamble
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize Default
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 1
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Title
+
+LIT Workflow Design
+\layout BeginFrame
+
+Outline
+\layout Standard
+
+
+\begin_inset LatexCommand \tableofcontents{}
+
+\end_inset 
+
+
+\layout BeginFrame
+
+LIT Workflow Framework
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename LITFlowFramework.eps
+	lyxscale 40
+	width 60text%
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout BeginFrame
+
+Template-based vs.
+ Instance-based Workflow
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename Template-Instance-Compare.eps
+	lyxscale 40
+	width 100text%
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout BeginFrame
+
+Planed vs.
+ Full-Dynamic Workflow
+\layout BeginFrame
+
+Reuse and dynamic recomposition
+\layout BeginFrame
+
+Granularity of reuse
+\layout BeginFrame
+
+Flow Control Implementation
+\layout BeginFrame
+
+PGIST Tree Data Structure vs.
+ Graph Data Structure
+\layout EndFrame
+
+\the_end
