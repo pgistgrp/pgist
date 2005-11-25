@@ -2,7 +2,7 @@
 \lyxformat 221
 \textclass beamer
 \begin_preamble
-%\usetheme{Luebeck}
+%\usetheme{Warsaw}
 %\setbeamercovered{transparent}
 \end_preamble
 \language english
@@ -42,6 +42,9 @@ Outline
 \end_inset 
 
 
+\layout Section
+
+Concepts and Structures
 \layout BeginFrame
 
 LIT Workflow Framework
@@ -83,9 +86,109 @@ Reuse and dynamic recomposition
 \layout BeginFrame
 
 Granularity of reuse
+\layout Section
+
+Implementation
+\layout Subsection
+
+Flow Control
 \layout BeginFrame
 
 Flow Control Implementation
+\layout Subsection
+
+Sequence Activity
+\layout BeginFrame
+
+Sequence Activity
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename SequenceFlowScheme.eps
+	lyxscale 40
+	width 65text%
+
+\end_inset 
+
+
+\layout Subsection
+
+Branch-Join
+\layout BeginFrame
+
+Branch-Join Activities
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename BranchJoinDiagram.eps
+	lyxscale 40
+	width 65text%
+
+\end_inset 
+
+
+\layout Subsection
+
+Switch-EndSwitch
+\layout BeginFrame
+
+Switch-EndSwitch Activities
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename SwitchEndSwitchDiagram.eps
+	lyxscale 40
+	width 65text%
+
+\end_inset 
+
+
+\layout BeginFrame
+
+Comparation between Branch-Join and Switch-EndSwitch
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename BranchJoin-SwitchDiagram.eps
+	lyxscale 40
+	width 75text%
+
+\end_inset 
+
+
+\layout Subsection
+
+Repeat-Until
+\layout BeginFrame
+
+Repeat-Until Activities
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename RepeatUntilDiagram.eps
+	lyxscale 40
+	width 65text%
+
+\end_inset 
+
+
+\layout Subsection
+
+While-Loop
+\layout Subsection
+
+JumpBack
+\layout Subsection
+
+Data Storage
+\layout Subsection
+
+Timer
 \layout BeginFrame
 
 PGIST Tree Data Structure vs.
