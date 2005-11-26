@@ -95,9 +95,24 @@ Flow Control
 \layout BeginFrame
 
 Flow Control Implementation
-\layout Subsection
+\layout Itemize
 
 Sequence Activity
+\layout Itemize
+
+Branch-Join
+\layout Itemize
+
+Switch-EndSwitch
+\layout Itemize
+
+Repeat-Until
+\layout Itemize
+
+While-Loop
+\layout Itemize
+
+JumpBack
 \layout BeginFrame
 
 Sequence Activity
@@ -112,9 +127,6 @@ Sequence Activity
 \end_inset 
 
 
-\layout Subsection
-
-Branch-Join
 \layout BeginFrame
 
 Branch-Join Activities
@@ -129,9 +141,6 @@ Branch-Join Activities
 \end_inset 
 
 
-\layout Subsection
-
-Switch-EndSwitch
 \layout BeginFrame
 
 Switch-EndSwitch Activities
@@ -160,9 +169,6 @@ Comparation between Branch-Join and Switch-EndSwitch
 \end_inset 
 
 
-\layout Subsection
-
-Repeat-Until
 \layout BeginFrame
 
 Repeat-Until Activities
@@ -177,12 +183,34 @@ Repeat-Until Activities
 \end_inset 
 
 
-\layout Subsection
+\layout BeginFrame
 
-While-Loop
-\layout Subsection
+While-Loop Activities
+\layout Standard
+\align center 
 
-JumpBack
+\begin_inset Graphics
+	filename WhileLoopDiagram.eps
+	lyxscale 40
+	width 65text%
+
+\end_inset 
+
+
+\layout BeginFrame
+
+JumpBack Activity
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename JumpBackDiagram.eps
+	lyxscale 40
+	width 65text%
+
+\end_inset 
+
+
 \layout Subsection
 
 Data Storage
