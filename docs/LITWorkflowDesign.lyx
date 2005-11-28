@@ -45,6 +45,9 @@ Outline
 \layout Section
 
 Concepts and Structures
+\layout Subsection
+
+LIT Workflow Framework
 \layout BeginFrame
 
 LIT Workflow Framework
@@ -60,6 +63,10 @@ LIT Workflow Framework
 \end_inset 
 
 
+\layout Subsection
+
+Template-based vs.
+ Instance-based Workflow
 \layout BeginFrame
 
 Template-based vs.
@@ -76,16 +83,42 @@ Template-based vs.
 \end_inset 
 
 
-\layout BeginFrame
+\layout Subsection
 
 Planed vs.
  Full-Dynamic Workflow
 \layout BeginFrame
 
-Reuse and dynamic recomposition
+Planed vs.
+ Full-Dynamic Workflow
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename Plan-DynamicDiagram.eps
+	lyxscale 40
+	width 65text%
+
+\end_inset 
+
+
+\layout Subsection
+
+Reuse and Granularity of reuse
 \layout BeginFrame
 
-Granularity of reuse
+Reuse and Granularity of reuse
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename ReuseDiagram.eps
+	lyxscale 40
+	width 50text%
+
+\end_inset 
+
+
 \layout Section
 
 Implementation
@@ -213,14 +246,52 @@ JumpBack Activity
 
 \layout Subsection
 
-Data Storage
+PGIST Tree Data Structure vs.
+ Graph Data Structure
+\layout BeginFrame
+
+Flow Instance Trajectory and Data Storage
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename FlowStorageDiagram.eps
+	lyxscale 40
+	width 45text%
+
+\end_inset 
+
+
+\layout BeginFrame
+
+Another Example
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename FlowStorageDiagram1.eps
+	lyxscale 40
+	width 40text%
+
+\end_inset 
+
+
 \layout Subsection
 
 Timer
 \layout BeginFrame
 
-PGIST Tree Data Structure vs.
- Graph Data Structure
+Timer
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename TimerDiagram.eps
+	width 50text%
+
+\end_inset 
+
+
 \layout EndFrame
 
 \the_end
