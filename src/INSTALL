@@ -1,0 +1,93 @@
+
+To install PGIST application, please follow the next steps.
+
+
+1.Make sure JDK and Apache Ant is installed on your system.
+  Get the JDK from sun home page.
+  Get the Ant binary package from http://ant.apache.org/.
+  Install JDK and make the java command available.
+  On linux, unpack it, and copy to somewhere you like, and add the following lines to /etc/Profile:
+  
+  export JAVA_HOME=/usr/java/jdk1.5.0_04
+  export ANT_HOME=/path/to/apache-ant
+  export PATH=$JAVA_HOME/bin:$ANT_HOME/bin:$PATH
+  
+  You may want to relogin to enable the environment variables or use "source" command to enable them temporarily.
+  
+  Test and make sure the commands javac/java/ant work.
+  
+2.Get the source codes from PGIST server.
+  There's a trick to get the source. For security reason, the CVS server is protected by SSH. So you have to create a SSH tunnel
+  to access the CVS server.
+  Under linux, you can simply use the following command to create a tunnel:
+  
+  ssh -2 -N -f -L 2401:localhost:2401 username@serverIP
+  
+  The server IP is: 128.95.212.210.
+  
+  After the tunnel is created, checkout the source codes:
+  
+  cvs -d:pserver:username@localhost:/data/cvsroot/repository1 login
+  cvs -d:pserver:username@localhost:/data/cvsroot/repository1 co pgist
+  
+3.Install PostgreSQL
+  A relational database is required for PGIST. Currently we are using PostgreSQL 8.1 (http://www.postgresql.org), however you can use MySQL/SQL Server/DB2/Oracle
+  as you want. The limit is that the database have to be supported by Hibernate (http://hibernate.org/).
+  The codes you checked out from CVS server is configured with PostgreSQL. If you use other databases, don't forget to configure it
+  correctly. The configure file is:
+  
+  $PGIST_SOURCE/src/main/WEB-INF/src/hibernate.cfg.xml
+  
+  Under linux, modify the /var/lib/pgsql/data/postgresql.conf, let postgresql server listen on '*', that means all connection requests.
+  And modify the /var/lib/pgsql/data/pg_hba.conf, let postgresql server accept the connection requests from at least the server where
+  tomcat will run on. In my pg_hba.conf it's like:
+  
+  local   all         all                               ident sameuser
+  host    all         all         127.0.0.1/32          md5
+  
+  You need to restart postgresql server after modifying the configurations.
+  
+  If you use linux, "su -" to switch to root, and then "su - postgres" to switch to postgres user. Now you can use:
+  
+  psql template1
+  
+  to login and operate. You need to create a database user for PGIST:
+  
+  create user pgist password 'password';
+  
+  The password should match that of hibernate.cfg.xml.
+  
+  Next you create a database for pgist:
+  
+  create database pgist owner pgist;
+  
+  Make sure you can access the database server from the machine your tomcat will run on:
+  
+  psql -h 192.168.0.1 -U pgist pgist
+  
+4.Install Apache Tomcat
+  Get the binary package from http://tomcat.apache.org/. Unpack and install it.
+  
+5.Compile the source codes
+  With a console, go into the source directory, now you at $PGIST_SOURCE/src. There's an ant build file named build.xml in this
+  directory. Open it and modify the line
+  
+  <property name="tomcat" value="/opt/jakarta-tomcat-5.5.9"/>
+  
+  to the correct place of your tomcat directory. Check all the above steps are correctly followed, especially the database configurations.
+  
+  Now comiple the sources with:
+  
+  ant compile
+  ant schema <--- this step will create the database tables
+  ant initdb <--- this step will initiate the databases
+  
+6.Finally, you can start your tomcat server and access with:
+
+  http://localhost:8080/pgist/
+  
+  Login with the default user admin/admin.
+
+  
+  
+
